@@ -10,14 +10,14 @@
     routes: [
       {
         path: "/",
-        render: () => import("./Home.svelte"),
+        render: () => import("@/pages/Home.svelte"),
       },
       {
         path: "/shit",
         render: () => import("./Shit.svelte"),
       },
     ],
-    render404: () => import("./NotFound.svelte"),
+    render404: () => import("./pages/NotFound.svelte"),
   };
   const routePaths = new Set([
     "home",

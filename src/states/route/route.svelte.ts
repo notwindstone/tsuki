@@ -1,6 +1,6 @@
 import type { RouteType } from "./route.type";
 
-export const Route = $state<RouteType>({
+export const RouteState = $state<RouteType>({
     current: "",
     loading: false,
 });
