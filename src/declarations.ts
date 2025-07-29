@@ -1,3 +1,3 @@
 declare global {
-    interface Window { __APP__: any }
+    interface Window { __TSUKI__: any }
 }

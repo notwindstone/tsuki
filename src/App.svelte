@@ -2,7 +2,8 @@
   import svelteLogo from '/svelte.svg'
   import viteLogo from '/vite.svg'
   import shitty from "./shitty.json";
-  import {Router, navigate, type RouterConf, getPathParams} from "svelte-mini-router";
+  import { Router, navigate, type RouterConf } from "svelte-mini-router";
+  import {ApplicationNamespace} from "./constants/app";
 
 
   export const RouterConfiguration: RouterConf = {
@@ -41,7 +42,7 @@
     console.log("%c fired", "font-size: 24px", currentRoute);
 
     window.postMessage("svelte_app_route_changed");
-    window.__APP__ = {
+    window[ApplicationNamespace] = {
       ...window.__APP__,
       route: currentRoute,
     };
