@@ -7,6 +7,8 @@
   import type { Component } from "svelte";
   import type { LazyComponent } from "@/lib/routing";
   import Loading from "@/pages/Loading.svelte";
+  import { getCurrentRouteState } from "@/states/route/route.svelte";
+  import { RouteArray } from "@/constants/routes";
 
   const props: {
 
@@ -30,10 +32,22 @@
    */
   let CurrentComponent: Component = $state(Loading);
 
+  const { setCurrentRoutePathname } = getCurrentRouteState();
+
   $effect(() => {
     currentComponentRenderer()
-      .then(module => {
-        CurrentComponent = module.default as Component;
+      .then((module: Record<"default", Component>) => {
+        CurrentComponent = module.default;
+
+        const pathname = "/" + routerState
+          .getCurrentUrlPathParts()
+          .join("/");
+
+        for (const declaredPathname of RouteArray) {
+          if (pathname === declaredPathname) {
+            setCurrentRoutePathname(declaredPathname);
+          }
+        }
       });
   });
 </script>

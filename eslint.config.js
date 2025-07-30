@@ -53,6 +53,9 @@ export default ts.config(
     },
     "rules": {
 
+      /* plugins can be any function */
+      "@typescript-eslint/no-unsafe-function-type": ["off"],
+
       /* lint rules fix */
       "svelte/no-inner-declarations": [
         "error",
@@ -130,7 +133,6 @@ export default ts.config(
         "multilineDetection": "brackets",
       }],
       "@stylistic/multiline-comment-style" : ["error", "starred-block"],
-      "@stylistic/multiline-ternary"       : ["error", "never"],
       "@stylistic/new-parens"              : ["warn", "never"],
       "@stylistic/newline-per-chained-call": ["warn", { "ignoreChainWithDepth": 2 }],
       "@stylistic/no-confusing-arrow"      : ["error", { "allowParens": true, "onlyOneSimpleParam": false }],
@@ -158,7 +160,6 @@ export default ts.config(
       "@stylistic/object-curly-spacing"            : ["error", "always"],
       "@stylistic/object-property-newline"         : ["off"],
       "@stylistic/one-var-declaration-per-line"    : ["error", "always"],
-      "@stylistic/operator-linebreak"              : ["error", "none"],
       "@stylistic/padded-blocks"                   : ["error", "never"],
       "@stylistic/padding-line-between-statements" : [
         "error",

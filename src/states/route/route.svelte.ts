@@ -1,6 +1,21 @@
 import type { RouteType } from "./route.type";
 
-export const RouteState = $state<RouteType>({
-  "current": "",
-  "loading": false,
+let currentRouteState = $state.raw<RouteType>({
+  "current": "/",
 });
+
+export function getCurrentRouteState() {
+  function setCurrentRoutePathname(pathname: RouteType["current"]) {
+    console.log(currentRouteState);
+    currentRouteState = {
+      "current": pathname,
+    };
+  }
+
+  return {
+    get "currentRouteState"() {
+      return currentRouteState;
+    },
+    setCurrentRoutePathname,
+  };
+}

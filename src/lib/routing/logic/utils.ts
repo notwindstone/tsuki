@@ -36,10 +36,17 @@ export function sanitizePath(path: string): string {
 
   const idxQ = p.indexOf("?");
 
-  if (idxQ !== -1) p = p.substring(0, idxQ);
+  if (idxQ !== -1) {
+    p = p.substring(0, idxQ);
+  }
 
-  if (p.startsWith("/")) p = p.substring(1);
-  if (p.endsWith("/")) p = p.substring(0, p.length - 1);
+  if (p.startsWith("/")) {
+    p = p.substring(1);
+  }
+
+  if (p.endsWith("/")) {
+    p = p.substring(0, p.length - 1);
+  }
 
   return p;
 }
@@ -62,7 +69,7 @@ export function serializeQueryParameters(params?: QueryParams): string {
       }
     }
   }
-  const seri = new URLSearchParams(output).toString();
+  const serialized = new URLSearchParams(output).toString();
 
-  return seri === "" ? "" : "?" + seri;
+  return serialized === "" ? "" : "?" + serialized;
 }

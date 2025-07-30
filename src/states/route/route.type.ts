@@ -1,4 +1,5 @@
+import { Routes } from "@/constants/routes";
+
 export type RouteType = {
-  "current": string;
-  "loading": boolean;
+  "current": typeof Routes[keyof typeof Routes];
 };

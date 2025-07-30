@@ -5,7 +5,8 @@ export const Routes = {
   "Recents": "/recents",
   "Browse" : "/browse",
 } as const;
-export const RouteSet = new Set(Object.values(Routes));
+export const RouteArray = Object.values(Routes);
+export const RouteSet = new Set(RouteArray);
 export const RouterConfiguration: RouterConfigurationType = {
   "routes": [
     {

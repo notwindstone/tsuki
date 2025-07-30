@@ -3,19 +3,16 @@
   import Book from "@/components/icons/Book.svelte";
   import Clock from "@/components/icons/Clock.svelte";
   import Compass from "@/components/icons/Compass.svelte";
-  import NotFound from '@/pages/NotFound.svelte';
-  import type {Component} from 'svelte';
-  import {RouterConfiguration, RouteSet} from '@/constants/routes';
-  import {Link, Router} from '@/lib/routing';
+  import { RouterConfiguration, RouteSet } from "@/constants/routes";
+  import { Link, Router } from "@/lib/routing";
+  import { getCurrentRouteState } from "@/states/route/route.svelte";
 
-  let status: "fetching" | "reading" | "rendering" = $state("fetching");
+  // let status: "fetching" | "reading" | "rendering" = $state("fetching");
   let count: number = $state(0);
   let code: string = $state("console.log('lol wha')");
   let func: Function | undefined = $state(undefined);
   let currentRoute: string = $state("home");
   let pluginLoaded: boolean = $state(false);
-
-  const lazyLoaded = () => import("./pages/Home.svelte");
 
   $effect(() => {
     if (!pluginLoaded) {
@@ -59,8 +56,10 @@
   (async () => {
     const fetched = await fetch(url);
 
-    status = "reading";
-    // code = await fetched.text();
+    /*
+     * status = "reading";
+     * code = await fetched.text();
+     */
   })();
 
   $effect(() => {
@@ -68,7 +67,7 @@
       return;
     }
     console.log("re-executing");
-    status = "rendering";
+    // status = "rendering";
     const exports = {
       "svelte_shit": "holyyy is this a static shared variable???",
     };
@@ -79,16 +78,13 @@
     pluginLoaded = true;
   });
 
-  let LazyComponentProbably: Component = $state(NotFound);
-
-  /*$effect(() => {
-    lazyLoaded().then(module => {
-      LazyComponentProbably = module.default;
-    });
-  });*/
+  const currentRouteState = getCurrentRouteState();
 </script>
 
 <main>
+  <p class="bg-red-500 w-fit">
+    {currentRouteState.currentRouteState.current}
+  </p>
   <Link path="/recents">Go Home</Link>
   <Link path="/">Go Back</Link>
   <Router routerConfiguration={RouterConfiguration} />
