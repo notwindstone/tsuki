@@ -27,5 +27,5 @@ export interface RouterConfiguration {
    * @example
    * render404: () => import('./Error404.svelte')
    */
-  "notFound"?: LazyComponent;
+  "notFound": LazyComponent;
 }

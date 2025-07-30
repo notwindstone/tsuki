@@ -4,7 +4,9 @@
 <script lang="ts">
   import routerState from "../logic/state.svelte";
   import type { RouterConfiguration } from "@/lib/routing/logic/router-configuration.type";
-  import type { LazyComponent } from "@/lib/routing/logic/lazy-component.type";
+  import type { Component } from "svelte";
+  import type { LazyComponent } from "@/lib/routing";
+  import Loading from "@/pages/Loading.svelte";
 
   const props: {
 
@@ -15,20 +17,25 @@
   } = $props();
 
   routerState.init(props.routerConfiguration);
+
+  /**
+   * Lazy component's load function
+   */
+  let currentComponentRenderer: LazyComponent = $derived(
+    routerState.currentUserRoute?.render ?? props.routerConfiguration.notFound,
+  );
+
+  /**
+   * Lazy loaded component
+   */
+  let CurrentComponent: Component = $state(Loading);
+
+  $effect(() => {
+    currentComponentRenderer()
+      .then(module => {
+        CurrentComponent = module.default as Component;
+      });
+  });
 </script>
 
-{#if routerState.currentUserRoute === undefined}
-  {#if props.routerConfiguration.notFound !== undefined}
-    {@render asyncComponent(props.routerConfiguration.notFound)}
-  {:else}
-    404 - Not found
-  {/if}
-{:else}
-  {@render asyncComponent(routerState.currentUserRoute.render)}
-{/if}
-
-{#snippet asyncComponent(renderLazyComponent: LazyComponent)}
-  {#await renderLazyComponent() then { "default": LoadedComponent }}
-    <LoadedComponent />
-  {/await}
-{/snippet}
+<CurrentComponent />
