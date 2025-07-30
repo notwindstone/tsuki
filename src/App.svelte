@@ -5,6 +5,7 @@
   import { Router, navigate, type RouterConf } from "svelte-mini-router";
   import {ApplicationNamespace} from "./constants/app";
   import Book from "@/components/icons/Book.svelte";
+  import Clock from "@/components/icons/Clock.svelte";
 
 
   export const RouterConfiguration: RouterConf = {
@@ -112,6 +113,7 @@ console.log("re-executing")
   <Router routerConf={RouterConfiguration} />
 
   <Book />
+  <Clock />
 
   <div style="display: flex; justify-content: center">
     <a href="https://vite.dev" target="_blank" rel="noreferrer">
