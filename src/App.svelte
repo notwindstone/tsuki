@@ -4,6 +4,7 @@
   import shitty from "./shitty.json";
   import { Router, navigate, type RouterConf } from "svelte-mini-router";
   import {ApplicationNamespace} from "./constants/app";
+  import Book from "@/components/icons/Book.svelte";
 
 
   export const RouterConfiguration: RouterConf = {
@@ -14,7 +15,7 @@
       },
       {
         path: "/shit",
-        render: () => import("./Shit.svelte"),
+        render: () => import("@/pages/Home.svelte"),
       },
     ],
     render404: () => import("./pages/NotFound.svelte"),
@@ -109,6 +110,8 @@ console.log("re-executing")
   {/if}
 
   <Router routerConf={RouterConfiguration} />
+
+  <Book />
 
   <div style="display: flex; justify-content: center">
     <a href="https://vite.dev" target="_blank" rel="noreferrer">
