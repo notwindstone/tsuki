@@ -11,12 +11,12 @@
   export const RouterConfiguration: RouterConf = {
     "routes": [
       {
-        "path"   : "/",
-        "render" : () => import("@/pages/Home.svelte"),
+        "path"  : "/",
+        "render": () => import("@/pages/Home.svelte"),
       },
       {
-        "path"   : "/shit",
-        "render" : () => import("@/pages/Home.svelte"),
+        "path"  : "/shit",
+        "render": () => import("@/pages/Home.svelte"),
       },
     ],
     "render404": () => import("./pages/NotFound.svelte"),
@@ -52,8 +52,8 @@
 
   $effect(() => {
     window.__APP__ = {
-      "dynamic" : count,
-      "static"  : "holy fuck",
+      "dynamic": count,
+      "static" : "holy fuck",
     };
 
     window.postMessage("svelte_app_updated");
