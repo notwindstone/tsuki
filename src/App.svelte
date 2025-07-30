@@ -113,9 +113,11 @@ console.log("re-executing")
 
   <Router routerConf={RouterConfiguration} />
 
-  <Book />
-  <Clock />
-  <Compass />
+  <div style="display: flex; gap: 8px">
+    <Book />
+    <Clock />
+    <Compass />
+  </div>
 
   <div style="display: flex; justify-content: center">
     <a href="https://vite.dev" target="_blank" rel="noreferrer">

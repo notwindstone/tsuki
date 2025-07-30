@@ -11,6 +11,11 @@
 </div>
 
 <style>
+  .group {
+    width: 32px;
+    height: 32px;
+  }
+
   .clock-icon {
     will-change: d;
     transition-property: d;

@@ -11,6 +11,11 @@
 </div>
 
 <style>
+  .group {
+    width: 32px;
+    height: 32px;
+  }
+
   .compass-icon {
     will-change: d;
     transition-property: d;

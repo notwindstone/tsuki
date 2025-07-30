@@ -13,6 +13,11 @@
 </div>
 
 <style>
+  .group {
+    width: 32px;
+    height: 32px;
+  }
+
     .book-icon__inner {
       will-change: d;
       transition-property: d;
