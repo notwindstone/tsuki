@@ -1,4 +1,4 @@
-import type { RouterConf } from "svelte-mini-router";
+import type { RouterConfiguration as RouterConfigurationType } from "@/lib/routing";
 
 export const Routes = {
   "Library": "/",
@@ -6,7 +6,7 @@ export const Routes = {
   "Browse" : "/browse",
 } as const;
 export const RouteSet = new Set(Object.values(Routes));
-export const RouterConfiguration: RouterConf = {
+export const RouterConfiguration: RouterConfigurationType = {
   "routes": [
     {
       "path"  : Routes.Library,
@@ -17,5 +17,5 @@ export const RouterConfiguration: RouterConf = {
       "render": () => import("@/pages/Home.svelte"),
     },
   ],
-  "render404": () => import("@/pages/NotFound.svelte"),
+  "notFound": () => import("@/pages/NotFound.svelte"),
 };

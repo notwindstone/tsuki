@@ -3,7 +3,8 @@
 -->
 <script lang="ts">
   import routerState from "../logic/state.svelte";
-  import type { LazyComponent, RouterConfiguration } from "../logic/types";
+  import type { RouterConfiguration } from "@/lib/routing/logic/router-configuration.type";
+  import type { LazyComponent } from "@/lib/routing/logic/lazy-component.type";
 
   const props: {
 
@@ -27,9 +28,7 @@
 {/if}
 
 {#snippet asyncComponent(renderLazyComponent: LazyComponent)}
-  {#await renderLazyComponent()}
-    {props.routerConfiguration.loadingText || "Loading..."}
-  {:then { "default": UserComponent }}
-    <UserComponent />
+  {#await renderLazyComponent() then { "default": LoadedComponent }}
+    <LoadedComponent />
   {/await}
 {/snippet}

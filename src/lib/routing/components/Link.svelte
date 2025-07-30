@@ -3,10 +3,13 @@
 -->
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import type { QueryParams } from "../logic/types";
+  import type { QueryParams } from "@/lib/routing/logic/query-params.type";
   import routerState from "../logic/state.svelte";
 
   const props: {
+    "class"?  : string;
+    "style"?  : string;
+    "children": Snippet;
 
     /**
      * Route path to redirect when the anchor is clicked.
@@ -16,9 +19,7 @@
     /**
      * URL query parameters; optional.
      */
-    "params"? : QueryParams;
-    "class"?  : string;
-    "children": Snippet;
+    "params"?: QueryParams;
   } = $props();
 
   function clickAction(event: MouseEvent & { "currentTarget": EventTarget & HTMLAnchorElement }): void {
@@ -30,6 +31,7 @@
 
 <a
   class={props.class}
+  style={props.style}
   href={routerState.generateFullUrl(props.path, props.params)}
   onclick={clickAction}
 >

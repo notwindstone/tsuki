@@ -1,4 +1,4 @@
-import type { QueryParams } from "./types";
+import type { QueryParams } from "@/lib/routing/logic/query-params.type";
 
 /**
  * Returns an object with the current URL query parameters, if any.

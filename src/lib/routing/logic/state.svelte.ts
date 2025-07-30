@@ -1,5 +1,7 @@
-import type { LazyComponent, QueryParams, RouterConfiguration } from "./types";
 import { isPathParam, sanitizePath, serializeQueryParameters } from "./utils";
+import type { LazyComponent } from "@/lib/routing/logic/lazy-component.type";
+import type { RouterConfiguration } from "@/lib/routing/logic/router-configuration.type";
+import type { QueryParams } from "@/lib/routing/logic/query-params.type";
 
 class RouterState {
   /** Application base URL; no leading or trailing "/", no URL query parameters. */
