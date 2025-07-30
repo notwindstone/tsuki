@@ -28,7 +28,7 @@
 
   let status: "fetching" | "reading" | "rendering" = $state("fetching");
   let count: number = $state(0);
-  let code: string = $state("alert('lol wha')");
+  let code: string = $state("console.log('lol wha')");
   let func: Function | undefined = $state(undefined);
   let currentRoute: string = $state("home");
   let pluginLoaded: boolean = $state(false);
@@ -113,9 +113,9 @@
   <Router routerConf={RouterConfiguration} />
 
   <div style="display: flex; gap: 8px">
-    <Book />
-    <Clock />
-    <Compass />
+    <Book active={count % 3 === 0} />
+    <Clock active={count % 3 === 1} />
+    <Compass active={count % 3 === 2} />
   </div>
 
   <div style="display: flex; justify-content: center">
