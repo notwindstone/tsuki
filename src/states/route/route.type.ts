@@ -1,4 +1,4 @@
 export type RouteType = {
-    current: string;
-    loading: boolean;
+  "current" : string;
+  "loading" : boolean;
 };

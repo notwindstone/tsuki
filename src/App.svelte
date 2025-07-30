@@ -1,26 +1,25 @@
 <script lang="ts">
-  import svelteLogo from '/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import shitty from "./shitty.json";
+  import svelteLogo from "/svelte.svg";
+  import viteLogo from "/vite.svg";
   import { Router, navigate, type RouterConf } from "svelte-mini-router";
-  import {ApplicationNamespace} from "./constants/app";
+  import { ApplicationNamespace } from "./constants/app";
   import Book from "@/components/icons/Book.svelte";
   import Clock from "@/components/icons/Clock.svelte";
   import Compass from "@/components/icons/Compass.svelte";
 
 
   export const RouterConfiguration: RouterConf = {
-    routes: [
+    "routes": [
       {
-        path: "/",
-        render: () => import("@/pages/Home.svelte"),
+        "path"   : "/",
+        "render" : () => import("@/pages/Home.svelte"),
       },
       {
-        path: "/shit",
-        render: () => import("@/pages/Home.svelte"),
+        "path"   : "/shit",
+        "render" : () => import("@/pages/Home.svelte"),
       },
     ],
-    render404: () => import("./pages/NotFound.svelte"),
+    "render404": () => import("./pages/NotFound.svelte"),
   };
   const routePaths = new Set([
     "home",
@@ -29,7 +28,7 @@
 
   let status: "fetching" | "reading" | "rendering" = $state("fetching");
   let count: number = $state(0);
-  let code: string = $state(shitty.shit);
+  let code: string = $state("alert('lol wha')");
   let func: Function | undefined = $state(undefined);
   let currentRoute: string = $state("home");
   let pluginLoaded: boolean = $state(false);
@@ -47,14 +46,14 @@
     window.postMessage("svelte_app_route_changed");
     window[ApplicationNamespace] = {
       ...window.__APP__,
-      route: currentRoute,
+      "route": currentRoute,
     };
   });
 
   $effect(() => {
     window.__APP__ = {
-      dynamic: count,
-      static:  "holy fuck",
+      "dynamic" : count,
+      "static"  : "holy fuck",
     };
 
     window.postMessage("svelte_app_updated");
@@ -69,8 +68,8 @@
   });
 
   const increment = () => {
-    count += 1
-  }
+    count += 1;
+  };
 
   const url = "https://raw.githubusercontent.com/ame-chan-lol/anisun-vue-example-extension/refs/heads/main/dist/bundle.js";
 
@@ -78,17 +77,17 @@
     const fetched = await fetch(url);
 
     status = "reading";
-    //code = await fetched.text();
+    // code = await fetched.text();
   })();
 
   $effect(() => {
     if (!func) {
       return;
     }
-console.log("re-executing")
+    console.log("re-executing");
     status = "rendering";
     const exports = {
-      svelte_shit: "holyyy is this a static shared variable???",
+      "svelte_shit": "holyyy is this a static shared variable???",
     };
     const module = { exports };
 
