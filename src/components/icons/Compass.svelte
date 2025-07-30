@@ -1,6 +1,6 @@
 <script lang="ts">
   import { colors } from "unocss/preset-mini";
-
+  console.log(colors);
   let {
     active,
   }: {
