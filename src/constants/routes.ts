@@ -10,10 +10,10 @@ export const RouterConfiguration: RouterConfigurationType = {
   "routes": [
     {
       "path"  : Routes.Library,
-      "render": () => import("@/pages/Home.svelte"),
+      "render": () => import("@/pages/NotFound.svelte"),
     },
     {
-      "path"  : Routes.Library,
+      "path"  : Routes.Recents,
       "render": () => import("@/pages/Home.svelte"),
     },
   ],
