@@ -2,6 +2,7 @@
   @component Renders the current route component.
 -->
 <script lang="ts">
+  import { fade } from "svelte/transition";
   import routerState from "../logic/state.svelte";
   import type { RouterConfiguration } from "@/lib/routing/logic/router-configuration.type";
   import type { Component } from "svelte";
@@ -52,4 +53,11 @@
   });
 </script>
 
-<CurrentComponent />
+{#key CurrentComponent}
+  <div
+    class="absolute"
+    transition:fade={{ "duration": 150 }}
+  >
+    <CurrentComponent />
+  </div>
+{/key}
