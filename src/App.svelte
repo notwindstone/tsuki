@@ -87,6 +87,11 @@
   </p>
   <Link path="/recents">Go Home</Link>
   <Link path="/">Go Back</Link>
+
+  <button onclick={increment}>
+    Clicked {count} times
+  </button>
+
   <Router routerConfiguration={RouterConfiguration} />
 
   <div style="display: flex; gap: 8px">
@@ -98,8 +103,4 @@
   <h1>Vite + Svelte</h1>
   <p style="opacity: 80%">runtime loading of remote components written in any JS framework lul</p>
   <p style="opacity: 40%">shared variables possible too :3</p>
-
-  <button onclick={increment}>
-    Clicked {count} times
-  </button>
 </main>
