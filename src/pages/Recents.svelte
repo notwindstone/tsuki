@@ -4,7 +4,6 @@
   import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { getCurrentExtensionsState } from "@/states/extensions/extensions.svelte";
   import { shitty } from "./shit.json";
-  //import {mount} from 'svelte';
 
   let count: number = $state(0);
   let code: string | undefined = $state(undefined);
@@ -85,7 +84,10 @@
 
     console.log("running the plugin");
     setCurrentExtensionStatus(pluginID, "running");
-    func(module, exports, { thisIsWorking: true });
+    func(module, exports, {
+      "damn" : "that's",
+      "crazy": true,
+    });
 
     setCurrentExtensionStatus(pluginID, "done");
 
@@ -100,6 +102,6 @@
     Clicked {count} times
   </button>
   <p>{currentExtensionsState[pluginID].status}</p>
-  <p>{currentExtensionsState[pluginID].timeToLoad} ms to load this shit</p>
+  <p>{currentExtensionsState[pluginID].timeToLoad} ms to load this extension</p>
   <div id="extensions-root-id" class="relative h-128 w-full rounded-md"></div>
 </div>

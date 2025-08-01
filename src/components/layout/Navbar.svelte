@@ -18,7 +18,7 @@
       ]}
     >
       <div class={[
-        "relative flex justify-center h-8 rounded-full duration-200 transition-[width,background-color] group-hover:before:bg-[theme(colors.white/.025)] group-active:before:bg-[theme(colors.white/.025)] before:w-18 before:h-full before:rounded-full before:absolute before:content-empty",
+        "relative flex justify-center h-8 rounded-full duration-200 transition-[width,background-color] group-hover:before:bg-[theme(colors.white/.02)] group-active:before:bg-[theme(colors.white/.02)] before:w-18 before:h-full before:rounded-full before:absolute before:content-empty",
         currentRouteState.current === Path
           ? "w-18 bg-zinc-900"
           : "w-8",
