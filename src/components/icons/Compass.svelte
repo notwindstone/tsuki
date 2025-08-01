@@ -9,7 +9,7 @@
 </script>
 
 <svg
-  class={["shrink-0 transition-[fill] duration-200", { active }]}
+  class={["shrink-0 py-1 transition-[fill] duration-200", { active }]}
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 -960 960 960"
 >

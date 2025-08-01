@@ -11,18 +11,17 @@
     <Link
       path={Path}
       class={[
-        "h-full flex flex-col gap-2 justify-center items-center flex-1",
+        "group h-full flex flex-col gap-2 justify-center items-center flex-1",
         currentRouteState.current === Path
           ? "text-white fill-white"
           : "text-[theme(colors.white/.7)] fill-[theme(colors.white/.7)]",
       ]}
     >
       <div class={[
-        "flex justify-center h-8 py-1 rounded-full duration-200 transition-[width,background-color]",
-        { "bg-zinc-900": currentRouteState.current === Path },
+        "relative flex justify-center h-8 rounded-full duration-200 transition-[width,background-color] group-hover:before:bg-[theme(colors.white/.025)] group-active:before:bg-[theme(colors.white/.025)] before:w-18 before:h-full before:rounded-full before:absolute before:content-empty",
         currentRouteState.current === Path
-          ? "w-18"
-          : "w-12",
+          ? "w-18 bg-zinc-900"
+          : "w-8",
       ]}>
         <Icon active={currentRouteState.current === Path} />
       </div>
