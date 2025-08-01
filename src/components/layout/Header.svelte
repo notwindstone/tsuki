@@ -1,3 +1,3 @@
-<header class="shrink-0 h-16">
+<header class="sticky top-0 h-16">
   Header
 </header>
