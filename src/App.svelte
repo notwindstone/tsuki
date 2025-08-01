@@ -83,7 +83,7 @@
 </script>
 
 <Layout>
-  <p class="bg-red-500 w-fit">
+  <p class={`bg-red-${700} w-fit`}>
     {currentRouteState.currentRouteState.current}
   </p>
   <p class="bg-red-500 w-fit">

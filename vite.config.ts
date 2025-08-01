@@ -13,6 +13,7 @@ export default defineConfig({
   },
   "plugins": [
     svelte(),
+    // uses unocss package
     UnoCSS(),
   ],
 });
