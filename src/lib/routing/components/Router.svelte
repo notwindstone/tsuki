@@ -58,7 +58,7 @@
 
 {#key CurrentComponent}
   <div
-    class="absolute"
+    class="absolute pt-16 pb-20"
     transition:fade={{ "duration": 150 }}
   >
     <CurrentComponent />

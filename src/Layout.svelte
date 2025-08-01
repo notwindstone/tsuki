@@ -11,7 +11,5 @@
 </script>
 
 <Header />
-<main>
-  {@render children()}
-</main>
+{@render children()}
 <Navbar />

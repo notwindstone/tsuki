@@ -7,7 +7,7 @@
 </script>
 
 <svg
-  class={["w-32 h-32", { active }]}
+  class={["shrink-0", { active }]}
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 -960 960 960"
 >

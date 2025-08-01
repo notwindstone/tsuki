@@ -92,14 +92,11 @@
   <Link path="/recents">Go Home</Link>
   <Link path="/">Go Back</Link>
 
-  <button onclick={increment}>
+  <button class="cursor-pointer" onclick={increment}>
     Clicked {count} times
   </button>
 
   <div style="display: flex; gap: 8px">
-    <Book active={count % 3 === 0} />
-    <Clock active={count % 3 === 1} />
-    <Compass active={count % 3 === 2} />
   </div>
 
   <h1>Vite + Svelte</h1>

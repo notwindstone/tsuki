@@ -1,5 +1,8 @@
-<div id="extensions-root-id" style="position: relative; border-radius: 8px; height: 400px">
-  {#each Array.from({ "length": 2000 }) as item, index (index)}
+<div
+  id="extensions-root-id"
+>
+  <!-- style="position: relative; border-radius: 8px; height: 400px" -->
+  {#each Array.from({ "length": 20000 }) as item, index (index)}
     <div style={`font-size: ${Math.floor(Math.random() * 12) * ((index % 3) + 1)}px`}>
       Lol apparently it works {item} {index + Math.random()}
     </div>
