@@ -22,7 +22,7 @@
   />
   <path
     class="book-icon__inner book-icon__bookmark-second"
-    fill="black"
+    fill="#024a70"
     d="M 640 -440 m 0 -440 l -100 -0 l -100 0 v 0 H 640 Z"
   />
 </svg>
