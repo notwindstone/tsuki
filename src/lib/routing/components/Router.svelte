@@ -33,9 +33,11 @@
    */
   let CurrentComponent: Component = $state(Loading);
 
-  const { setCurrentRoutePathname } = getCurrentRouteState();
+  const { setCurrentRoutePathname, setCurrentRouteStatus } = getCurrentRouteState();
 
   $effect(() => {
+    setCurrentRouteStatus(true);
+
     currentComponentRenderer()
       .then((module: Record<"default", Component>) => {
         CurrentComponent = module.default;
@@ -47,6 +49,7 @@
         for (const declaredPathname of RouteArray) {
           if (pathname === declaredPathname) {
             setCurrentRoutePathname(declaredPathname);
+            setCurrentRouteStatus(false);
           }
         }
       });

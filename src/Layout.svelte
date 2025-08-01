@@ -1,8 +1,19 @@
-<script>
-  import Link from '@/lib/routing/components/Link.svelte';
+<script lang="ts">
+  import Header from "@/components/layout/Header.svelte";
+  import NavigationBar from "@/components/layout/NavigationBar.svelte";
+  import type { Snippet } from "svelte";
+
+  let {
+    children,
+  }: {
+    "children": Snippet;
+  } = $props();
 </script>
 
-<h1>
-  sd
-  <Link></Link>
-</h1>
+<Header />
+<div class="w-full h-[calc(100%-64px)] flex sm:flex-row-reverse flex-col">
+  <main class="relative w-full h-full overflow-y-auto">
+    {@render children()}
+  </main>
+  <NavigationBar />
+</div>

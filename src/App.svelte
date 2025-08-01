@@ -6,6 +6,7 @@
   import { RouterConfiguration, RouteSet } from "@/constants/routes";
   import { Link, Router } from "@/lib/routing";
   import { getCurrentRouteState } from "@/states/route/route.svelte";
+  import Layout from "@/Layout.svelte";
 
   // let status: "fetching" | "reading" | "rendering" = $state("fetching");
   let count: number = $state(0);
@@ -81,9 +82,12 @@
   const currentRouteState = getCurrentRouteState();
 </script>
 
-<main>
+<Layout>
   <p class="bg-red-500 w-fit">
     {currentRouteState.currentRouteState.current}
+  </p>
+  <p class="bg-red-500 w-fit">
+    {currentRouteState.currentRouteState.loading}
   </p>
   <Link path="/recents">Go Home</Link>
   <Link path="/">Go Back</Link>
@@ -91,8 +95,6 @@
   <button onclick={increment}>
     Clicked {count} times
   </button>
-
-  <Router routerConfiguration={RouterConfiguration} />
 
   <div style="display: flex; gap: 8px">
     <Book active={count % 3 === 0} />
@@ -103,4 +105,6 @@
   <h1>Vite + Svelte</h1>
   <p style="opacity: 80%">runtime loading of remote components written in any JS framework lul</p>
   <p style="opacity: 40%">shared variables possible too :3</p>
-</main>
+
+  <Router routerConfiguration={RouterConfiguration} />
+</Layout>

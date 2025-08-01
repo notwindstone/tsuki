@@ -1,15 +1,17 @@
 import type { RouteType } from "./route.type";
 
-let currentRouteState = $state.raw<RouteType>({
+let currentRouteState = $state<RouteType>({
   "current": "/",
+  "loading": true,
 });
 
 export function getCurrentRouteState() {
   function setCurrentRoutePathname(pathname: RouteType["current"]) {
-    console.log(currentRouteState);
-    currentRouteState = {
-      "current": pathname,
-    };
+    currentRouteState.current = pathname;
+  }
+
+  function setCurrentRouteStatus(status: RouteType["loading"]) {
+    currentRouteState.loading = status;
   }
 
   return {
@@ -17,5 +19,6 @@ export function getCurrentRouteState() {
       return currentRouteState;
     },
     setCurrentRoutePathname,
+    setCurrentRouteStatus,
   };
 }

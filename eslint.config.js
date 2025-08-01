@@ -53,6 +53,17 @@ export default ts.config(
     },
     "rules": {
 
+      /* use svelte/prefer-const rule instead of default */
+      "prefer-const"       : ["off"],
+      "svelte/prefer-const": [
+        "error",
+        {
+          "destructuring"       : "any",
+          "additionalProperties": false,
+          "excludedRunes"       : ["$props", "$state", "$derived"],
+        },
+      ],
+
       /* plugins can be any function */
       "@typescript-eslint/no-unsafe-function-type": ["off"],
 
