@@ -26,6 +26,10 @@
   function clickAction(event: MouseEvent & { "currentTarget": EventTarget & HTMLAnchorElement }): void {
     event.preventDefault();
 
+    if (window.location.pathname === props.path) {
+      return;
+    }
+
     routerState.navigate(props.path, props.params);
   }
 </script>

@@ -6,16 +6,29 @@
   const currentRouteState = getCurrentRouteState().currentRouteState;
 </script>
 
-<nav class="fixed bottom-0 h-20 w-full flex flex-nowrap bg-sky-950">
+<nav class="fixed bottom-0 h-18 w-full flex flex-nowrap bg-zinc-950">
   {#each NavigationButtons as { Label, Path, Icon } (Path)}
     <Link
       path={Path}
-      class={["h-full flex flex-col gap-2 justify-center items-center flex-1"]}
+      class={[
+        "h-full flex flex-col gap-2 justify-center items-center flex-1",
+        currentRouteState.current === Path
+          ? "text-white fill-white"
+          : "text-[theme(colors.white/.7)] fill-[theme(colors.white/.7)]",
+      ]}
     >
-      <div class="flex justify-center w-18 h-8 py-1 bg-sky-900 rounded-full">
+      <div class={[
+        "flex justify-center h-8 py-1 rounded-full duration-200 transition-[width,background-color]",
+        { "bg-zinc-900": currentRouteState.current === Path },
+        currentRouteState.current === Path
+          ? "w-18"
+          : "w-12",
+      ]}>
         <Icon active={currentRouteState.current === Path} />
       </div>
-      <p class="select-none text-center leading-none">
+      <p class={[
+        "select-none text-center leading-none text-sm duration-200 transition-[color]",
+      ]}>
         {Label}
       </p>
     </Link>
