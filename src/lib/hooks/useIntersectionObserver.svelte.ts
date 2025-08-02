@@ -10,12 +10,16 @@ export const useIntersectionObserver = (options: {
 
   $effect(() => {
     if (ref) {
-      observer = new IntersectionObserver(([entry]) => {
-        observed = {
-          "isIntersecting"   : entry.isIntersecting,
-          "intersectionRatio": entry.intersectionRatio,
-        };
-      }, options);
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          console.log("updated");
+          observed = {
+            "isIntersecting"   : entry.isIntersecting,
+            "intersectionRatio": entry.intersectionRatio,
+          };
+        },
+        options,
+      );
 
       observer.observe(ref);
 

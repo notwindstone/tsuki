@@ -73,7 +73,8 @@
     const beforeLoad = performance.now();
 
     setCurrentExtensionStatus(pluginID, "loading");
-    func = new Function("module", "exports", "_tsuki", "with (_tsuki) { " + code + " }");
+    func = new Function("module", "exports", "_tsuki", code);
+    // func = new Function("module", "exports", "_tsuki", "with (_tsuki) { " + code + " }");
 
     if (!func) {
       return;

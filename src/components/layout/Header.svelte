@@ -4,8 +4,17 @@
   import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver.svelte";
 
   const intersection = useIntersectionObserver({
-    // (<= 0.5) doesn't update when hidden under fixed header
-    "threshold": [0.5, 0.6, 0.7, 0.8, 0.9, 1],
+
+    /*
+     * Basically [0.5, 0.525, ..., 0.975, 1]
+     * Ending at (<= 0.5) removes updates, when component is already hidden under fixed header
+     *
+     * Intersection Observer is optimized by default to update only when
+     * browser can handle it, ignoring some of these thresholds on fast scrolls
+     */
+    "threshold": Array
+      .from({ "length": 21 })
+      .map((_, index) => (index + 20) / 40),
   });
 
   const currentRouteState = getCurrentRouteState().currentRouteState;
@@ -23,7 +32,7 @@
 >
   <button
     aria-label="Go back"
-    onclick={() => window.history.back}
+    onclick={() => window.history.back()}
     class="relative shrink-0 cursor-pointer flex justify-center items-center p-2 rounded-full"
     use:ripple={{
       "color": "rgba(255, 255, 255, 0.06)",
