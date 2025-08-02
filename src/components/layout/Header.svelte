@@ -2,6 +2,7 @@
   import { ripple } from "svelte-ripple-action";
   import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver.svelte";
+  import type { RouteType } from "@/states/route/route.type";
 
   const intersection = useIntersectionObserver({
 
@@ -19,12 +20,16 @@
 
   const currentRouteState = getCurrentRouteState().currentRouteState;
 
-  const _label = "Основные";
+  const _label: Record<RouteType["current"], string> = {
+    "/"       : "Основные",
+    "/recents": "Недавние",
+    "/browse" : "Поисковик",
+  };
 </script>
 
 <header
   class={[
-    "z-1000 fixed top-0 flex flex-nowrap items-center gap-2 h-16 w-full pl-2 sm:pl-26 opacity-100 transition-[background-color]",
+    "z-1000 fixed top-0 flex flex-nowrap items-center gap-2 h-16 w-full pl-2 pr-2 sm:pl-26 opacity-100 transition-[background-color]",
     (intersection.observed?.intersectionRatio ?? 1) <= 0.5
       ? "bg-zinc-950"
       : "bg-black",
@@ -42,14 +47,29 @@
   </button>
   <p
     class={[
-      "text-lg leading-none transition-[opacity]",
+      "text-lg w-full leading-none transition-[opacity]",
       (intersection.observed?.intersectionRatio ?? 1) <= 0.7
         ? "opacity-100"
         : "opacity-0",
     ]}
   >
-    {_label}
+    {_label[currentRouteState.current]}
   </p>
+  <button
+    aria-label="More"
+    onclick={() => alert("modal should be here")}
+    class={[
+      "relative shrink-0 cursor-pointer justify-center items-center p-2 rounded-full",
+      currentRouteState.current === "/"
+        ? "flex"
+        : "none",
+    ]}
+    use:ripple={{
+      "color": "rgba(255, 255, 255, 0.06)",
+    }}
+  >
+    <span class="i-material-symbols-more-vert w-6 h-6"></span>
+  </button>
 </header>
 <div
   bind:this={intersection.ref}
@@ -64,7 +84,7 @@
       )
     };`}
   >
-    {_label}
+    {_label[currentRouteState.current]}
   </p>
 </div>
 <p class={`bg-red-${700} w-fit`}>
