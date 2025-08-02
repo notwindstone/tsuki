@@ -4,17 +4,19 @@
   import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver.svelte";
 
   const intersection = useIntersectionObserver({
-    // (<= 0.4) doesn't update when hidden under fixed header
-    "threshold": [0.4, 0.55, 0.7, 0.85, 1],
+    // (<= 0.5) doesn't update when hidden under fixed header
+    "threshold": [0.5, 0.6, 0.7, 0.8, 0.9, 1],
   });
 
   const currentRouteState = getCurrentRouteState().currentRouteState;
+
+  const _label = "Основные";
 </script>
 
 <header
   class={[
     "z-1000 fixed top-0 flex flex-nowrap items-center gap-2 h-16 w-full pl-2 sm:pl-26 opacity-100 transition-[background-color]",
-    (intersection.observed?.intersectionRatio ?? 1) <= 0.6
+    (intersection.observed?.intersectionRatio ?? 1) <= 0.5
       ? "bg-zinc-950"
       : "bg-black",
   ]}
@@ -32,20 +34,28 @@
   <p
     class={[
       "text-lg leading-none transition-[opacity]",
-      (intersection.observed?.intersectionRatio ?? 1) <= 0.6
+      (intersection.observed?.intersectionRatio ?? 1) <= 0.7
         ? "opacity-100"
         : "opacity-0",
     ]}
   >
-    Главная
+    {_label}
   </p>
 </header>
 <div
   bind:this={intersection.ref}
-  class="pt-16 pl-4 sm:pl-28 h-40 flex flex-col justify-end"
+  class="pt-16 pl-4 sm:pl-28 h-36 flex flex-col justify-end"
 >
-  <p class="text-3xl">
-    Основные
+  <p
+    class="text-3xl transition-[opacity]"
+    style={`opacity: ${
+      Math.max(
+        ((intersection.observed?.intersectionRatio ?? 1) - 0.6) / 0.4,
+        0,
+      )
+    };`}
+  >
+    {_label}
   </p>
 </div>
 <p class={`bg-red-${700} w-fit`}>
