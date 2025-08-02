@@ -4,7 +4,12 @@
   const currentRouteState = getCurrentRouteState().currentRouteState;
 </script>
 
-<header class="fixed top-0 h-16 w-full sm:pl-24">
+<header class="fixed top-0 flex flex-nowrap gap-4 bg-red w-full sm:pl-24">
+  <button>
+
+  </button>
+</header>
+<div>
   <p class={`bg-red-${700} w-fit`}>
     {currentRouteState.current}
   </p>
@@ -12,5 +17,5 @@
     {currentRouteState.loading}
   </p>
 
-  Header
-</header>
+  sosal
+</div>
