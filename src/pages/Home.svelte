@@ -1,10 +1,20 @@
 <script lang="ts">
+  import { getContext } from "svelte";
+  import { ScreenContextKey, Screens } from "@/constants/screens";
+  import type { ScreenType } from "@/types/Screen.type";
+
+  const currentScreen = getContext(ScreenContextKey) as ScreenType;
 </script>
 
-<div>
+<div class="p-4">
   <h1>Vite + Svelte</h1>
   <p style="opacity: 80%">runtime loading of remote components written in any JS framework lul</p>
   <p style="opacity: 40%">shared variables possible too :3</p>
+  <button onclick={() => {
+    currentScreen.state = Screens.Settings;
+  }}>
+    Open screen
+  </button>
   {#each Array.from({ "length": 500 }) as _, index (index)}
     <div>{index}</div>
   {/each}

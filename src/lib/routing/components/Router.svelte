@@ -10,7 +10,9 @@
   import Loading from "@/pages/Loading.svelte";
   import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { RouteArray } from "@/constants/routes";
-  import Screen from "@/components/layout/Screen.svelte";
+  import { getContext } from "svelte";
+  import { ScreenContextKey } from "@/constants/screens";
+  import type { ScreenType } from "@/types/Screen.type";
 
   const props: {
 
@@ -35,6 +37,7 @@
   let CurrentComponent: Component = $state(Loading);
 
   const { setCurrentRoutePathname, setCurrentRouteStatus } = getCurrentRouteState();
+  const currentScreen = getContext(ScreenContextKey) as ScreenType;
 
   $effect(() => {
     setCurrentRouteStatus(true);
@@ -59,10 +62,14 @@
 
 {#key CurrentComponent}
   <div
-    class="absolute pb-20 sm:pl-24 w-full"
+    class={[
+      "absolute pb-20 sm:pl-24 w-full transition-[opacity,translate] duration-300 ease-out",
+      currentScreen.state === undefined
+        ? "opacity-100 translate-x-0"
+        : "opacity-0 -translate-x-16 max-h-[calc(100svh-144px)] overflow-y-hidden",
+    ]}
     transition:fade={{ "duration": 150 }}
   >
     <CurrentComponent />
   </div>
 {/key}
-<Screen />

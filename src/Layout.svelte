@@ -3,14 +3,17 @@
   import Navbar from "@/components/layout/Navbar.svelte";
   import { setContext, type Snippet } from "svelte";
   import { ScreenContextKey } from "@/constants/screens";
+  import type { ScreenType } from "@/types/Screen.type";
+  import Screen from "@/components/layout/Screen.svelte";
+
+  let currentScreen = $state<ScreenType>({
+    "state": undefined,
+  });
 
   // For Screen functionality
-  setContext<{
-    "label" : string;
-    "screen": string;
-  } | undefined>(
+  setContext<ScreenType>(
     ScreenContextKey,
-    undefined,
+    currentScreen,
   );
 
   let {
@@ -23,3 +26,4 @@
 <Header />
 {@render children()}
 <Navbar />
+<Screen />

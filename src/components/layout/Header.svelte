@@ -3,6 +3,9 @@
   import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver.svelte";
   import type { RouteType } from "@/states/route/route.type";
+  import { getContext } from "svelte";
+  import { ScreenContextKey } from "@/constants/screens";
+  import type { ScreenType } from "@/types/Screen.type";
 
   const intersection = useIntersectionObserver({
 
@@ -19,6 +22,7 @@
   });
 
   const currentRouteState = getCurrentRouteState().currentRouteState;
+  const currentScreen = getContext(ScreenContextKey) as ScreenType;
 
   const _label: Record<RouteType["current"], string> = {
     "/"       : "Основные",
@@ -29,7 +33,10 @@
 
 <header
   class={[
-    "z-1000 fixed top-0 flex flex-nowrap items-center gap-2 h-16 w-full pl-2 pr-2 sm:pl-26 opacity-100 transition-[background-color]",
+    "z-1000 fixed top-0 flex flex-nowrap items-center gap-2 h-16 w-full pl-2 pr-2 opacity-100 transition-[background-color]",
+    currentScreen.state === undefined
+      ? "sm:pl-26"
+      : "",
     (intersection.observed?.intersectionRatio ?? 1) <= 0.5
       ? "bg-zinc-950"
       : "bg-black",
@@ -73,7 +80,12 @@
 </header>
 <div
   bind:this={intersection.ref}
-  class="pt-16 pl-4 sm:pl-28 h-36 flex flex-col justify-end"
+  class={[
+    "pt-16 pl-4 h-36 flex flex-col justify-end overflow-y-hidden",
+    currentScreen.state === undefined
+      ? "sm:pl-28"
+      : "",
+  ]}
 >
   <p
     class="text-3xl transition-[opacity]"
@@ -87,10 +99,4 @@
     {_label[currentRouteState.current]}
   </p>
 </div>
-<p class={`bg-red-${700} w-fit`}>
-  {currentRouteState.current}
-</p>
-<p class="bg-red-500 w-fit">
-  {currentRouteState.loading}
-</p>
 

@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Svelte + TS</title>
   </head>
-  <body style="background-color: black">
+  <!-- CSS styles and JS code will not be loaded instantly -->
+  <!-- So prevent white background flashings using a style -->
+  <body style="background-color:black">
     <div id="tsuki_app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -2,11 +2,22 @@
   import { Link } from "@/lib/routing";
   import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { NavigationButtons } from "@/constants/navigation";
+  import { getContext } from "svelte";
+  import { ScreenContextKey } from "@/constants/screens";
+  import type { ScreenType } from "@/types/Screen.type";
 
   const currentRouteState = getCurrentRouteState().currentRouteState;
+  const currentScreen = getContext(ScreenContextKey) as ScreenType;
 </script>
 
-<nav class="z-1000 fixed bottom-0 h-20 w-full flex flex-nowrap bg-zinc-950 sm:left-0 sm:top-0 sm:w-24 sm:h-full sm:flex-col sm:justify-start sm:pt-8 sm:gap-8">
+<nav
+  class={[
+    "z-1000 fixed bottom-0 h-20 w-full flex-nowrap bg-zinc-950 sm:left-0 sm:top-0 sm:w-24 sm:h-full sm:flex-col sm:justify-start sm:pt-8 sm:gap-8",
+    currentScreen.state === undefined
+      ? "flex"
+      : "hidden",
+  ]}
+>
   {#each NavigationButtons as { Label, Path, Icon } (Path)}
     <Link
       path={Path}

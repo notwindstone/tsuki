@@ -2,3 +2,7 @@
   background: black;
   color: white;
 }
+
+html, body, #tsuki_app {
+  overflow-x: hidden;
+}

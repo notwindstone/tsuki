@@ -4,4 +4,8 @@ export const Screens = {
     "label" : "Настройки",
     "screen": "settings",
   },
+  "Extra": {
+    "label" : "Дополнительно",
+    "screen": "extra",
+  },
 } as const;
