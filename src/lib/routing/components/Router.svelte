@@ -10,6 +10,7 @@
   import Loading from "@/pages/Loading.svelte";
   import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { RouteArray } from "@/constants/routes";
+  import Screen from "@/components/layout/Screen.svelte";
 
   const props: {
 
@@ -64,3 +65,4 @@
     <CurrentComponent />
   </div>
 {/key}
+<Screen />
