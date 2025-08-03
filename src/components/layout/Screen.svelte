@@ -3,13 +3,16 @@
   import { ScreenContextKey } from "@/constants/screens";
   import { cubicOut } from "svelte/easing";
   import slideFade from "@/lib/transitions/slide-fade";
+  import { SvelteURLSearchParams } from "svelte/reactivity";
   import type { ScreenType } from "@/types/Screen.type";
+  import {getPathParams} from '@/lib/routing';
 
   const currentScreen = getContext(ScreenContextKey) as ScreenType;
+  const searchParameters = new SvelteURLSearchParams(window.location.search);
 
   $effect(() => {
-    const searchParameters = new URLSearchParams(window.location.search);
-console.log(searchParameters);
+    console.log("huh", getPathParams());
+
     if (currentScreen.state === undefined) {
       searchParameters.delete("screen");
     } else {
