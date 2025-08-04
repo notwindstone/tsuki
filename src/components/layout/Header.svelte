@@ -2,10 +2,12 @@
   import { ripple } from "svelte-ripple-action";
   import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver.svelte";
-  import type { RouteType } from "@/states/route/route.type";
   import { getContext } from "svelte";
   import { ScreenContextKey } from "@/constants/screens";
   import type { ScreenType } from "@/types/Screen.type";
+  import { NavigationButtons } from "@/constants/navigation";
+
+  const currentLabel = "asdf";
 
   const intersection = useIntersectionObserver({
 
@@ -23,12 +25,6 @@
 
   const currentRouteState = getCurrentRouteState().currentRouteState;
   const currentScreen = getContext(ScreenContextKey) as ScreenType;
-
-  const _label: Record<RouteType["current"], string> = {
-    "/"       : "Основные",
-    "/recents": "Недавние",
-    "/browse" : "Поисковик",
-  };
 </script>
 
 <header
@@ -66,7 +62,7 @@
         : "opacity-0",
     ]}
   >
-    {_label[currentRouteState.current]}
+    {currentLabel}
   </p>
   <button
     aria-label="More"
@@ -102,7 +98,7 @@
       )
     };`}
   >
-    {_label[currentRouteState.current]}
+    {currentLabel}
   </p>
 </div>
 

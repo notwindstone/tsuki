@@ -12,7 +12,7 @@ export const NavigationButtons: Array<{
   {
     "Path" : "/",
     "Icon" : Book,
-    "Label": "Главная",
+    "Label": "Библиотека",
   },
   {
     "Path" : "/recents",
