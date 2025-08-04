@@ -4,8 +4,18 @@
   import { getContext } from "svelte";
   import { ScreenContextKey } from "@/constants/screens";
   import type { ScreenType } from "@/types/Screen.type";
+  import { getPopState } from "@/lib/routing/logic/state.svelte";
 
   const currentScreen = getContext(ScreenContextKey) as ScreenType;
+  const currentPopState = getPopState();
+
+  $effect(() => {
+    if (currentPopState.currentPopState === undefined) {
+      return;
+    }
+
+    currentScreen.state = undefined;
+  });
 </script>
 
 {#if currentScreen.state !== undefined}

@@ -20,6 +20,9 @@ class RouterState {
     "render": LazyComponent;
   }>>([]);
 
+  /** Updates on pop states */
+  popState = $state<number | undefined>();
+
   /** User route to be currently rendered, if any. */
   currentUserRoute = $derived(this.userRoutes.find(userRoute => {
     if (this.currentPathParts.length !== userRoute.pathParts.length) {
@@ -40,7 +43,9 @@ class RouterState {
   }));
 
   constructor() {
-    window.onpopstate = () => { // back or forward button
+    // back or forward button
+    window.onpopstate = () => {
+      this.popState = Math.random();
       routerState.currentPathParts = routerState.getCurrentUrlPathParts();
     };
   }
@@ -145,4 +150,12 @@ export function getPathParams(): Record<string, string> {
  */
 export function navigate(path: string, queryParams?: QueryParams): void {
   routerState.navigate(path, queryParams);
+}
+
+export function getPopState() {
+  return {
+    get "currentPopState"() {
+      return routerState.popState;
+    },
+  };
 }
