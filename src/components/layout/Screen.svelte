@@ -16,8 +16,17 @@
         "duration": 300,
         "easing"  : cubicOut,
       }}
-      class="p-4 absolute w-full h-full flex flex-col gap-4"
+      class="p-4 w-full h-full flex flex-col gap-4"
     >
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
       <div>hewwo</div>
       <div>hewwo</div>
       <div>hewwo</div>
