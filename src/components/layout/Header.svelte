@@ -7,8 +7,6 @@
   import type { ScreenType } from "@/types/Screen.type";
   import { NavigationButtons } from "@/constants/navigation";
 
-  const currentLabel = "asdf";
-
   const intersection = useIntersectionObserver({
 
     /*
@@ -25,6 +23,18 @@
 
   const currentRouteState = getCurrentRouteState().currentRouteState;
   const currentScreen = getContext(ScreenContextKey) as ScreenType;
+
+  function getCurrentLabel() {
+    console.log("i was triggered");
+    if (currentScreen.state === undefined) {
+      const found = NavigationButtons.find(entry => entry.Path === currentRouteState.current)
+        ?? NavigationButtons[0];
+
+      return found.Label;
+    }
+
+    return currentScreen.state.label;
+  }
 </script>
 
 <header
@@ -62,7 +72,7 @@
         : "opacity-0",
     ]}
   >
-    {currentLabel}
+    {getCurrentLabel()}
   </p>
   <button
     aria-label="More"
@@ -98,7 +108,7 @@
       )
     };`}
   >
-    {currentLabel}
+    {getCurrentLabel()}
   </p>
 </div>
 
