@@ -63,7 +63,7 @@
 {#key CurrentComponent}
   <div
     class={[
-      "absolute pb-20 sm:pl-24 w-full transition-[opacity,translate] duration-300 ease-out",
+      "absolute pb-20 sm:pl-24 w-full transition-[opacity,translate] duration-300 ease-out translate-z-0",
       currentScreen.state === undefined
         ? "opacity-100 translate-x-0"
         : "opacity-0 -translate-x-16 max-h-[calc(100svh-144px)] overflow-y-hidden",

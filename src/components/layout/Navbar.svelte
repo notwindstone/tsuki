@@ -12,10 +12,10 @@
 
 <nav
   class={[
-    "z-1000 fixed bottom-0 h-20 w-full flex-nowrap bg-zinc-950 sm:left-0 sm:top-0 sm:w-24 sm:h-full sm:flex-col sm:justify-start sm:pt-8 sm:gap-8",
+    "z-1000 fixed bottom-0 h-20 w-full flex flex-nowrap bg-zinc-950 sm:left-0 sm:top-0 sm:w-24 sm:h-full sm:flex-col sm:justify-start sm:pt-8 sm:gap-8 transition-[opacity,translate] duration-300 ease-out translate-z-0",
     currentScreen.state === undefined
-      ? "flex"
-      : "hidden",
+      ? "opacity-100 translate-x-0"
+      : "opacity-0 -translate-x-16",
   ]}
 >
   {#each NavigationButtons as { Label, Path, Icon } (Path)}
