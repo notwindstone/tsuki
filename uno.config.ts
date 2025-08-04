@@ -1,7 +1,15 @@
-import { defineConfig, presetIcons, presetWind4 } from "unocss";
+import { defineConfig, presetIcons, presetWind4, presetWebFonts } from "unocss";
 
 export default defineConfig({
   "presets": [
+    presetWebFonts({
+      "provider": "google",
+      "fonts"   : {
+        "sans": "Google Sans",
+        "mono": ["Fira Code", "Fira Mono:400,700"],
+      },
+    }),
+    // Material Symbols with CSS
     presetIcons(),
 
     /*

@@ -33,6 +33,11 @@
       <div>hewwo</div>
       <div>hewwo</div>
       <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
+      <div>hewwo</div>
       <button class="flex" onclick={() => {
         currentScreen.state = undefined;
       }}>
