@@ -44,8 +44,13 @@
 >
   <button
     aria-label="Go back"
-    onclick={() => window.history.back()}
-    class="relative shrink-0 cursor-pointer flex justify-center items-center p-2 rounded-full"
+    onclick={() => {
+      currentScreen.state = undefined;
+    }}
+    class={[
+      "relative shrink-0 cursor-pointer flex justify-center items-center p-2 rounded-full",
+      currentScreen.state === undefined && "hidden",
+    ]}
     use:ripple={{
       "color": "rgba(255, 255, 255, 0.06)",
     }}
@@ -55,6 +60,7 @@
   <p
     class={[
       "text-lg w-full leading-none transition-[opacity]",
+      currentScreen.state === undefined && "pl-2",
       (intersection.observed?.intersectionRatio ?? 1) <= 0.7
         ? "opacity-100"
         : "opacity-0",
