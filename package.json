@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "devDependencies": {
     "@eslint/js": "^9.32.0",
-    "@iconify-json/material-symbols": "^1.2.30",
     "@stylistic/eslint-plugin": "^5.2.2",
     "@sveltejs/vite-plugin-svelte": "^6.1.0",
     "@tsconfig/svelte": "^5.0.4",
@@ -24,8 +23,5 @@
     "preview": "vite preview --host",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },
-  "type": "module",
-  "dependencies": {
-    "svelte-ripple-action": "^2.0.0"
-  }
+  "type": "module"
 }
