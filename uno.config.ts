@@ -1,28 +1,27 @@
-import { defineConfig, presetIcons, presetWind4, presetWebFonts } from "unocss";
+import { defineConfig, presetIcons, presetWebFonts, presetWind3 } from "unocss";
 
 export default defineConfig({
   "presets": [
-    presetWebFonts({
-      "provider": "google",
-      "fonts"   : {
-        "sans": "Google Sans",
-        "mono": ["Fira Code", "Fira Mono:400,700"],
-      },
-    }),
-    // Material Symbols with CSS
-    presetIcons(),
 
     /*
-     * presetWind3 requires Chrome 99+ (March 1, 2022)
-     * presetWind4 requires Chrome 111+ (March 9, 2023)
+     * presetWind3 theoretically requires Chrome 99+ (March 1, 2022), but
+     * can work with older browsers (tested on Chrome 88)
+     * presetWind4 requires Chrome 111+ (March 9, 2023), otherwise colors won't work
      *
      * it sucks lol
      */
-    presetWind4({
-      "preflights": {
-        // reset all default styles like tailwind does
-        "reset": true,
+    presetWind3({
+      "dark": "class",
+    }),
+    // Fetches Geist font from Google fonts
+    presetWebFonts({
+      "provider": "google",
+      "fonts"   : {
+        "sans": "Geist",
+        "mono": ["Fira Code", "Fira Mono:400,700"],
       },
     }),
+    // Lucide icons with CSS
+    presetIcons(),
   ],
 });

@@ -3,8 +3,8 @@ import { mount } from "svelte";
 import { ApplicationRootID } from "./constants/app";
 import "./globals.css";
 import "virtual:uno.css";
-// ripple effect stylesheet
-import "svelte-ripple-action/ripple.css";
+// reset css styles like tailwind does it
+import "@unocss/reset/tailwind.css";
 
 const app = mount(App, {
   "target": document.getElementById(ApplicationRootID)!,

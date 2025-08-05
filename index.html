@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Svelte + TS</title>
+    <title>tsuki</title>
   </head>
-  <!-- CSS styles and JS code will not be loaded instantly -->
+  <!-- CSS styles and JS code will not be loaded instantly (this ain't SSR 🥀) -->
   <!-- So prevent white background flashings using a style -->
   <body style="background-color:black">
-    <div id="tsuki_app"></div>
+    <!-- Temporarily set element class to dark so that dark: selector styles will apply -->
+    <!-- In the future we can read localStorage and set class based on the config -->
+    <div id="tsuki_app" class="dark"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { ripple } from "svelte-ripple-action";
   import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver.svelte";
   import { getContext } from "svelte";
@@ -57,9 +56,6 @@
       "relative shrink-0 cursor-pointer flex justify-center items-center p-2 rounded-full",
       currentScreen.state === undefined && "hidden",
     ]}
-    use:ripple={{
-      "color": "rgba(255, 255, 255, 0.06)",
-    }}
   >
     <span class="i-material-symbols-arrow-back w-6 h-6"></span>
   </button>
@@ -83,9 +79,6 @@
         ? "flex"
         : "none",
     ]}
-    use:ripple={{
-      "color": "rgba(255, 255, 255, 0.06)",
-    }}
   >
     <span class="i-material-symbols-more-vert w-6 h-6"></span>
   </button>

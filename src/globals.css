@@ -1,8 +1,7 @@
-:root {
-  background: black;
-  color: white;
-}
-
-html, body, #tsuki_app {
-  overflow-x: hidden;
+html, body {
+  /*
+   * presetWind3 resets all custom web fonts from unocss
+   * that's why we manually add Geist here with fallbacks as safe fonts
+   */
+  font-family: Geist, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }

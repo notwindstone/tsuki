@@ -5,13 +5,13 @@ import type { QueryParams } from "@/lib/routing/logic/query-params.type";
 
 class RouterState {
   /** Application base URL; no leading or trailing "/", no URL query parameters. */
-  private baseUrl = $state<string>("");
+  baseUrl = $state<string>("");
 
   /** Parts of the current path, without baseUrl. Won't include URL query parameters. */
-  private currentPathParts = $state<Array<string>>([]);
+  currentPathParts = $state<Array<string>>([]);
 
   /** User-defined routes. */
-  private userRoutes = $state<Array<{
+  userRoutes = $state<Array<{
 
     /** Parts of the path, without baseUrl. Won't include URL query parameters. */
     "pathParts": string[];

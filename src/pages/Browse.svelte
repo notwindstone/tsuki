@@ -2,7 +2,7 @@
   import Screen from "@/components/layout/Screen.svelte";
 </script>
 
-<h1>
+<h1 class="text-white dark:text-yellow-500">
   naaw
 </h1>
 <Screen />
