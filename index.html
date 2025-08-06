@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="en">
+<!-- temporarily set element class to dark so that dark: selector styles will apply -->
+<!-- in the future we can read localStorage and set class based on the config -->
+<html class="dark" lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tsuki</title>
   </head>
-  <!-- CSS styles and JS code will not be loaded instantly (this ain't SSR 🥀) -->
-  <!-- So prevent white background flashings using a style -->
+  <!-- css styles and js code will not be loaded instantly -->
+  <!-- so prevent white background flashings using a style -->
   <body style="background-color:black">
-    <!-- Temporarily set element class to dark so that dark: selector styles will apply -->
-    <!-- In the future we can read localStorage and set class based on the config -->
-    <div id="tsuki_app" class="dark text-white bg-red-950"></div>
+    <div id="tsuki_app" class="text-black bg-white dark:text-white dark:bg-black"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

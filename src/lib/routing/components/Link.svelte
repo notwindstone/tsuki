@@ -15,7 +15,7 @@
     /**
      * Route path to redirect when the anchor is clicked.
      */
-    "path": RouteType["current"];
+    "href": RouteType["current"];
 
     /**
      * URL query parameters; optional.
@@ -26,18 +26,18 @@
   function clickAction(event: MouseEvent & { "currentTarget": EventTarget & HTMLAnchorElement }): void {
     event.preventDefault();
 
-    if (window.location.pathname === props.path) {
+    if (window.location.pathname === props.href) {
       return;
     }
 
-    routerState.navigate(props.path, props.params);
+    routerState.navigate(props.href, props.params);
   }
 </script>
 
 <a
   class={props.class}
   style={props.style}
-  href={routerState.generateFullUrl(props.path, props.params)}
+  href={routerState.generateFullUrl(props.href, props.params)}
   onclick={clickAction}
 >
   {@render props.children()}

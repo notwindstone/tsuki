@@ -18,7 +18,6 @@ export default defineConfig({
       "provider": "google",
       "fonts"   : {
         "sans": "Geist",
-        "mono": ["Fira Code", "Fira Mono:400,700"],
       },
     }),
     // Lucide icons with CSS
