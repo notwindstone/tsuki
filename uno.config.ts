@@ -13,14 +13,19 @@ export default defineConfig({
     presetWind3({
       "dark": "class",
     }),
-    // Fetches Geist font from Google fonts
+
+    /*
+     * Fetches Geist font from Google fonts.
+     * Unfortunately, Tailwind reset styles override web fonts
+     * So we need to manually specify Geist in globals.css
+     */
     presetWebFonts({
       "provider": "google",
       "fonts"   : {
         "sans": "Geist",
       },
     }),
-    // Lucide icons with CSS
+    // Lucide icons with CSS (@iconify-json/lucide)
     presetIcons(),
   ],
 });
