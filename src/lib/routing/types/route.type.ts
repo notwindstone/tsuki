@@ -1,4 +1,5 @@
 import type { LazyComponent } from "@/lib/routing/types/lazy-component.type";
+import type { Routes } from "@/constants/routes";
 
 /**
  * Path and component to an application route. Path parameters are supported.
@@ -18,13 +19,14 @@ export interface Route {
 
   /**
    * URL path to match. Path parameters are supported.
+   * Gets all possible routes from hard-coded object
    *
    * @example
    * path: '/page1'
    *
    * path: '/page2/{name}/and/{age}'
    */
-  "path": string;
+  "path": typeof Routes[keyof typeof Routes];
 
   /**
    * Function which lazy-loads the component to be rendered.

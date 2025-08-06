@@ -19,9 +19,7 @@
 
   routerState.init(props.routerConfiguration);
 
-  const routeAsState = getRouteState();
-  const shoot = $derived(getRouteState().current);
-  const setRouteStatus = routeAsState.setRouteStatus;
+  const setRouteStatus = getRouteState().setRouteStatus;
 
   /**
    * Lazy component's load function
@@ -49,19 +47,11 @@
   });
 </script>
 
-<div>
-  huh: {shoot}
-</div>
-<div>
-  Current: {routeAsState.current}
-</div>
-<div>
-  Loading: {routeAsState.loading}
-</div>
 {#key CurrentComponent}
   <div
     class={[
-      "absolute pb-20 sm:pl-24 w-full duration-300 ease-out translate-z-0",
+      // absolute position so that fading pages will not shift each other
+      "absolute w-full",
     ]}
     transition:fade={{ "duration": 150 }}
   >

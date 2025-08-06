@@ -4,8 +4,8 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { QueryParams } from "@/lib/routing/types/query-params.type";
-  import type { RouteType } from "@/types/routes/route.type";
   import routerState from "../logic/state.svelte";
+  import type { Route } from "@/lib/routing";
 
   const props: {
     "class"?  : string | Array<string>;
@@ -15,7 +15,7 @@
     /**
      * Route path to redirect when the anchor is clicked.
      */
-    "href": RouteType["current"];
+    "href": Route["path"];
 
     /**
      * URL query parameters; optional.
