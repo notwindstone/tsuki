@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ExtensionsLoader from "@/components/extensions/ExtensionsLoader.svelte";
   import type { Snippet } from "svelte";
 
   let {
@@ -9,3 +10,4 @@
 </script>
 
 {@render children()}
+<ExtensionsLoader />

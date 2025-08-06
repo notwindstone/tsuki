@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tsuki</title>
     <script>
-      // read user theme configs from local storage and apply to the body element
+
+      /*
+       * read user theme configs from local storage and apply to the body element
+       * if user doesn't have a configuration in local storage, use his browser's preferred theme
+       */
       document.addEventListener("DOMContentLoaded", () => {
-        console.log("shit")
         const storedConfiguration = localStorage.getItem("config");
         let parsedConfiguration;
 
@@ -19,10 +22,24 @@
           parsedConfiguration = {};
         }
 
-        if (parsedConfiguration?.theme === "dark") {
-          // presetWind3 has been set to use class for dark mode
+        // if there is a falsy "theme" field in parsedConfiguration use browser's preferred theme
+        if (!parsedConfiguration?.theme && window?.matchMedia) {
+          const isLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+          if (isLight) {
+            return;
+          }
+
           document.body.className = "dark";
         }
+
+        // use dark theme for any other values
+        if (parsedConfiguration?.theme === "light") {
+          return;
+        }
+
+        // presetWind3 has been set to use class for the dark mode
+        document.body.className = "dark";
       });
     </script>
   </head>
