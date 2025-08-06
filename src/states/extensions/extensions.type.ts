@@ -1,4 +1,9 @@
+type Statuses = "fetching" | "reading" | "initializing" | "executing" | "done";
+
+// keys here are extension unique ids. each plugin has its own data
 export type ExtensionsType = Record<string, {
-  "timeToLoad": number;
-  "status"    : "fetching" | "reading" | "loading" | "running" | "done";
+  // time to achieve each step
+  "time"  : Record<Exclude<Statuses, "done">, number | undefined>;
+  // current extension step
+  "status": Statuses;
 }>;

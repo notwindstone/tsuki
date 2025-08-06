@@ -1,3 +1,3 @@
-<h1>
+<div>
   Loading...
-</h1>
+</div>

@@ -4,22 +4,38 @@ let currentExtensionsState = $state<ExtensionsType>({});
 
 export function getCurrentExtensionsState() {
   function init(key: string) {
+    // if extension was already initialized, don't override its state
     if (currentExtensionsState[key] !== undefined) {
       return;
     }
 
+    // initial state
     currentExtensionsState[key] = {
-      "status"    : "fetching",
-      "timeToLoad": 0,
+      "status": "fetching",
+      "time"  : {
+        "fetching"    : undefined,
+        "reading"     : undefined,
+        "initializing": undefined,
+        "executing"   : undefined,
+      },
     };
   }
 
-  function setCurrentExtensionStatus(key: string, value: ExtensionsType[""]["status"]) {
-    currentExtensionsState[key].status = value;
-  }
-
-  function setCurrentExtensionTime(key: string, value: ExtensionsType[""]["timeToLoad"]) {
-    currentExtensionsState[key].timeToLoad = value;
+  // sets extension statistics
+  function setCurrentExtensionData(
+    key: string,
+    {
+      status,
+      timeKey,
+      timeValue,
+    }: {
+      "status"   : ExtensionsType[string]["status"];
+      "timeKey"  : keyof ExtensionsType[string]["time"];
+      "timeValue": number;
+    },
+  ) {
+    currentExtensionsState[key].status = status;
+    currentExtensionsState[key].time[timeKey] = timeValue;
   }
 
   return {
@@ -27,7 +43,6 @@ export function getCurrentExtensionsState() {
       return currentExtensionsState;
     },
     init,
-    setCurrentExtensionStatus,
-    setCurrentExtensionTime,
+    setCurrentExtensionData,
   };
 }
