@@ -1,12 +1,30 @@
 <!doctype html>
-<!-- temporarily set element class to dark so that dark: selector styles will apply -->
-<!-- TODO: in the future we can read localStorage and set class based on the config -->
 <html>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/mingcute_moon_stars_fill.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tsuki</title>
+    <script>
+      // read user theme configs from local storage and apply to the body element
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("shit")
+        const storedConfiguration = localStorage.getItem("config");
+        let parsedConfiguration;
+
+        try {
+          // JSON.parse(...) can throw an exception
+          parsedConfiguration = JSON.parse(storedConfiguration);
+        } catch {
+          parsedConfiguration = {};
+        }
+
+        if (parsedConfiguration?.theme === "dark") {
+          // presetWind3 has been set to use class for dark mode
+          document.body.className = "dark";
+        }
+      });
+    </script>
   </head>
   <!-- css styles and js code will not be loaded instantly -->
   <!-- so prevent white background flashings using a style -->
