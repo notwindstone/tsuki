@@ -1,7 +1,6 @@
 <script lang="ts">
   import { RouteSet } from "@/constants/routes";
   import { ApplicationNamespace } from "@/constants/app";
-  import { getCurrentRouteState } from "@/states/route/route.svelte";
   import { getCurrentExtensionsState } from "@/states/extensions/extensions.svelte";
   import { shitty } from "./shit.json";
 
@@ -18,7 +17,7 @@
 
   initCurrentExtension(pluginID);
 
-  const currentRouteState = getCurrentRouteState().currentRouteState;
+  const currentRouteState: any = {};
 
   let hasLoaded = $derived.by(() => currentExtensionsState[pluginID].status === "done");
 

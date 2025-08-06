@@ -1,25 +1,25 @@
 import type { RouterConfiguration as RouterConfigurationType } from "@/lib/routing";
 
 export const Routes = {
-  "Library": "/",
-  "Recents": "/recents",
-  "Browse" : "/browse",
+  "Home"    : "/",
+  "Anime"   : "/anime",
+  "Settings": "/settings",
 } as const;
 export const RouteArray = Object.values(Routes);
 export const RouteSet = new Set(RouteArray);
 export const RouterConfiguration: RouterConfigurationType = {
   "routes": [
     {
-      "path"  : Routes.Library,
+      "path"  : Routes.Home,
       "render": () => import("@/pages/Home.svelte"),
     },
     {
-      "path"  : Routes.Recents,
-      "render": () => import("@/pages/Recents.svelte"),
+      "path"  : Routes.Anime,
+      "render": () => import("@/pages/Anime.svelte"),
     },
     {
-      "path"  : Routes.Browse,
-      "render": () => import("@/pages/Browse.svelte"),
+      "path"  : Routes.Settings,
+      "render": () => import("@/pages/Settings.svelte"),
     },
   ],
   "notFound": () => import("@/pages/NotFound.svelte"),

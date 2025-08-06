@@ -1,5 +1,5 @@
-import type { LazyComponent } from "@/lib/routing/logic/lazy-component.type";
-import type { Route } from "@/lib/routing/logic/route.type";
+import type { LazyComponent } from "@/lib/routing/types/lazy-component.type";
+import type { Route } from "@/lib/routing/types/route.type";
 
 /**
  * Router configuration.

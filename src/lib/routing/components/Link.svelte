@@ -3,8 +3,8 @@
 -->
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import type { QueryParams } from "@/lib/routing/logic/query-params.type";
-  import type { RouteType } from "@/states/route/route.type";
+  import type { QueryParams } from "@/lib/routing/types/query-params.type";
+  import type { RouteType } from "@/types/routes/route.type";
   import routerState from "../logic/state.svelte";
 
   const props: {

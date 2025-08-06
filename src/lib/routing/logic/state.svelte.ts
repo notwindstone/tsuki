@@ -1,17 +1,17 @@
 import { isPathParam, sanitizePath, serializeQueryParameters } from "./utils";
-import type { LazyComponent } from "@/lib/routing/logic/lazy-component.type";
-import type { RouterConfiguration } from "@/lib/routing/logic/router-configuration.type";
-import type { QueryParams } from "@/lib/routing/logic/query-params.type";
+import type { LazyComponent } from "@/lib/routing/types/lazy-component.type";
+import type { RouterConfiguration } from "@/lib/routing/types/router-configuration.type";
+import type { QueryParams } from "@/lib/routing/types/query-params.type";
 
 class RouterState {
   /** Application base URL; no leading or trailing "/", no URL query parameters. */
-  baseUrl = $state<string>("");
+  private baseUrl = $state<string>("");
 
   /** Parts of the current path, without baseUrl. Won't include URL query parameters. */
-  currentPathParts = $state<Array<string>>([]);
+  private currentPathParts = $state<Array<string>>([]);
 
   /** User-defined routes. */
-  userRoutes = $state<Array<{
+  private userRoutes = $state<Array<{
 
     /** Parts of the path, without baseUrl. Won't include URL query parameters. */
     "pathParts": string[];
@@ -20,8 +20,7 @@ class RouterState {
     "render": LazyComponent;
   }>>([]);
 
-  /** Updates on pop states */
-  popState = $state<number | undefined>();
+  isRouteLoading = $state<boolean>();
 
   /** User route to be currently rendered, if any. */
   currentUserRoute = $derived(this.userRoutes.find(userRoute => {
@@ -45,7 +44,6 @@ class RouterState {
   constructor() {
     // back or forward button
     window.onpopstate = () => {
-      this.popState = Math.random();
       routerState.currentPathParts = routerState.getCurrentUrlPathParts();
     };
   }
@@ -143,6 +141,37 @@ export function getPathParams(): Record<string, string> {
 }
 
 /**
+ * Sets route loading state
+ */
+function setRouteStatus(loading: boolean) {
+  routerState.isRouteLoading = loading;
+}
+
+/**
+ * Returns a state with current user route
+ *
+ * @example
+ * const routeState = getRouteState();
+ * const currentRoute = $derived(getRouteState().current);
+ */
+export function getRouteState() {
+  return {
+    get "current"() {
+      if (routerState.currentUserRoute === undefined) {
+        return "/";
+      }
+
+      //
+      return "/" + routerState.currentUserRoute.pathParts.join("/");
+    },
+    get "loading"() {
+      return routerState.isRouteLoading;
+    },
+    setRouteStatus,
+  };
+}
+
+/**
  * Programmatically, immediately navigates to the given path, which will trigger
  * the rendering of the new route component.
  *
@@ -150,12 +179,4 @@ export function getPathParams(): Record<string, string> {
  */
 export function navigate(path: string, queryParams?: QueryParams): void {
   routerState.navigate(path, queryParams);
-}
-
-export function getPopState() {
-  return {
-    get "currentPopState"() {
-      return routerState.popState;
-    },
-  };
 }

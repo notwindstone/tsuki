@@ -1,4 +1,4 @@
-import type { LazyComponent } from "@/lib/routing/logic/lazy-component.type";
+import type { LazyComponent } from "@/lib/routing/types/lazy-component.type";
 
 /**
  * Path and component to an application route. Path parameters are supported.

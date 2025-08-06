@@ -8,6 +8,10 @@ Watch the anime from various sources in a web app that doesn't suck
 [![vite-badge]](https://vite.dev/)
 </div>
 
+// temporary
+// every extension will be executed once in the App.svelte
+// then we can use extension id to window.postMessage with `tsuki_trigger_mount_${extension_id}` key to load player extension. this should be fired at button click on anime page
+
 ## Star History
 
 [![star-history-chart]](https://star-history.com/#notwindstone/tsuki&Date)
