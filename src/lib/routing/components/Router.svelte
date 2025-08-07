@@ -38,11 +38,10 @@
 
     currentComponentRenderer()
       .then((module: Record<"default", Component>) => {
-        document.startViewTransition(() => {
-          CurrentComponent = module.default;
+        CurrentComponent = module.default;
 
-          setRouteStatus(false);
-        });
+        setRouteStatus(false);
+        document.startViewTransition();
       });
   });
 </script>
