@@ -4,7 +4,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { QueryParams } from "@/lib/routing/types/query-params.type";
-  import routerState from "../logic/state.svelte";
+  import routerState from "@/lib/routing/logic/state.svelte";
   import type { Route } from "@/lib/routing";
 
   const props: {

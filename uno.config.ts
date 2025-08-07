@@ -1,14 +1,15 @@
 import { defineConfig, presetIcons, presetWebFonts, presetWind3 } from "unocss";
+// eslint-disable-next-line
+// @ts-ignore - "esModuleInterop" and "allowSyntheticDefaultImports" don't affect it somehow
+import presetLegacyCompat from "@unocss/preset-legacy-compat";
 
 export default defineConfig({
   "presets": [
 
     /*
-     * presetWind3 theoretically requires Chrome 99+ (March 1, 2022), but
-     * can work with older browsers (tested on Chrome 88)
      * presetWind4 requires Chrome 111+ (March 9, 2023), otherwise colors won't work
      *
-     * it sucks lol
+     * it sucks lol (presetLegacyCompat can't convert oklch() colors)
      */
     presetWind3({
       "dark": "class",
@@ -27,5 +28,9 @@ export default defineConfig({
     }),
     // Lucide icons with CSS (@iconify-json/lucide)
     presetIcons(),
+    presetLegacyCompat({
+      // Old browsers don't support space styled color functions (i.e. rgb(255 255 255))
+      "commaStyleColorFunction": true,
+    }),
   ],
 });

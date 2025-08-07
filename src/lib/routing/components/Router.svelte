@@ -3,7 +3,7 @@
 -->
 <script lang="ts">
   import { fade } from "svelte/transition";
-  import routerState, { getRouteState } from "../logic/state.svelte";
+  import routerState, { getRouteState } from "@/lib/routing/logic/state.svelte";
   import type { RouterConfiguration } from "@/lib/routing/types/router-configuration.type";
   import type { Component } from "svelte";
   import type { LazyComponent } from "@/lib/routing";
