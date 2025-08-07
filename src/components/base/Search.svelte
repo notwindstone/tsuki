@@ -1,8 +1,8 @@
 <script lang="ts">
   let {
-    searchState,
+    setSearch,
   }: {
-    "searchState": Record<"search", string>;
+    "setSearch": (newValue: unknown) => void;
   } = $props();
 </script>
 
@@ -11,8 +11,8 @@
     <div class="i-lucide-search w-4 h-4"></div>
   </div>
   <input
-    bind:value={searchState.search}
     type="text"
+    oninput={event => setSearch(event.currentTarget.value)}
     class="outline-none focus:outline-none w-full h-full text-sm bg-transparent text-black dark:text-white"
     placeholder="Search anime..."
   />

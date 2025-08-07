@@ -1,12 +1,12 @@
 <script lang="ts">
 import { Link, navigate } from "@/lib/routing";
 import Search from "@/components/base/Search.svelte";
+import { useDebounce } from "@/lib/hooks/useDebounce.svelte";
 
-let searchState = $state<Record<"search", string>>({
-  "search": "",
-});
+const debouncedSearch = useDebounce("", 300);
 </script>
 
 <div class="flex flex-col gap-2 items-center p-4">
-  <Search searchState={searchState} />
+  Current: {debouncedSearch.value}
+  <Search setSearch={debouncedSearch.update} />
 </div>
