@@ -22,6 +22,10 @@
      * To fix `src/lib/helpers/throttle.ts`
      */
     "noImplicitThis": false,
+
+    /**
+     * handles "@/..." imports
+     */
     "paths": {
       "@/*": ["./src/*"]
     }

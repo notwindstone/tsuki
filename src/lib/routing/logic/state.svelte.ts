@@ -2,6 +2,7 @@ import { isPathParam, sanitizePath, serializeQueryParameters } from "./utils";
 import type { LazyComponent } from "@/lib/routing/types/lazy-component.type";
 import type { RouterConfiguration } from "@/lib/routing/types/router-configuration.type";
 import type { QueryParams } from "@/lib/routing/types/query-params.type";
+import type { Route } from "@/lib/routing";
 
 class RouterState {
   /** Application base URL; no leading or trailing "/", no URL query parameters. */
@@ -177,6 +178,6 @@ export function getRouteState() {
  *
  * You can pass, optionally, an object to be serialized as URL query parameters.
  */
-export function navigate(path: string, queryParams?: QueryParams): void {
+export function navigate(path: Route["path"], queryParams?: QueryParams): void {
   routerState.navigate(path, queryParams);
 }

@@ -3,11 +3,12 @@
   import { RouteSet } from "@/constants/routes";
   import { ApplicationNamespace } from "@/constants/app";
   import { shitty } from "@/pages/shit.json";
+  import type { ExtensionFunctionType } from "@/types/extensions/extension-function.type";
 
   console.log("hello");
 
   let code: string | undefined = $state(undefined);
-  let func: Function | undefined = $state(undefined);
+  let func: ExtensionFunctionType | undefined = $state(undefined);
 
   const pluginID = "vue-extension";
 
@@ -80,7 +81,8 @@
       "timeKey"  : "reading",
       "timeValue": 0,
     });
-    func = new Function("module", "exports", "_tsuki", code);
+    // tell typescript that this is not just a Function type
+    func = new Function("module", "exports", code) as ExtensionFunctionType;
     // func = new Function("module", "exports", "_tsuki", "with (_tsuki) { " + code + " }");
 
     if (!func) {
@@ -96,10 +98,7 @@
       "timeKey"  : "initializing",
       "timeValue": 0,
     });
-    func(module, exports, {
-      "damn" : "that's",
-      "crazy": true,
-    });
+    func(module, exports);
 
     setCurrentExtensionData(pluginID, {
       "status"   : "done",

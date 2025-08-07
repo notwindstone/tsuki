@@ -11,19 +11,21 @@
        * read user theme configs from local storage and apply to the body element
        * if user doesn't have a configuration in local storage, use his browser's preferred theme
        */
-      document.addEventListener("DOMContentLoaded", () => {
+      const handleConfigs = () => {
         const storedConfiguration = localStorage.getItem("config");
         let parsedConfiguration;
 
         try {
           // JSON.parse(...) can throw an exception
           parsedConfiguration = JSON.parse(storedConfiguration);
-        } catch {
+        } catch(error) {
+          console.log("Configuration parsing error:", error);
+
           parsedConfiguration = {};
         }
 
         // if there is a falsy "theme" field in parsedConfiguration use browser's preferred theme
-        if (!parsedConfiguration?.theme && window?.matchMedia) {
+        if (parsedConfiguration && !parsedConfiguration.theme && window.matchMedia) {
           const isLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
           if (isLight) {
@@ -34,18 +36,21 @@
         }
 
         // use dark theme for any other values
-        if (parsedConfiguration?.theme === "light") {
+        if (parsedConfiguration && parsedConfiguration.theme === "light") {
           return;
         }
 
         // presetWind3 has been set to use class for the dark mode
         document.body.className = "dark";
-      });
+      }
+
+      // we need HTML to be completely parsed, otherwise document.body will be `null`
+      document.addEventListener("DOMContentLoaded", handleConfigs);
     </script>
   </head>
   <!-- css styles and js code will not be loaded instantly -->
   <!-- so prevent white background flashings using a style -->
-  <body style="background-color:black">
+  <body class="dark" style="background-color:black">
     <div id="tsuki_app" class="text-black bg-white dark:text-white dark:bg-black"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

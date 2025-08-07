@@ -64,9 +64,6 @@ export default ts.config(
         },
       ],
 
-      /* plugins can be any function */
-      "@typescript-eslint/no-unsafe-function-type": ["off"],
-
       /* lint rules fix */
       "svelte/no-inner-declarations": [
         "error",
