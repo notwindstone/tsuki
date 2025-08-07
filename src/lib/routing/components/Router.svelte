@@ -48,12 +48,20 @@
 {#key CurrentComponent}
   <div
     class={[
-      // absolute position so that fading pages will not shift each other
+
+      /*
+       * absolute position so that fading pages will not shift each other.
+       * new page will appear even if previous page is still fading away
+       */
       "absolute w-full",
-      // old browsers, such as firefox 77, do not apply #tsuki element classnames to absolute children, so we copy them here...
+
+      /*
+       * old browsers, such as firefox 77, do not apply #tsuki element classnames to absolute children
+       * so we copy those classnames here too... bruh
+       */
       "text-black bg-white dark:text-white dark:bg-black",
     ]}
-    transition:fade={{ "duration": 150 }}
+    transition:fade={{ "duration": 200 }}
   >
     <CurrentComponent />
   </div>

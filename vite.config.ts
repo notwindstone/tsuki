@@ -6,6 +6,10 @@ import legacy from "@vitejs/plugin-legacy";
 
 // https://vite.dev/config/
 export default defineConfig({
+  "preview": {
+    // allow any origins in preview mode ("vite preview")
+    "allowedHosts": true,
+  },
   // handles "@/..." imports
   "resolve": {
     "alias": {
