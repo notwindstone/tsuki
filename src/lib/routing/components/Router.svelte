@@ -38,11 +38,9 @@
 
     currentComponentRenderer()
       .then((module: Record<"default", Component>) => {
-        setTimeout(() => {
-          CurrentComponent = module.default;
+        CurrentComponent = module.default;
 
-          setRouteStatus(false);
-        }, 1000);
+        setRouteStatus(false);
       });
   });
 </script>
