@@ -8,6 +8,7 @@
     "@sveltejs/vite-plugin-svelte": "^6.1.0",
     "@tsconfig/svelte": "^5.0.4",
     "@types/node": "^24.1.0",
+    "@unocss/preset-legacy-compat": "^66.4.1",
     "@vitejs/plugin-legacy": "^7.1.0",
     "eslint-plugin-svelte": "^3.11.0",
     "globals": "^16.3.0",
