@@ -9,4 +9,7 @@ const debouncedSearch = useDebounce("", 300);
 <div class="flex flex-col gap-2 items-center p-4">
   Current: {debouncedSearch.value}
   <Search setSearch={debouncedSearch.update} />
+  <Link href="/anime">
+    next page
+  </Link>
 </div>
