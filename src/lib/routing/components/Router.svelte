@@ -38,15 +38,29 @@
 
     currentComponentRenderer()
       .then((module: Record<"default", Component>) => {
-        document.startViewTransition();
-        CurrentComponent = module.default;
+        document.startViewTransition(() => {
+          CurrentComponent = module.default;
 
-        setRouteStatus(false);
+          setRouteStatus(false);
+        });
       });
   });
+
+/*
+{#key CurrentComponent}
+  <div
+    class={[
+      "absolute w-full",
+      "text-black bg-white dark:text-white dark:bg-black",
+    ]}
+    transition:fade={{ "duration": 200 }}
+  >
+    <CurrentComponent />
+  </div>
+{/key}
+*/
 </script>
 
-{#key CurrentComponent}
   <div
     class={[
 
@@ -54,7 +68,7 @@
        * absolute position so that fading pages will not shift each other.
        * new page will appear even if previous page is still fading away
        */
-      "w-full",
+      " w-full",
 
       /*
        * old browsers, such as firefox 77, do not apply #tsuki element classnames to absolute children
@@ -66,4 +80,3 @@
   >
     <CurrentComponent />
   </div>
-{/key}
