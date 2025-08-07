@@ -1,4 +1,5 @@
 import type { RouterConfiguration as RouterConfigurationType } from "@/lib/routing";
+import { BaseURL } from "@/constants/app";
 
 export const Routes = {
   "Home"    : "/",
@@ -8,7 +9,8 @@ export const Routes = {
 export const RouteArray = Object.values(Routes);
 export const RouteSet = new Set(RouteArray);
 export const RouterConfiguration: RouterConfigurationType = {
-  "routes": [
+  "baseUrl": BaseURL,
+  "routes" : [
     {
       "path"  : Routes.Home,
       "render": () => import("@/pages/Home.svelte"),

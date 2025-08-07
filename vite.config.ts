@@ -3,9 +3,11 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import UnoCSS from "unocss/vite";
 import path from "path";
 import legacy from "@vitejs/plugin-legacy";
+import { BaseURL } from "./src/constants/app.ts";
 
 // https://vite.dev/config/
 export default defineConfig({
+  "base"   : BaseURL,
   "preview": {
     // allow any origins in preview mode ("vite preview")
     "allowedHosts": true,
