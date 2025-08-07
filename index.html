@@ -17,7 +17,12 @@
 
         try {
           // JSON.parse(...) can throw an exception
-          parsedConfiguration = JSON.parse(storedConfiguration);
+          const unknownParsedData = JSON.parse(storedConfiguration);
+
+          parsedConfiguration = {
+            // spreading can throw an exception too
+            ...unknownParsedData,
+          };
         } catch(error) {
           console.log("Configuration parsing error:", error);
 
@@ -25,7 +30,7 @@
         }
 
         // if there is a falsy "theme" field in parsedConfiguration use browser's preferred theme
-        if (parsedConfiguration && !parsedConfiguration.theme && window.matchMedia) {
+        if (!parsedConfiguration.theme && window.matchMedia) {
           const isLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
           if (isLight) {
@@ -36,7 +41,7 @@
         }
 
         // use dark theme for any other values
-        if (parsedConfiguration && parsedConfiguration.theme === "light") {
+        if (parsedConfiguration.theme === "light") {
           return;
         }
 
@@ -50,7 +55,7 @@
   </head>
   <!-- css styles and js code will not be loaded instantly -->
   <!-- so prevent white background flashings using a style -->
-  <body class="dark" style="background-color:black">
+  <body style="background-color:black">
     <div id="tsuki_app" class="text-black bg-white dark:text-white dark:bg-black"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
