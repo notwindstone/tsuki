@@ -55,7 +55,7 @@
        * absolute position so that fading pages will not shift each other.
        * new page will appear even if previous page is still fading away
        */
-      "absolute w-full",
+      "w-full",
 
       /*
        * old browsers, such as firefox 77, do not apply #tsuki element classnames to absolute children
