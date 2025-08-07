@@ -61,7 +61,7 @@
        */
       "text-black bg-white dark:text-white dark:bg-black",
     ]}
-    transition:fade={{ "duration": 200 }}
+    
   >
     <CurrentComponent />
   </div>
