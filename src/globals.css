@@ -5,3 +5,30 @@ html, body {
    */
   font-family: Geist, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+/* animations */
+.animate-progress-bar {
+  animation-name: progress-bar;
+  animation-duration: 750ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /*
+   * add an animation delay so that cached routes
+   * will not trigger this animation
+   */
+  animation-delay: 100ms;
+}
+
+/* keyframes */
+@keyframes progress-bar {
+  from {
+    transform: translateX(-100%);
+    /* override initial opacity value */
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    /* override initial opacity value */
+    opacity: 1;
+  }
+}

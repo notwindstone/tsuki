@@ -52,6 +52,8 @@
     class={[
       // absolute position so that fading pages will not shift each other
       "absolute w-full",
+      // old browsers, such as firefox 77, do not apply #tsuki element classnames to absolute children, so we copy them here...
+      "text-black bg-white dark:text-white dark:bg-black",
     ]}
     transition:fade={{ "duration": 150 }}
   >
