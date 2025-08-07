@@ -12,4 +12,7 @@ const debouncedSearch = useDebounce("", 300);
   <Link href="/anime">
     next page
   </Link>
+  <p style="view-transition-name:shit">
+    shit
+  </p>
 </div>
