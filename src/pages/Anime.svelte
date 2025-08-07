@@ -7,6 +7,9 @@
 </script>
 
 <div class="flex flex-col gap-2">
+  <p style="view-transition-name:shit">
+    shit
+  </p>
   <button class="w-fit" onclick={increment}>
     Clicked {count} times
   </button>
