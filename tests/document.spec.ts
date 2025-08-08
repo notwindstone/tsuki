@@ -3,18 +3,18 @@ import { BaseURL } from "../src/constants/app";
 
 const websiteUrl = `http://localhost:4173${BaseURL}`;
 
-test("Has 'home' title", async ({ page }) => {
+test("Has a 'home' title", async ({ page }) => {
   // go to home page
   await page.goto(websiteUrl);
 
-  // expect a title to contain a 'home' substring
-  await expect(page).toHaveTitle("home");
+  // expect a title to have a 'home' substring
+  await expect(page).toHaveTitle(/.*home/);
 });
 
-test("Has 'anime' title", async ({ page }) => {
+test("Has an 'anime' title", async ({ page }) => {
   // go to anime page
   await page.goto(websiteUrl + "/anime");
 
-  // expect a title to contain an 'anime' substring
-  await expect(page).toHaveTitle("anime");
+  // expect a title to have an 'anime' substring
+  await expect(page).toHaveTitle(/.*anime/);
 });

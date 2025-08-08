@@ -7,7 +7,11 @@ import { BaseURL } from "./src/constants/app.ts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  "base"   : BaseURL,
+  "base"  : BaseURL,
+  "server": {
+    // expose to the network
+    "host": true,
+  },
   "preview": {
     // allow any origins in preview mode ("vite preview")
     "allowedHosts": true,
@@ -50,6 +54,8 @@ export default defineConfig({
       ],
       // add polyfills that weren't included in vite build
       "modernPolyfills": [
+        "web.queue-microtask",
+        "es/global-this",
         // introduced in Chrome 85+ and Firefox 77+
         "esnext.string.replace-all",
       ],
