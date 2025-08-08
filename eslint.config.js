@@ -126,12 +126,6 @@ export default ts.config(
         "exceptAfterOverload"  : true,
         "exceptAfterSingleLine": true,
       }],
-      "@stylistic/max-len": ["warn", {
-        "code"                  : 110,
-        "ignoreComments"        : true,
-        "ignoreTrailingComments": true,
-        "ignoreUrls"            : true,
-      }],
       "@stylistic/max-statements-per-line": ["error", { "max": 1 }],
       "@stylistic/member-delimiter-style" : ["error", {
         "multiline": {
