@@ -9,6 +9,7 @@
     "@tanstack/svelte-query": "^5.83.1",
     "@tsconfig/svelte": "^5.0.4",
     "@types/node": "^24.1.0",
+    "@unocss/eslint-config": "^66.4.2",
     "@unocss/preset-legacy-compat": "^66.4.1",
     "@vitejs/plugin-legacy": "^7.1.0",
     "eslint-plugin-svelte": "^3.11.0",
