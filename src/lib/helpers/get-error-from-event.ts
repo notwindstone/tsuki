@@ -12,6 +12,11 @@ export function getErrorFromEvent(event: unknown): AppErrorType {
     foundData["message"] = event.message;
   }
 
+  // for 'unhandledrejection' event
+  if ("reason" in event) {
+    foundData["message"] = event.reason;
+  }
+
   if ("lineno" in event) {
     foundData["lineno"] = event.lineno;
   }
