@@ -30,7 +30,7 @@
         return value === currentPath;
       });
 
-    // there might
+    // just to be safe
     return foundRoute?.[0]?.toLowerCase?.();
   });
 
