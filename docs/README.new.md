@@ -12,6 +12,21 @@ Watch the anime from various sources in a web app that doesn't suck
 // every extension will be executed once in the App.svelte
 // then we can use extension id to window.postMessage with `tsuki_trigger_mount_${extension_id}` key to load player extension. this should be fired at button click on anime page
 
+## Browser Support
+
+- Firefox >= 67
+- Chromium >= 66
+- Safari >= 12
+- Microsoft Edge >= 79
+
+### Why these?
+
+Firefox 67 and higher: introduced [dynamic import()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#browser_compatibility) support
+
+Chromium 66/Safari 12 and higher: introduced [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController#browser_compatibility) support (required for @tanstack/svelte-query)
+
+Microsoft Edge 79 and higher: changed the engine from EdgeHTML to Chromium
+
 ## Star History
 
 [![star-history-chart]](https://star-history.com/#notwindstone/tsuki&Date)
