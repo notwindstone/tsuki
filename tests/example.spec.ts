@@ -1,15 +1,18 @@
 import { test, expect } from "@playwright/test";
+import { BaseURL } from "../src/constants/app";
+
+const websiteUrl = `http://localhost:4173${BaseURL}`;
+
+test.beforeEach(async ({ page }) => {
+  await page.goto(websiteUrl);
+});
 
 test("has title", async ({ page }) => {
-  await page.goto("http://localhost:4173/tsuki");
-
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Playwright/);
 });
 
 test("get started link", async ({ page }) => {
-  await page.goto("http://localhost:4173/tsuki");
-
   // Click the get started link.
   await page.getByRole("link", { "name": "Get started" }).click();
 
