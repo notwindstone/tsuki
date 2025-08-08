@@ -33,9 +33,19 @@ export default defineConfig({
         // default @vitejs/plugin-legacy browserlist
         "edge>=79",
         "firefox>=67",
-        "chrome>=64",
+
+        /*
+         * 'AbortController' requires Chrome 66+
+         * default value: "chrome>=64"
+         */
+        "chrome>=66",
         "safari>=12",
-        "chromeAndroid>=64",
+
+        /*
+         * 'AbortController' requires Chrome 66+
+         * default value: "chromeAndroid>=64"
+         */
+        "chromeAndroid>=66",
         "iOS>=12",
       ],
       // add polyfills that weren't included in vite build
