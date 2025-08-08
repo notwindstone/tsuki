@@ -24,7 +24,8 @@
 
 <!-- listen for app errors -->
 <svelte:window onerror={handleConsole} />
-{#if show}
+<!-- show error components only if there is actually any error -->
+{#if (show && loggedErrors.length > 0)}
   <div class="overflow-y-auto px-4 pt-4 text-center">
     <p class="opacity-60">Application is loading too long... Something is off.</p>
     <p class="mb-4">Console:</p>
