@@ -7,6 +7,8 @@
   import type { RouterConfiguration } from "@/lib/routing/types/router-configuration.type";
   import type { Component } from "svelte";
   import type { LazyComponent } from "@/lib/routing";
+  import { ApplicationName } from "@/constants/app";
+  import { Routes } from "@/constants/routes";
   import Loading from "@/pages/Loading.svelte";
 
   const props: {
@@ -20,6 +22,17 @@
   routerState.init(props.routerConfiguration);
 
   const setRouteStatus = getRouteState().setRouteStatus;
+  const derivedDocumentTitle = $derived.by(() => {
+    const currentPath = getRouteState().current;
+    const foundRoute = Object
+      .entries(Routes)
+      .find(([, value]) => {
+        return value === currentPath;
+      });
+
+    // there might
+    return foundRoute?.[0]?.toLowerCase?.();
+  });
 
   /**
    * Lazy component's load function
@@ -44,6 +57,10 @@
       });
   });
 </script>
+
+<svelte:head>
+  <title>{ApplicationName} - {derivedDocumentTitle}</title>
+</svelte:head>
 
 {#key CurrentComponent}
   <div
