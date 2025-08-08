@@ -6,7 +6,7 @@ const websiteUrl = `http://localhost:4173${BaseURL}`;
 const RouteEntries = Object
   .entries(Routes);
 
-// check every defined page to have specific title
+// check every defined page to have a specific title
 for (const [RouteName, RoutePath] of RouteEntries) {
   const testName = `Has: '${RouteName}' title`;
   const pageTitleRegex = new RegExp(`.*${RouteName.toLowerCase()}`);
