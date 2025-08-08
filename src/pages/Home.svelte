@@ -15,7 +15,7 @@
   });
 </script>
 
-<div class="flex flex-col gap-2 items-center p-4">
+<div class="flex flex-col items-center gap-2 p-4">
   {#if $query.isLoading}
     <p>
       Loading...

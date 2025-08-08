@@ -59,7 +59,7 @@
        * old browsers, such as firefox 77, do not apply #tsuki element classnames to absolute children
        * so we copy those classnames here too... bruh
        */
-      "text-black bg-white dark:text-white dark:bg-black",
+      "bg-white text-black dark:bg-black dark:text-white",
     ]}
     transition:fade={{ "duration": 200 }}
   >
