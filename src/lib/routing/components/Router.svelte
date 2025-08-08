@@ -54,9 +54,9 @@
 
     currentComponentRenderer()
       .then((module: Record<"default", Component>) => {
-        CurrentComponent = module.default;
+        //CurrentComponent = module.default;
 
-        setRouteStatus(false);
+        //setRouteStatus(false);
       });
   });
 </script>
