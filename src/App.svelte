@@ -4,7 +4,7 @@
   import { Router } from "@/lib/routing";
   import Layout from "@/Layout.svelte";
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient;
 </script>
 
 <QueryClientProvider client={queryClient}>
