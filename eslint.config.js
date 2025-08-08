@@ -4,13 +4,17 @@ import globals from "globals";
 import ts from "typescript-eslint";
 import svelteConfig from "./svelte.config.js";
 import stylistic from "@stylistic/eslint-plugin";
+import unocss from "@unocss/eslint-config/flat";
 import { globalIgnores } from "eslint/config";
 
 export default ts.config(
+  // don't lint ./dist/ and ./node_modules/ directories
   globalIgnores(["dist", "node_modules"]),
   js.configs.recommended,
   ...ts.configs.recommended,
   ...svelte.configs.recommended,
+  // https://unocss.dev/integrations/eslint
+  unocss,
   {
     "languageOptions": {
       "globals": {
