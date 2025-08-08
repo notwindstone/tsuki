@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Link, navigate } from "@/lib/routing";
   import Search from "@/components/base/Search.svelte";
-  import { useDebounce } from "@/lib/hooks/useDebounce.svelte";
+  import { useDebounce } from "@/lib/hooks/use-debounce.svelte.js";
   import { createQuery } from "@tanstack/svelte-query";
 
   const debouncedSearch = useDebounce("", 300);

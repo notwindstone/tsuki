@@ -29,8 +29,9 @@
     "dev": "GIT_COMMIT_HASH=$(git rev-parse --short HEAD) vite",
     "build": "GIT_COMMIT_HASH=$(git rev-parse --short HEAD) vite build",
     "preview": "vite preview",
-    "test": "bunx playwright test",
-    "test:ui": "bunx playwright test --ui",
+    "test:vitest": "vitest ./src",
+    "test:playwright": "bunx playwright test",
+    "test:playwright:ui": "bunx playwright test --ui",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },
   "type": "module"
