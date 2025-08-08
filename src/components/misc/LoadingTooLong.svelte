@@ -30,7 +30,7 @@
 </script>
 
 <!-- listen for app errors -->
-<svelte:window onerror={handleConsole} />
+<svelte:window onerror={handleConsole} onunhandledrejection={handleConsole} />
 {#if show}
   <div class="overflow-y-auto px-4 pt-4 text-center">
     <p class="opacity-60">Application is loading too long... Something is off.</p>
