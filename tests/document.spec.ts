@@ -1,20 +1,21 @@
 import { test, expect } from "@playwright/test";
 import { BaseURL } from "../src/constants/app";
+import { Routes } from "../src/constants/routes";
 
 const websiteUrl = `http://localhost:4173${BaseURL}`;
+const RouteEntries = Object
+  .entries(Routes);
 
-test("Has a 'home' title", async ({ page }) => {
-  // go to home page
-  await page.goto(websiteUrl);
+// check every defined page to have specific title
+for (const [RouteName, RoutePath] of RouteEntries) {
+  const testName = `Has: '${RouteName}' title`;
+  const pageTitleRegex = new RegExp(`.*${RouteName.toLowerCase()}`);
 
-  // expect a title to have a 'home' substring
-  await expect(page).toHaveTitle(/.*home/);
-});
+  test(testName, async ({ page }) => {
+    // go to home page
+    await page.goto(websiteUrl + RoutePath);
 
-test("Has an 'anime' title", async ({ page }) => {
-  // go to anime page
-  await page.goto(websiteUrl + "/anime");
-
-  // expect a title to have an 'anime' substring
-  await expect(page).toHaveTitle(/.*anime/);
-});
+    // expect a title to have a 'home' substring
+    await expect(page).toHaveTitle(pageTitleRegex);
+  });
+}

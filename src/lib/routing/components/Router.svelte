@@ -30,8 +30,11 @@
         return value === currentPath;
       });
 
-    // just to be safe
-    return foundRoute?.[0]?.toLowerCase?.();
+    if (!foundRoute) {
+      return "unknown";
+    }
+
+    return foundRoute[0].toLowerCase();
   });
 
   /**
