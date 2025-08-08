@@ -15,7 +15,7 @@
     const timeout = setTimeout(() => {
       show = true;
       // show user that something went wrong only after 7.5 seconds have elapsed
-    }, 7_50);
+    }, 7_500);
 
     // return a method to clean timeout (will be called on unmount)
     return () => clearTimeout(timeout);
