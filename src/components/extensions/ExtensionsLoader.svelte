@@ -4,13 +4,32 @@
   import { ApplicationNamespace } from "@/constants/app";
   import { shitty } from "@/pages/shit.json";
   import type { ExtensionFunctionType } from "@/types/extensions/extension-function.type";
+  import { createQuery } from "@tanstack/svelte-query";
+
+  const query = createQuery({
+    "queryKey": ["todos"],
+    "queryFn" : async () => {
+      const plugin = await fetch("https://raw.githubusercontent.com/notwindstone/anisun-extensions/refs/heads/main/styles-needy-girl-overdose/bundle.js");
+
+      return await plugin.text();
+    },
+  });
+
+  $effect(() => {
+    console.log("re-trigger");
+    if ($query.data) {
+      const shit = new Function("module", "exports", $query.data);
+
+      // shit({ "exports": {} }, {});
+    }
+  });
 
   console.log("hello");
 
   let code: string | undefined = $state(undefined);
   let func: ExtensionFunctionType | undefined = $state(undefined);
 
-  const gsdfgs = kjhas.asdasd;
+  const gsdfgs = qwerty.qwerty;
 
   const pluginID = "vue-extension";
 
