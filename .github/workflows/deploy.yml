@@ -56,7 +56,7 @@ jobs:
           fields: '{"GIT_COMMIT_HASH": "${{ env.GIT_COMMIT_HASH }}"}'
 
       - name: Build
-        run: bun run build:github
+        run: bun run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
