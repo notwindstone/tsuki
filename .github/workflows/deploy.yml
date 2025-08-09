@@ -44,6 +44,12 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Specify commit hash in env-variables.json
+        uses: restackio/update-json-file-action@6f50afee9a03a456a30cd574123db793319f7544
+        with:
+          file: "./src/constants/env-variables.json"
+          fields: '{"GIT_COMMIT_HASH": "${{ env.sha_short  }}"}'
+
       - name: Build
         run: bun run build
 
