@@ -18,12 +18,12 @@
   {@render children()}
 
   {#snippet failed(error)}
-    <div class="h-screen w-full flex flex-col items-center justify-center bg-black max-h-svh">
-      <p class="select-none text-4xl text-white font-600">
+    <div class="h-screen w-full flex flex-col items-center justify-center bg-white max-h-svh dark:bg-black">
+      <p class="select-none text-4xl text-black font-600 dark:text-white">
         tsuki
       </p>
       <div class="overflow-y-auto px-4 pt-4 text-center">
-        <p class="opacity-70">Something went wrong.</p>
+        <p class="opacity-80">Something went wrong.</p>
         <p class="mb-4">Error:</p>
         <ConsoleError currentError={getErrorFromEvent(error)} />
       </div>
@@ -39,7 +39,7 @@
       <p class="font-semibold">
         Could not load extensions:
       </p>
-      <p class="text-sm opacity-70">
+      <p class="text-sm opacity-80">
         {getErrorFromEvent(error).message}
       </p>
     </div>

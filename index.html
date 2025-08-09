@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/mingcute_moon_stars_fill.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tsuki</title>
+    <meta name="description" content="An ad-free web app to watch anime from various sources provided by extensions" />
     <script>
 
       /*
@@ -34,6 +35,8 @@
           const isLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
           if (isLight) {
+            document.body.style.backgroundColor = "white";
+
             return;
           }
 
@@ -42,6 +45,8 @@
 
         // use dark theme for any other values
         if (parsedConfiguration.theme === "light") {
+          document.body.style.backgroundColor = "white";
+
           return;
         }
 

@@ -33,7 +33,7 @@
 <svelte:window onerror={handleConsole} onunhandledrejection={handleConsole} />
 {#if show}
   <div class="overflow-y-auto px-4 pt-4 text-center">
-    <p class="opacity-70">Application is loading too long... Something is off.</p>
+    <p class="opacity-80">Application is loading too long... Something is off.</p>
     <p class="mb-4">Error:</p>
     <!-- using index as a key is safer here -->
     {#each loggedErrors as currentError, index (index)}
