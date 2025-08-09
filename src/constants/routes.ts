@@ -2,9 +2,10 @@ import type { RouterConfiguration as RouterConfigurationType } from "@/lib/routi
 import { BaseURL } from "@/constants/app";
 
 export const Routes = {
-  "Home"    : "/",
-  "Anime"   : "/anime",
-  "Settings": "/settings",
+  "Home"      : "/",
+  "Anime"     : "/anime",
+  "Settings"  : "/settings",
+  "Extensions": "/extensions",
 } as const;
 export const RouteArray = Object.values(Routes);
 export const RouteSet = new Set(RouteArray);
@@ -22,6 +23,10 @@ export const RouterConfiguration: RouterConfigurationType = {
     {
       "path"  : Routes.Settings,
       "render": () => import("@/pages/Settings.svelte"),
+    },
+    {
+      "path"  : Routes.Extensions,
+      "render": () => import("@/pages/Extensions.svelte"),
     },
   ],
   "notFound": () => import("@/pages/NotFound.svelte"),
