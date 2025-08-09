@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link, navigate } from "@/lib/routing";
+  import { Link } from "@/lib/routing";
   import { useDebounce } from "@/lib/hooks/use-debounce.svelte.js";
   import { GithubLink, HomePageLinks } from "@/constants/app";
   import Search from "@/components/base/Search.svelte";
