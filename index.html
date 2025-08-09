@@ -35,6 +35,7 @@
           const isLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
           if (isLight) {
+            // body background color is black initially (see its styles below)
             document.body.style.backgroundColor = "white";
 
             return;
@@ -45,6 +46,7 @@
 
         // use dark theme for any other values
         if (parsedConfiguration.theme === "light") {
+          // body background color is black initially (see its styles below)
           document.body.style.backgroundColor = "white";
 
           return;

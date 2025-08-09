@@ -15,7 +15,7 @@
       tsuki
     </span>
     <a
-      class="absolute bottom-4 left-[50%] translate-x-[-50%] rounded-md bg-neutral-100 px-2 py-1 text-sm text-neutral-700 opacity-80 transition-[opacity] dark:bg-neutral-900 dark:text-neutral-300 hover:opacity-100"
+      class="absolute bottom-4 left-[50%] translate-x-[-50%] rounded-md bg-neutral-100 px-2 py-1 text-sm text-black opacity-80 transition-[opacity] dark:bg-neutral-900 dark:text-white hover:opacity-100"
       href={`${GithubLink}/commit/${env.GIT_COMMIT_HASH}`}
       target="_blank"
     >
