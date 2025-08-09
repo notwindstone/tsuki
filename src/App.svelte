@@ -4,7 +4,14 @@
   import { Router } from "@/lib/routing";
   import Layout from "@/Layout.svelte";
 
-  const queryClient = new QueryClient;
+  const queryClient = new QueryClient({
+    "defaultOptions": {
+      "queries": {
+        // set queries cache time to Infinity (until the page reload tho)
+        "staleTime": Infinity,
+      },
+    },
+  });
 </script>
 
 <QueryClientProvider client={queryClient}>

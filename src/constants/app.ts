@@ -4,6 +4,8 @@ export const ApplicationName = "tsuki";
 export const ApplicationRootID = "tsuki_app";
 export const ApplicationNamespace = "__TSUKI__";
 
+export const HistoryLocalStorageKey = "@tsuki/history";
+
 export const GithubLink = "https://github.com/notwindstone/tsuki";
 
 // change to `/` if you are hosting it on "your.website.domain/" and not "your.website.domain/tsuki"
