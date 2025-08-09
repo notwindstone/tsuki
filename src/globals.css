@@ -6,6 +6,11 @@ html, body {
   font-family: Geist, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* utilities */
+.aspect-poster {
+  aspect-ratio: 9 / 16;
+}
+
 /* animations */
 .animate-progress-bar {
   animation-name: progress-bar;

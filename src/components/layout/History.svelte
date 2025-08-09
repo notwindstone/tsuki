@@ -69,11 +69,10 @@
   <!-- we don't care about $history.isPending -->
   <!-- because localStorage blocks main thread -->
   {#if $history.data && $history.data.size > 0}
-    <div class="flex justify-center" transition:fade={{ "duration": 200 }}>
+    <div class="w-full flex justify-center" transition:fade={{ "duration": 200 }}>
       <Pagination
         data={$history.data.entries}
         size={$history.data.size}
-        chunkSize={ChunkSize}
       />
     </div>
   {:else if $history.data && $history.data.size <= 0}
