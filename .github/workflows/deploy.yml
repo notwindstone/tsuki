@@ -44,9 +44,14 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Add commit hash to Environmental Variables
+        run: |
+          echo "GIT_COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Specify commit hash in env-variables.json
         uses: restackio/update-json-file-action@6f50afee9a03a456a30cd574123db793319f7544
         with:
+          # Application will import git commit hash from this file
           file: "./src/constants/env-variables.json"
           fields: '{"GIT_COMMIT_HASH": "${{ env.GIT_COMMIT_HASH }}"}'
 
