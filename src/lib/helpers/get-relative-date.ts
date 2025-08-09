@@ -14,13 +14,19 @@ export function getRelativeDate({
   "from"?        : Date;
 }): Date {
   const relativeDate = new Date(from);
+  const result = {
+    "days"   : days * 24 * 60 * 60 * 1000,
+    "hours"  : hours * 60 * 60 * 1000,
+    "minutes": minutes * 60 * 1000,
+    "seconds": seconds * 1000,
+  };
 
   relativeDate.setTime(
     relativeDate.getTime() +
-    days * 24 * 60 * 60 * 1000 +
-    hours * 60 * 60 * 1000 +
-    minutes * 60 * 1000 +
-    seconds * 1000 +
+    result.days +
+    result.hours +
+    result.minutes +
+    result.seconds +
     milliseconds,
   );
 
