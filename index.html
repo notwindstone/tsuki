@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/mingcute_moon_stars_fill.svg" />
@@ -7,13 +7,26 @@
     <title>tsuki</title>
     <meta name="description" content="An ad-free web app to watch anime from various sources provided by extensions" />
     <script>
+      // html doesn't need to be parsed for lang attribute to be changed, so we set it here
+      const storedLanguage = localStorage.getItem("@tsuki/locale");
+
+      /*
+       * 'en' value by default (see above)
+       *
+       * html accepts only two-letter language codes
+       * tho user can still write some gibberish in local storage
+       * that has two letters, and then language attribute will be invalid lol
+       */
+      if (storedLanguage.length === 2) {
+        document.documentElement.lang = storedLanguage;
+      }
 
       /*
        * read user theme configs from local storage and apply to the body element
        * if user doesn't have a configuration in local storage, use his browser's preferred theme
        */
       const handleConfigs = () => {
-        const storedConfiguration = localStorage.getItem("config");
+        const storedConfiguration = localStorage.getItem("@tsuki/config");
         let parsedConfiguration;
 
         try {

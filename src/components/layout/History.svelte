@@ -1,9 +1,10 @@
 <script lang="ts">
   import type { HistoryEntryType } from "@/types/history/history-entry.type";
   import { createQuery } from "@tanstack/svelte-query";
-  import { HistoryLocalStorageKey } from "@/constants/app";
+  import { ChunkSize, HistoryLocalStorageKey } from "@/constants/app";
   import { fade } from "svelte/transition";
   import { getHistoryEntryFromUnknown } from "@/lib/helpers/get-history-entry-from-unknown";
+  import { divideListToChunks } from "@/lib/helpers/divide-list-to-chunks";
   import Pagination from "@/components/base/Pagination.svelte";
 
   const history = createQuery({
@@ -22,11 +23,38 @@
         parsedHistory = [];
       }
 
+      /*
+       * validation of 2000 entries (529 453 bytes) with every field being a random value
+       * requires 8.5 milliseconds in dev mode on:
+       *
+       * Ryzen 3 3100
+       * Chrome 139.0.7258.66 with 20x CPU slowdown (Chrome -> Performance tab)
+       *
+       * and 0.4 milliseconds without a CPU slowdown.
+       */
       const shallowlyValidatedHistory: Array<HistoryEntryType>
         = parsedHistory.map((unknownEntry: unknown) => getHistoryEntryFromUnknown(unknownEntry));
 
-      // first elements will be the most recent
-      return shallowlyValidatedHistory.reverse();
+      /*
+       * divide a list into chunks to make pagination faster
+       *
+       * same setup as above:
+       * 5 milliseconds with 20x CPU slowdown,
+       * 0.2 milliseconds without a CPU slowdown.
+       */
+      const dividedEntries = divideListToChunks({
+        // first elements will be the most recent
+        "list"     : shallowlyValidatedHistory.reverse(),
+        // pagination will show 30 anime cards on the page
+        "chunkSize": ChunkSize,
+      });
+
+      return {
+        // chunks of entries
+        "entries": dividedEntries,
+        // 'dividedEntries' is an object, not an array
+        "size"   : Object.keys(dividedEntries).length,
+      };
     },
   });
 </script>
@@ -35,18 +63,22 @@
   <p class="text-center text-2xl font-medium leading-none">
     History
   </p>
-  <p class="text-center leading-none opacity-70">
+  <p class="text-center leading-none opacity-80">
     Find anime titles that you have recently watched
   </p>
   <!-- we don't care about $history.isPending -->
   <!-- because localStorage blocks main thread -->
-  {#if $history.data && $history.data.length > 0}
-    <div transition:fade={{ "duration": 200 }}>
-      <Pagination />
+  {#if $history.data && $history.data.size > 0}
+    <div class="flex justify-center" transition:fade={{ "duration": 200 }}>
+      <Pagination
+        data={$history.data.entries}
+        size={$history.data.size}
+        chunkSize={ChunkSize}
+      />
     </div>
-  {:else if $history.data && $history.data.length <= 0}
-    <div transition:fade={{ "duration": 200 }}>
-      No history yet. Try watching some anime first
+  {:else if $history.data && $history.data.size <= 0}
+    <div class="text-center" transition:fade={{ "duration": 200 }}>
+      No history yet. Try watching some anime first!
     </div>
   {/if}
 </div>
