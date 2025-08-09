@@ -24,7 +24,7 @@
       </p>
       <div class="overflow-y-auto px-4 pt-4 text-center">
         <p class="opacity-70">Something went wrong.</p>
-        <p class="mb-4">Console:</p>
+        <p class="mb-4">Error:</p>
         <ConsoleError currentError={getErrorFromEvent(error)} />
       </div>
     </div>

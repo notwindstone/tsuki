@@ -26,6 +26,12 @@
     {currentError?.message}
   </p>
   <div class="shrink-0 pl-8 text-[#45a1ff]">
-    {currentError?.filename}:{currentError?.lineno}:{currentError?.colno}
+    {
+      currentError?.filename ?? "unknown"
+    }:{
+      currentError?.lineno ?? 0
+    }:{
+      currentError?.colno ?? 0
+    }
   </div>
 </div>
