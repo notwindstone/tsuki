@@ -30,4 +30,19 @@
     </div>
   {/snippet}
 </svelte:boundary>
-<ExtensionsLoader />
+<!-- handle app-breaking extension system errors -->
+<svelte:boundary>
+  <ExtensionsLoader />
+
+  {#snippet failed(error)}
+    <div class="fixed bottom-2 right-2 max-w-[calc(100%-16px)] border border-black rounded-md bg-white px-2 py-1 text-black">
+      <p class="font-semibold">
+        Could not load extensions:
+      </p>
+      {console.log(error)}
+      <p class="text-sm opacity-70">
+        {getErrorFromEvent(error).message}
+      </p>
+    </div>
+  {/snippet}
+</svelte:boundary>
