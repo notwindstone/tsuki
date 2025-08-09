@@ -1,7 +1,9 @@
 <script lang="ts">
+  import type { HistoryEntryType } from "@/types/history/history-entry.type";
   import { createQuery } from "@tanstack/svelte-query";
   import { HistoryLocalStorageKey } from "@/constants/app";
   import { fade } from "svelte/transition";
+  import { getHistoryEntryFromUnknown } from "@/lib/helpers/get-history-entry-from-unknown";
   import Pagination from "@/components/base/Pagination.svelte";
 
   const history = createQuery({
@@ -20,8 +22,11 @@
         parsedHistory = [];
       }
 
+      const shallowlyValidatedHistory: Array<HistoryEntryType>
+        = parsedHistory.map((unknownEntry: unknown) => getHistoryEntryFromUnknown(unknownEntry));
+
       // first elements will be the most recent
-      return parsedHistory.reverse();
+      return shallowlyValidatedHistory.reverse();
     },
   });
 </script>
