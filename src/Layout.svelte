@@ -39,7 +39,6 @@
       <p class="font-semibold">
         Could not load extensions:
       </p>
-      {console.log(error)}
       <p class="text-sm opacity-70">
         {getErrorFromEvent(error).message}
       </p>
