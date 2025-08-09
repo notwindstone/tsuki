@@ -3,10 +3,12 @@
   import { useDebounce } from "@/lib/hooks/use-debounce.svelte.js";
   import Search from "@/components/base/Search.svelte";
   import { HomePageLinks } from "@/constants/app";
+  import { GIT_COMMIT_HASH } from "@/constants/env-variables.json";
 
   const debouncedSearch = useDebounce("", 300);
 </script>
 
+{GIT_COMMIT_HASH}
 <div class="flex flex-col items-center gap-2 p-4">
   <div class="flex flex-nowrap gap-2">
     {#each HomePageLinks as link (link.href)}
