@@ -10,17 +10,17 @@
 
 <div
   class={[
-    "h-10 w-full flex flex-nowrap cursor-text items-center gap-0 overflow-clip rounded-md bg-neutral-100 ring-black dark:bg-neutral-900 dark:ring-white",
+    "relative h-10 w-full cursor-text overflow-clip rounded-md bg-neutral-100 ring-2 ring-transparent transition-[shadow] dark:bg-neutral-900 focus-within:ring-black dark:focus-within:ring-white",
     classNames,
   ]}
 >
-  <div class="h-10 w-10 flex shrink-0 items-center justify-center">
+  <div class="pointer-events-none absolute h-10 w-10 flex items-center justify-center">
     <div class="i-lucide-search h-4 w-4"></div>
   </div>
   <input
     type="text"
     oninput={event => setSearch(event.currentTarget.value)}
-    class="h-full w-full bg-transparent text-sm text-black outline-none dark:text-white focus:outline-none placeholder-neutral-500"
+    class="h-full w-full bg-transparent pl-10 text-sm text-black outline-none dark:text-white focus:outline-none placeholder-neutral-500"
     placeholder="Search anime..."
   />
 </div>
