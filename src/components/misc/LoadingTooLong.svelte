@@ -17,14 +17,14 @@
     loggedErrors.push(getErrorFromEvent(event));
   };
 
-  // set timeout in the effect so we can destroy it on component unmount
+  // set a timeout in the effect so we can destroy it on component unmount
   $effect(() => {
     const timeout = setTimeout(() => {
       show = true;
       // show user that something went wrong only after 7.5 seconds have elapsed
     }, 7_500);
 
-    // return a method to clean timeout (will be called on unmount)
+    // return a method to clean the timeout (will be called on unmount)
     return () => clearTimeout(timeout);
   });
 </script>

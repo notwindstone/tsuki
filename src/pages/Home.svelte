@@ -25,7 +25,7 @@
       Error: {$query.error.message}
     </p>
   {:else if $query.isSuccess}
-    <p class="line-clamp-8 break-all">
+    <p class="max-h-32 overflow-y-auto break-all">
       {JSON.stringify($query.data)}
     </p>
   {/if}
@@ -33,6 +33,7 @@
   <Search
     setSearch={debouncedSearch.update}
     classNames="max-w-144"
+    placeholder="Search anime by name or MAL ID..."
   />
   <Link href="/anime">
     next page

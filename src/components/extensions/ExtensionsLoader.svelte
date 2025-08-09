@@ -10,6 +10,8 @@
   let code: string | undefined = $state(undefined);
   let func: ExtensionFunctionType | undefined = $state(undefined);
 
+  const gsdfgs = kjhas.asdasd;
+
   const pluginID = "vue-extension";
 
   const currentExtensionsState = getCurrentExtensionsState().currentExtensionsState;
