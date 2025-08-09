@@ -26,8 +26,9 @@
   },
   "private": true,
   "scripts": {
-    "dev": "GIT_COMMIT_HASH=$(git rev-parse --short HEAD) vite",
-    "build": "GIT_COMMIT_HASH=$(git rev-parse --short HEAD) vite build",
+    "dev": "vite",
+    "build": "vite build",
+    "build:github": "GIT_COMMIT_HASH=$(git rev-parse --short HEAD) vite build",
     "preview": "vite preview",
     "test": "bun run test:vitest && bun run test:playwright",
     "test:vitest": "vitest run ./src",
