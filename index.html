@@ -17,7 +17,7 @@
        * tho user can still write some gibberish in local storage
        * that has two letters, and then language attribute will be invalid lol
        */
-      if (storedLanguage.length === 2) {
+      if (storedLanguage && storedLanguage.length === 2) {
         document.documentElement.lang = storedLanguage;
       }
 
