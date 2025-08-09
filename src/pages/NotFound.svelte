@@ -13,7 +13,7 @@ import { Link } from "@/lib/routing/index.js";
     Not Found
   </p>
   <Link
-    class="mt-2 cursor-pointer rounded-md bg-red-500 px-4 py-2 transition-[opacity] focus:cursor-default focus:opacity-60"
+    class="mt-2 cursor-pointer rounded-md bg-red-500 px-4 py-2 transition-[opacity] focus:cursor-default focus:opacity-70"
     href="/"
   >
     Home

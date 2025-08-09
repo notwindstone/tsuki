@@ -62,7 +62,8 @@
 </script>
 
 <svelte:head>
-  <title>{ApplicationName} - {derivedDocumentTitle}</title>
+  <!-- if 'derivedDocumentTitle' is falsy (empty, undefined, etc.), show 'tsuki' -->
+  <title>{derivedDocumentTitle || ApplicationName}</title>
 </svelte:head>
 
 {#key CurrentComponent}

@@ -7,7 +7,7 @@
 <!-- otherwise `vh` will be applied -->
 <div class="h-screen w-full flex flex-col items-center justify-center bg-black max-h-svh">
   <p class="select-none text-4xl text-white font-600">
-    tsuki.
+    tsuki
   </p>
   <LoadingTooLong />
 </div>
