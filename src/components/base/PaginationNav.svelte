@@ -13,45 +13,11 @@
     "setPage"   : (specific: number) => void;
   } = $props();
 
-  const handleKeyboard = (event: KeyboardEvent): void => {
-    if (event.target === null) {
-      return;
-    }
-
-    // 'tagName' returns target element
-    if (!("tagName" in event.target)) {
-      return;
-    }
-
-    // handle keyboard navigation only if user didn't focus on some element
-    if (event.target.tagName !== "BODY") {
-      return;
-    }
-
-    const key = event.key.toLowerCase();
-
-    switch (key) {
-      case "arrowleft":
-      case "a": {
-        goPrevious();
-
-        break;
-      }
-      case "arrowright":
-      case "d": {
-        goNext();
-
-        break;
-      }
-    }
-  };
-
   const temporary = [
     1, "dots", 3, 4, 5, "dots", 10,
   ] as const;
 </script>
 
-<svelte:window onkeydown={handleKeyboard} />
 <div class="flex flex-wrap justify-center gap-2">
   <button
     disabled={page <= 1}
@@ -59,7 +25,7 @@
     class="h-8 w-8 flex items-center justify-center rounded-md bg-neutral-100 transition-[background-color] dark:bg-neutral-900 disabled:bg-transparent"
     onclick={goPrevious}
   >
-    <div class="i-lucide-chevron-left"></div>
+    <span class="i-lucide-chevron-left"></span>
   </button>
   <!-- items can be duplicated, index is better here as the key -->
   {#each temporary as item, index (index)}
@@ -87,6 +53,6 @@
     class="h-8 w-8 flex items-center justify-center rounded-md bg-neutral-100 transition-[background-color] dark:bg-neutral-900 disabled:bg-transparent"
     onclick={goNext}
   >
-    <div class="i-lucide-chevron-right"></div>
+    <span class="i-lucide-chevron-right"></span>
   </button>
 </div>

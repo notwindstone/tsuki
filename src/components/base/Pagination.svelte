@@ -33,8 +33,41 @@
   const setPage = (specific: number) => {
     page = specific;
   };
+  const handleKeyboard = (event: KeyboardEvent) => {
+    if (event.target === null) {
+      return;
+    }
+
+    // 'tagName' returns target element
+    if (!("tagName" in event.target)) {
+      return;
+    }
+
+    // handle keyboard navigation only if user didn't focus on some element (other than button)
+    if (event.target.tagName !== "BODY" && event.target.tagName !== "BUTTON") {
+      return;
+    }
+
+    const key = event.key.toLowerCase();
+
+    switch (key) {
+      case "arrowleft":
+      case "a": {
+        goPrevious();
+
+        break;
+      }
+      case "arrowright":
+      case "d": {
+        goNext();
+
+        break;
+      }
+    }
+  };
 </script>
 
+<svelte:window onkeydown={handleKeyboard} />
 <PaginationNav
   page={page}
   size={size}
