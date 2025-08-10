@@ -1,9 +1,17 @@
 <script lang="ts">
   import { getErrorFromEvent } from "@/lib/helpers/get-error-from-event";
+  import { setContext } from "svelte";
   import ExtensionsLoader from "@/components/extensions/ExtensionsLoader.svelte";
   import ProgressBar from "@/components/layout/ProgressBar.svelte";
   import type { Snippet } from "svelte";
   import ConsoleError from "@/components/misc/ConsoleError.svelte";
+
+  // will be used when global states are hard/time-consuming to implement in some scenario
+  let defaultValuesStore = $state({
+    "search": "",
+  });
+
+  setContext("default-values-store", defaultValuesStore);
 
   let {
     children,
