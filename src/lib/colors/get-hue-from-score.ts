@@ -6,5 +6,9 @@ export function getHueFromScore(score: number) {
   const scoreValue = score * multiplier;
 
   // returns a hue parameter for HSL color
-  return initialRange - baseValue + scoreValue;
+  return Math.max(
+    // hue should not go beyond 0-150 range
+    0,
+    initialRange - baseValue + scoreValue,
+  );
 }
