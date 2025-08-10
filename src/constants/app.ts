@@ -8,9 +8,9 @@ export const HistoryLocalStorageKey = "@tsuki/history";
 
 /*
  * in the future we can read localStorage to allow user change this value
- * 36 is divisible by 2, 3 and 4
+ * 30 is divisible by 2, 3 and 5
  */
-export const ChunkSize = 36;
+export const ChunkSize = 30;
 
 export const GithubLink = "https://github.com/notwindstone/tsuki";
 

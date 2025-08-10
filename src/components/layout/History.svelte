@@ -45,7 +45,7 @@
       const dividedEntries = divideListToChunks({
         // first elements will be the most recent
         "list"     : shallowlyValidatedHistory.reverse(),
-        // pagination will show 36 anime cards on the page
+        // pagination will show 30 anime cards on the page
         "chunkSize": ChunkSize,
       });
 
@@ -69,7 +69,7 @@
   <!-- we don't care about $history.isPending -->
   <!-- because localStorage blocks main thread -->
   {#if $history.data && $history.data.size > 0}
-    <div class="w-full flex justify-center" transition:fade={{ "duration": 200 }}>
+    <div class="w-full flex flex-col gap-2" transition:fade={{ "duration": 200 }}>
       <Pagination
         data={$history.data.entries}
         size={$history.data.size}
