@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { getPaginationEntries } from "@/lib/helpers/get-pagination-entries";
+
   let {
     page,
     size,
@@ -13,9 +15,13 @@
     "setPage"   : (specific: number) => void;
   } = $props();
 
-  const temporary = [
-    1, "dots", 3, 4, 5, "dots", 10,
-  ] as const;
+  const pagination = $derived(
+    getPaginationEntries({
+      "current": page,
+      "last"   : size,
+      "delta"  : 3,
+    }),
+  );
 </script>
 
 <div class="flex flex-wrap justify-center gap-2">
@@ -28,7 +34,7 @@
     <span class="i-lucide-chevron-left"></span>
   </button>
   <!-- items can be duplicated, index is better here as the key -->
-  {#each temporary as item, index (index)}
+  {#each pagination as item, index (index)}
     {#if item === "dots"}
       <div class="h-8 w-8 flex items-center justify-center">
         <div class="i-lucide-ellipsis"></div>
