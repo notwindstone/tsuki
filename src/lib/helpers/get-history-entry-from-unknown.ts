@@ -2,7 +2,7 @@ import type { HistoryEntryType } from "@/types/history/history-entry.type";
 
 // it probably was better to use runtime validators like Typia...
 export function getHistoryEntryFromUnknown(input: unknown): HistoryEntryType {
-  const safeObject: HistoryEntryType = {};
+  const safeObject: HistoryEntryType = { "id": 0 };
 
   // early return if input is not an object
   if (
@@ -13,6 +13,12 @@ export function getHistoryEntryFromUnknown(input: unknown): HistoryEntryType {
   }
 
   // unfortunately, i can't use an array of 'HistoryEntryType' keys to apply fields to safeObject with 'for' loop
+  if ("id" in input) {
+    safeObject.id = typeof input.id === "number"
+      ? input.id
+      : 0;
+  }
+
   if ("idMal" in input) {
     // check if a number
     safeObject.idMal = typeof input.idMal === "number"

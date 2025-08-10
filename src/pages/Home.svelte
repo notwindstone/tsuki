@@ -1,12 +1,91 @@
 <script lang="ts">
+  import type { HistoryEntryType } from "@/types/history/history-entry.type";
   import { Link } from "@/lib/routing";
   import { useDebounce } from "@/lib/hooks/use-debounce.svelte.js";
-  import { GithubLink, HomePageLinks } from "@/constants/app";
+  import { createQuery } from "@tanstack/svelte-query";
+  import { createAnilistQuery } from "@/lib/graphql/create-anilist-query";
+  import { ChunkSize, GithubLink, HomePageLinks } from "@/constants/app";
+  import { getHistoryEntryFromUnknown } from "@/lib/helpers/get-history-entry-from-unknown";
   import Search from "@/components/base/Search.svelte";
   import env from "@/constants/env-variables.json";
   import History from "@/components/layout/History.svelte";
+  import Card from "@/components/base/Card.svelte";
 
   const debouncedSearch = useDebounce("", 300);
+
+  // that's a react-like way to make queries lol ("state changed, lemme re-create this hook")
+  const animes = $derived(
+    createQuery({
+      "queryKey": ["anime", "anilist", "search", debouncedSearch.value],
+      "queryFn" : async () => {
+        const response = await fetch("https://graphql.anilist.co", {
+          "method" : "POST",
+          "headers": {
+            "Content-Type": "application/json",
+          },
+          "body": JSON.stringify(
+            createAnilistQuery({
+              "queries": [
+                {
+                  "alias" : "search",
+                  "name"  : "Page.Media",
+                  "fields": [
+                    "id",
+                    "idMal",
+                    "title.romaji",
+                    "title.native",
+                    "title.english",
+                    "coverImage.extraLarge",
+                    "status",
+                    "averageScore",
+                    "episodes",
+                  ],
+                  "variables": {
+                    "media": {
+                      "type"  : "ANIME",
+                      // it's surely a string
+                      "search": debouncedSearch.value as string,
+                    },
+                    "page": {
+                      "page"   : 1,
+                      "perPage": ChunkSize,
+                    },
+                  },
+                },
+              ],
+            }),
+          ),
+        });
+        const data: unknown = await response.json();
+
+        /** maybe i should actually use runtime json validators */
+        if (
+          // check if data is an object and has the 'data' property
+          typeof data !== "object" ||
+          data === null ||
+          !("data" in data) ||
+          // check if data.data is an object and has the 'Search' property
+          typeof data.data !== "object" ||
+          data.data === null ||
+          !("Search" in data.data) ||
+          // check if data.data.Search is an object and has the 'media' property
+          typeof data.data.Search !== "object" ||
+          data.data.Search === null ||
+          !("media" in data.data.Search) ||
+          // check if data.data.Search.media is an array
+          !Array.isArray(data.data.Search.media)
+        ) {
+          return [];
+        }
+
+        const unknownList: Array<unknown> = data.data.Search.media;
+        // TODO: rename this type and function
+        const animeEntries: Array<HistoryEntryType> = unknownList.map((entry: unknown) => getHistoryEntryFromUnknown(entry));
+
+        return animeEntries;
+      },
+    }),
+  );
 </script>
 
 <div class="flex flex-col items-center p-4">
@@ -46,5 +125,23 @@
     classNames="max-w-144"
     placeholder="Search anime by name or MAL ID..."
   />
+  {#if $animes.isPending}
+    <div class="pt-4 text-center">
+      Loading...
+    </div>
+  {:else if $animes.isError}
+    <div class="pt-4 text-center">
+      Error:
+      <span class="underline underline-red-500 underline-wavy">
+        {$animes?.error?.message}
+      </span>
+    </div>
+  {:else if $animes.data}
+    <div class="grid cols-2 max-w-320 w-full gap-2 pt-4 md:cols-5 sm:cols-3">
+      {#each $animes.data as anime (anime.id)}
+        <Card entry={anime} />
+      {/each}
+    </div>
+  {/if}
   <History />
 </div>

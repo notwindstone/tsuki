@@ -1,6 +1,7 @@
 import type { StatusType } from "@/types/anilist/status.type";
 
 export type HistoryEntryType = Partial<{
+  "id"   : number;
   // MyAnimeList ID
   "idMal": number;
   "title": Partial<{

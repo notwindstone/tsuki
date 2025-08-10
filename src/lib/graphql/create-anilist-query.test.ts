@@ -34,7 +34,7 @@ const testData: Array<
     },
     // output
     {
-      "query"    : "query($searchMain: String, $pageMain: Int, $perPageMain: Int) { Main: Page(perPage" +
+      "query": "query($searchMain: String, $pageMain: Int, $perPageMain: Int) { Main: Page(perPage" +
         ": $perPageMain, page: $pageMain) { media(search: $searchMain) { id title {english romaji} } } }",
       "variables": JSON.stringify({
         // 'Main' because of the alias

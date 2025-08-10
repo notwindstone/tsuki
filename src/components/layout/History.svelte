@@ -63,7 +63,7 @@
   <p class="text-center text-3xl font-medium leading-none">
     History
   </p>
-  <p class="text-center text-lg leading-none opacity-80">
+  <p class="text-center leading-none opacity-80">
     Find anime titles that you have recently watched
   </p>
   <!-- we don't care about $history.isPending -->
