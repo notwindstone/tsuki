@@ -69,7 +69,7 @@
   <!-- we don't care about $history.isPending -->
   <!-- because localStorage blocks main thread -->
   {#if $history.data && $history.data.size > 0}
-    <div class="w-full flex flex-col gap-2" transition:fade={{ "duration": 200 }}>
+    <div class="w-full flex flex-col items-center gap-2" transition:fade={{ "duration": 200 }}>
       <Pagination
         data={$history.data.entries}
         size={$history.data.size}

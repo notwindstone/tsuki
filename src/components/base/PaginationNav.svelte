@@ -26,7 +26,7 @@
   );
 </script>
 
-<div class="flex flex-wrap justify-center gap-2">
+<div class="w-88 flex flex-wrap justify-between gap-2 sm:w-128">
   <button
     disabled={page <= 1}
     aria-label="go to the previous page"
@@ -35,26 +35,28 @@
   >
     <span class="i-lucide-chevron-left"></span>
   </button>
-  <!-- items can be duplicated, index is better here as the key -->
-  {#each pagination as item, index (index)}
-    {#if item === "dots"}
-      <div class="h-8 w-8 flex items-center justify-center">
-        <div class="i-lucide-ellipsis"></div>
-      </div>
-    {:else}
-      <button
-        onclick={() => setPage(item)}
-        class={[
-          "h-8 min-w-8 flex items-center justify-center rounded-md transition-[background-color]",
-          page === item
-            ? "bg-rose-500"
-            : "bg-neutral-100 dark:bg-neutral-900",
-        ]}
-      >
-        {item}
-      </button>
-    {/if}
-  {/each}
+  <div class="flex flex-wrap gap-2">
+    <!-- items can be duplicated, index is better here as the key -->
+    {#each pagination as item, index (index)}
+      {#if item === "dots"}
+        <div class="h-8 w-8 flex items-center justify-center">
+          <div class="i-lucide-ellipsis"></div>
+        </div>
+      {:else}
+        <button
+          onclick={() => setPage(item)}
+          class={[
+            "h-8 min-w-8 flex items-center justify-center rounded-md transition-[background-color]",
+            page === item
+              ? "bg-rose-500"
+              : "bg-neutral-100 dark:bg-neutral-900",
+          ]}
+        >
+          {item}
+        </button>
+      {/if}
+    {/each}
+  </div>
   <button
     disabled={page >= size}
     aria-label="go to the next page"
