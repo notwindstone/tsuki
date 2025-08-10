@@ -17,7 +17,7 @@
 
   $effect(() => {
     // kinda fishy...
-    defaultValuesStore.update("search", denouncedSearch.value);
+    defaultValuesStore.update("search", denouncedSearch.value as string);
   });
 
   // that's a react-like way to make queries lol ("state have changed, lemme re-create this hook")
