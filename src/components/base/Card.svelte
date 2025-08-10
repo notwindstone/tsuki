@@ -3,6 +3,7 @@
   import type { StatusType } from "@/types/anilist/status.type";
   import { Link } from "@/lib/routing";
   import { BaseURL } from "@/constants/app.js";
+  import { getHueFromScore } from "@/lib/colors/get-hue-from-score";
 
   let show = $state<boolean>(false);
   let {
@@ -17,11 +18,12 @@
     ?? entry?.title?.native
     ?? "unknown";
   const status: StatusType = entry?.status ?? "FINISHED";
-  const image: string =  entry?.coverImage?.extraLarged ?? `${BaseURL}/frieren-no-image.webp`;
+  const image: string =  entry?.coverImage?.extraLarge ?? `${BaseURL}/frieren-no-image.webp`;
 </script>
 
 <!-- show card only if idMal is defined -->
-{#if entry.idMal !== undefined}
+{#if entry?.idMal !== undefined}
+  <!-- redirects to /anime?idMal=SOME_NUMBER -->
   <Link
     href="/anime"
     params={{ "idMal": entry.idMal }}
@@ -33,11 +35,13 @@
         "absolute h-full w-full object-cover transition-[opacity,transform] group-hover:scale-105",
         show ? "opacity-100" : "opacity-0",
       ]}
-      alt={`${entry?.title?.english}'s anime cover image`}
+      alt={`${title}'s anime cover image`}
       src={image}
       onload={() => show = true}
     />
+    <!-- darkens image background -->
     <div class="absolute h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
+    <!-- top badges -->
     <div class="z-10 w-full flex flex-wrap justify-between gap-2 p-2 text-xs">
       <!-- data-tooltip styles are defined in globals.css -->
       <div
@@ -47,27 +51,30 @@
       >
         <!-- content is displayed by data-tooltip -->
       </div>
-      {#if entry.averageScore}
+      {#if entry?.averageScore}
         <div
           data-tooltip={entry.averageScore / 10}
           data-tooltip-hover="Others' score"
           class="rounded-md px-2 py-1 text-white leading-none"
-          style={`background-color:hsl(${150 - 100 * 3 + entry.averageScore * 3},100%,30%)`}
+          style={`background-color:hsl(${getHueFromScore(entry.averageScore)},100%,30%)`}
         >
           <!-- content is displayed by data-tooltip -->
         </div>
       {/if}
     </div>
+    <!-- bottom badges & title name -->
     <div class="z-10 w-full flex flex-col gap-2 p-2">
-      <div
-        data-tooltip={`${entry?.currentEpisode ?? 0} / ${entry?.episodes ?? 0}`}
-        data-tooltip-hover="Episodes watched"
-        class="w-fit rounded-md bg-neutral-900 px-2 py-1 text-xs text-white leading-none dark:bg-neutral-100 dark:text-black"
-      >
-        <!-- content is displayed by data-tooltip -->
-      </div>
+      {#if entry?.currentEpisode}
+        <div
+          data-tooltip={`${entry.currentEpisode} / ${entry?.episodes ?? "?"}`}
+          data-tooltip-hover="Episodes watched"
+          class="w-fit rounded-md bg-neutral-900 px-2 py-1 text-xs text-white leading-none dark:bg-neutral-100 dark:text-black"
+        >
+          <!-- content is displayed by data-tooltip -->
+        </div>
+      {/if}
       <p class="line-clamp-3 text-black dark:text-white">
-        {entry?.title?.english}
+        {title}
       </p>
     </div>
   </Link>
