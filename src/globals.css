@@ -16,7 +16,16 @@ html, body {
 
 /* utilities */
 .aspect-poster {
-  aspect-ratio: 9 / 16;
+  /* support for old browsers */
+  padding-bottom: 100%;
+}
+
+@supports (aspect-ratio: 9 / 16) {
+  .aspect-poster {
+    aspect-ratio: 9 / 16;
+    /* overwrite */
+    padding-bottom: unset;
+  }
 }
 
 /* animations */

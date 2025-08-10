@@ -27,7 +27,7 @@
       src={entry?.coverImage?.extraLarge}
       onload={() => show = true}
     />
-    <div class="absolute h-full w-full bg-white opacity-50 transition-[opacity] dark:bg-black group-hover:opacity-30"></div>
+    <div class="absolute h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
     <div class="z-10 w-full flex flex-wrap justify-between gap-2 p-2 text-xs">
       <!-- data-tooltip styles are defined in globals.css -->
       <div
@@ -37,13 +37,16 @@
       >
         <!-- content is displayed by data-tooltip -->
       </div>
-      <div
-        data-tooltip={(entry?.averageScore ?? 0) / 10}
-        data-tooltip-hover="Others' score"
-        class="rounded-md bg-green-600 px-2 py-1 text-white leading-none"
-      >
-        <!-- content is displayed by data-tooltip -->
-      </div>
+      {#if entry.averageScore}
+        <div
+          data-tooltip={entry.averageScore / 10}
+          data-tooltip-hover="Others' score"
+          class="rounded-md px-2 py-1 text-white leading-none"
+          style={`background-color:hsl(${150 - 100 * 3 + entry.averageScore * 3},100%,30%)`}
+        >
+          <!-- content is displayed by data-tooltip -->
+        </div>
+      {/if}
     </div>
     <div class="z-10 w-full flex flex-col gap-2 p-2">
       <div
