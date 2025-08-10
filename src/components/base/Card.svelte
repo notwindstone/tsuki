@@ -33,7 +33,7 @@
     <img
       loading="lazy"
       class={[
-        "absolute h-full w-full object-cover transition-[opacity,transform] group-hover:scale-105",
+        "absolute h-full w-full object-cover transition-[opacity,transform] duration-300 group-hover:scale-105",
         show ? "opacity-100" : "opacity-0",
       ]}
       alt={`${title}'s anime cover image`}
