@@ -60,10 +60,10 @@
 </script>
 
 <div class="max-w-320 w-full flex flex-col gap-4 pt-8">
-  <p class="text-center text-2xl font-medium leading-none">
+  <p class="text-center text-3xl font-medium leading-none">
     History
   </p>
-  <p class="text-center leading-none opacity-80">
+  <p class="text-center text-lg leading-none opacity-80">
     Find anime titles that you have recently watched
   </p>
   <!-- we don't care about $history.isPending -->

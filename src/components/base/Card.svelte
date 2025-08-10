@@ -2,7 +2,7 @@
   import type { HistoryEntryType } from "@/types/history/history-entry.type";
   import type { StatusType } from "@/types/anilist/status.type";
   import { Link } from "@/lib/routing";
-  import { BaseURL } from "@/constants/app.js";
+  import { NoImageURL } from "@/constants/app.js";
   import { getHueFromScore } from "@/lib/colors/get-hue-from-score";
 
   let show = $state<boolean>(false);
@@ -11,6 +11,8 @@
   }: {
     "entry": HistoryEntryType;
   } = $props();
+  // we will change this image on image load error
+  let image = $state<string>(entry?.coverImage?.extraLarge ?? NoImageURL);
 
   // assign a safe anime title
   const title: string = entry?.title?.english
@@ -18,7 +20,6 @@
     ?? entry?.title?.native
     ?? "unknown";
   const status: StatusType = entry?.status ?? "FINISHED";
-  const image: string =  entry?.coverImage?.extraLarge ?? `${BaseURL}/frieren-no-image.webp`;
 </script>
 
 <!-- show card only if idMal is defined -->
@@ -38,6 +39,7 @@
       alt={`${title}'s anime cover image`}
       src={image}
       onload={() => show = true}
+      onerror={() => image = NoImageURL}
     />
     <!-- darkens image background -->
     <div class="absolute h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
