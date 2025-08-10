@@ -1,7 +1,6 @@
 import { expect, test } from "vitest";
 import { getHueFromScore } from "./get-hue-from-score";
 
-// need to explicitly set the type
 const testData = [
   [
 

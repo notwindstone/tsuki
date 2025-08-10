@@ -1,7 +1,6 @@
 import { expect, test } from "vitest";
 import { getPaginationEntries } from "./get-pagination-entries";
 
-// need to explicitly set the type
 const testData = [
   [
     { "current": 1, "last": 60, "delta": 2 },
