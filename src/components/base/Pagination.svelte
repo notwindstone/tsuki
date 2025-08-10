@@ -56,14 +56,12 @@
     const key = event.key.toLowerCase();
 
     switch (key) {
-      case "arrowleft":
-      case "a": {
+      case "arrowleft": {
         goPrevious();
 
         break;
       }
-      case "arrowright":
-      case "d": {
+      case "arrowright": {
         goNext();
 
         break;
