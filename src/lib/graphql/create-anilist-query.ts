@@ -6,7 +6,8 @@ import { formatListToGraphqlFields } from "@/lib/graphql/format-list-to-graphql-
 import IsKeyInObject from "@/types/utils/is-key-in-object";
 
 /**
- * A zero-dependency Anilist GraphQL wrapper written a couple of months ago
+ * A zero-dependency Anilist GraphQL wrapper written a couple of months ago.
+ * Link: https://github.com/notwindstone/anisun/blob/main/src/lib/graphql/client.ts
  */
 export function createAnilistQuery({
   queries,

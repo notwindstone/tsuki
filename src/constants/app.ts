@@ -7,8 +7,8 @@ export const ApplicationNamespace = "__TSUKI__";
 export const HistoryLocalStorageKey = "@tsuki/history";
 
 /*
- * in the future we can read localStorage to allow user change this value
- * 30 is divisible by 2, 3 and 5
+ * in the future we can read localStorage to allow user change this value.
+ * default: 30 is divisible by 2, 3 and 5
  */
 export const ChunkSize = 30;
 
