@@ -6,9 +6,9 @@ const testData = [
   ["c", "C"],
   ["text", "Text"],
   ["Text", "Text"],
-  ["ah no", "Ah no"],
-  ["Ah yes", "Ah yes"],
-  ["ah Yes", "Ah Yes"],
+  ["ah yes", "Ah yes"],
+  ["whaaar", "Whaaar"],
+  ["weikav Lucky65v2", "Weikav Lucky65v2"],
   ["100", "100"],
   [
     "the 100 texts that are really, really, really, really, really long",
