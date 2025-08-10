@@ -1,6 +1,7 @@
 import type { StatusType } from "@/types/anilist/status.type";
 
-export type HistoryEntryType = Partial<{
+export type AnimeEntryType = Partial<{
+  // Anilist ID
   "id"   : number;
   // MyAnimeList ID
   "idMal": number;
@@ -14,13 +15,15 @@ export type HistoryEntryType = Partial<{
     "extraLarge": string;
   }>;
   // Anilist status
-  "status"        : StatusType;
+  "status"      : StatusType;
   // Anilist score
-  "averageScore"  : number;
+  "averageScore": number;
   // total episodes
-  "episodes"      : number;
-  // which episode user have opened
+  "episodes"    : number;
+
+  /** History only: which episode user have opened */
   "currentEpisode": number;
-  // when have user opened a page with this anime
-  "date"          : string;
+
+  /** History only: when have user opened a page with this anime */
+  "date": string;
 }>;

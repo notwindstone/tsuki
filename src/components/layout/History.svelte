@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { HistoryEntryType } from "@/types/history/history-entry.type";
+  import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import { createQuery } from "@tanstack/svelte-query";
   import { ChunkSize, HistoryLocalStorageKey } from "@/constants/app";
   import { fade } from "svelte/transition";
-  import { getHistoryEntryFromUnknown } from "@/lib/helpers/get-history-entry-from-unknown";
+  import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
   import { divideListToChunks } from "@/lib/helpers/divide-list-to-chunks";
   import Pagination from "@/components/base/Pagination.svelte";
 
@@ -32,8 +32,8 @@
        *
        * and 0.4 milliseconds without a CPU slowdown.
        */
-      const shallowlyValidatedHistory: Array<HistoryEntryType>
-        = parsedHistory.map((unknownEntry: unknown) => getHistoryEntryFromUnknown(unknownEntry));
+      const shallowlyValidatedHistory: Array<AnimeEntryType>
+        = parsedHistory.map((unknownEntry: unknown) => getAnimeEntryFromUnknown(unknownEntry));
 
       /*
        * divide a list into chunks to make pagination faster

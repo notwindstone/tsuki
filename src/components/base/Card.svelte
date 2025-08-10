@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { HistoryEntryType } from "@/types/history/history-entry.type";
+  import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import type { StatusType } from "@/types/anilist/status.type";
   import { Link } from "@/lib/routing";
   import { NoImageURL } from "@/constants/app.js";
@@ -9,7 +9,7 @@
   let {
     entry,
   }: {
-    "entry": HistoryEntryType;
+    "entry": AnimeEntryType;
   } = $props();
   // we will change this image on image load error
   let image = $state<string>(entry?.coverImage?.extraLarge ?? NoImageURL);

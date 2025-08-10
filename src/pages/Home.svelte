@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { HistoryEntryType } from "@/types/history/history-entry.type";
+  import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import { Link } from "@/lib/routing";
   import { useDebounce } from "@/lib/hooks/use-debounce.svelte.js";
   import { createQuery } from "@tanstack/svelte-query";
   import { createAnilistQuery } from "@/lib/graphql/create-anilist-query";
   import { ChunkSize, GithubLink, HomePageLinks } from "@/constants/app";
-  import { getHistoryEntryFromUnknown } from "@/lib/helpers/get-history-entry-from-unknown";
+  import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
   import Search from "@/components/base/Search.svelte";
   import env from "@/constants/env-variables.json";
   import History from "@/components/layout/History.svelte";
@@ -80,7 +80,7 @@
 
         const unknownList: Array<unknown> = data.data.Search.media;
         // TODO: rename this type and function
-        const animeEntries: Array<HistoryEntryType> = unknownList.map((entry: unknown) => getHistoryEntryFromUnknown(entry));
+        const animeEntries: Array<AnimeEntryType> = unknownList.map((entry: unknown) => getAnimeEntryFromUnknown(entry));
 
         return animeEntries;
       },

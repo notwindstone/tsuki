@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { HistoryEntryType } from "@/types/history/history-entry.type";
+  import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import Card from "@/components/base/Card.svelte";
   import PaginationNav from "@/components/base/PaginationNav.svelte";
 
@@ -8,7 +8,7 @@
     data,
     size,
   }: {
-    "data": Record<number, Array<HistoryEntryType>>;
+    "data": Record<number, Array<AnimeEntryType>>;
     "size": number;
   } = $props();
 

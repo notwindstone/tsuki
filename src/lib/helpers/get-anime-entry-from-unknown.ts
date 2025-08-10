@@ -1,8 +1,9 @@
-import type { HistoryEntryType } from "@/types/history/history-entry.type";
+import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
 
 // it probably was better to use runtime validators like Typia...
-export function getHistoryEntryFromUnknown(input: unknown): HistoryEntryType {
-  const safeObject: HistoryEntryType = { "id": 0 };
+export function getAnimeEntryFromUnknown(input: unknown): AnimeEntryType {
+  // Anilist should always return non-null 'id' field, but just to be safe make an initial value here
+  const safeObject: AnimeEntryType = { "id": 0 };
 
   // early return if input is not an object
   if (
