@@ -26,7 +26,7 @@
   );
 </script>
 
-<div class="w-88 flex flex-wrap justify-between gap-2 sm:w-128">
+<div class="max-w-full w-88 flex flex-wrap justify-between gap-2 sm:w-128">
   <button
     disabled={page <= 1}
     aria-label="go to the previous page"
