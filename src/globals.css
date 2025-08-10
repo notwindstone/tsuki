@@ -6,6 +6,14 @@ html, body {
   font-family: Geist, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* data attributes */
+[data-tooltip]:after {
+  content: attr(data-tooltip);
+}
+[data-tooltip]:hover:after {
+  content: attr(data-tooltip-hover);
+}
+
 /* utilities */
 .aspect-poster {
   aspect-ratio: 9 / 16;
