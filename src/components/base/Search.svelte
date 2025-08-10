@@ -45,7 +45,6 @@
 </script>
 
 <svelte:window onkeydown={handleKeyboard} />
-<div>meh: {defaultValue}</div>
 <div
   class={[
     "relative h-10 w-full cursor-text overflow-clip rounded-md bg-neutral-100 ring-2 ring-transparent transition-[shadow] dark:bg-neutral-900 focus-within:ring-black dark:focus-within:ring-white",
