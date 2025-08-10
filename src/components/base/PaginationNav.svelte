@@ -4,12 +4,14 @@
   let {
     page,
     size,
+    delta,
     goNext,
     goPrevious,
     setPage,
   }: {
     "page"      : number;
     "size"      : number;
+    "delta"     : number;
     "goNext"    : () => void;
     "goPrevious": () => void;
     "setPage"   : (specific: number) => void;
@@ -19,7 +21,7 @@
     getPaginationEntries({
       "current": page,
       "last"   : size,
-      "delta"  : 3,
+      "delta"  : delta,
     }),
   );
 </script>

@@ -12,6 +12,11 @@
     "size": number;
   } = $props();
 
+  // show less pagination elements on small screen (tailwind's 'sm' breakpoint)
+  const delta = window.innerWidth >= 640
+    ? 3
+    : 1;
+
   const goNext = () => {
     if (page >= size) {
       page = size;
@@ -71,6 +76,7 @@
 <PaginationNav
   page={page}
   size={size}
+  delta={delta}
   goNext={goNext}
   goPrevious={goPrevious}
   setPage={setPage}
@@ -84,6 +90,7 @@
 <PaginationNav
   page={page}
   size={size}
+  delta={delta}
   goNext={goNext}
   goPrevious={goPrevious}
   setPage={setPage}
