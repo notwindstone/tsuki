@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getContext } from "svelte";
   import { Link } from "@/lib/routing";
   import { useDebounce } from "@/lib/hooks/use-debounce.svelte.js";
   import { createQuery } from "@tanstack/svelte-query";
@@ -9,7 +10,15 @@
   import History from "@/components/layout/History.svelte";
   import Card from "@/components/base/Card.svelte";
 
-  const debouncedSearch = useDebounce("", 300);
+  const defaultValuesStore = getContext("default-values-store");
+  // we intentionally lose reactivity here, because the value will be used only as the default one
+  const defaultSearch = defaultValuesStore.search;
+  const debouncedSearch = useDebounce(defaultSearch, 300);
+
+  $effect(() => {
+    // kinda fishy...
+    defaultValuesStore.update("search", denouncedSearch.value);
+  });
 
   // that's a react-like way to make queries lol ("state have changed, lemme re-create this hook")
   const animes = $derived(
@@ -60,6 +69,7 @@
     setSearch={debouncedSearch.update}
     classNames="max-w-144"
     placeholder="Search anime by name or MAL ID..."
+    defaultValue={defaultSearch}
   />
   {#if $animes.isPending}
     <div class="pt-4 text-center">
