@@ -1,0 +1,40 @@
+import type { SeasonType } from "./season.type";
+import type { FormatType } from "./format.type";
+import type { StatusType } from "./status.type";
+import type { SortType } from "./sort.type";
+import type { SourceType } from "./source.type";
+
+export type VariablesType = Partial<{
+  "type"                : "ANIME" | "MANGA";
+  "id"                  : number;
+  "idMal"               : number;
+  "season"              : SeasonType;
+  "seasonYear"          : number;
+  "format"              : FormatType;
+  "status"              : StatusType;
+  "sort"                : SortType;
+  "episodes"            : number;
+  "duration"            : number;
+  "isAdult"             : boolean;
+  "genre"               : string;
+  "genre_in"            : Array<string>;
+  "tag_in"              : Array<string>;
+  "tag"                 : string;
+  "onList"              : boolean;
+  "licensedBy"          : string;
+  "licensedById"        : number;
+  "averageScore"        : number;
+  "averageScore_greater": number;
+  "popularity"          : number;
+  "search"              : string;
+  "source"              : SourceType;
+  "startDate_greater"   : number;
+  "endDate_lesser"      : number;
+  "episodes_greater"    : number;
+  "episodes_lesser"     : number;
+  "duration_greater"    : number;
+  "duration_lesser"     : number;
+  // MediaList
+  "userName"            : string;
+  "mediaListStatus"     : "COMPLETED" | "CURRENT" | "DROPPED" | "PAUSED" | "PLANNING" | "REPEATING";
+}>;
