@@ -12,7 +12,7 @@
 
   const defaultValuesStore = getContext("default-values-store");
   // we intentionally lose reactivity here, because the value will be used only as the default one
-  const defaultSearch = defaultValuesStore.getState().search;
+  const defaultSearch = defaultValuesStore.state.search;
   const debouncedSearch = useDebounce(defaultSearch, 300);
 
   $effect(() => {
