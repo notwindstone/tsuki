@@ -12,12 +12,12 @@
 
   const defaultValuesStore = getContext("default-values-store");
   // we intentionally lose reactivity here, because the value will be used only as the default one
-  const defaultSearch = defaultValuesStore.state.search;
+  const defaultSearch = defaultValuesStore.getState().search;
   const debouncedSearch = useDebounce(defaultSearch, 300);
 
   $effect(() => {
     // kinda fishy...
-    defaultValuesStore.update("search", denouncedSearch.value as string);
+    defaultValuesStore.update("search", debouncedSearch.value as string);
   });
 
   // that's a react-like way to make queries lol ("state have changed, lemme re-create this hook")
