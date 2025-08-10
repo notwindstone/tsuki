@@ -23,7 +23,7 @@
 }}>
   click
 </button>
-<div class="grid cols-5 w-full gap-2">
+<div class="grid cols-2 w-full gap-2 md:cols-5 sm:cols-3">
   <!-- index is safer as a key here (entries can be duplicated) -->
   {#each data[page - 1] as entry, index (`${page}-${index}`)}
     <Card entry={entry} />
