@@ -44,6 +44,20 @@ const testData = [
       "coverImage": {},
     }),
   ],
+  [
+    {
+      "status": "FINISHEd",
+    },
+    JSON.stringify({}),
+  ],
+  [
+    {
+      "status": "FINISHED",
+    },
+    JSON.stringify({
+      "status": "FINISHED",
+    }),
+  ],
 ] as const;
 
 for (const [input, output] of testData) {

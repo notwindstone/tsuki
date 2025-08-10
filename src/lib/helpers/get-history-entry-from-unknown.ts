@@ -34,6 +34,24 @@ export function getHistoryEntryFromUnknown(input: unknown): HistoryEntryType {
       : {};
   }
 
+  if ("status" in input) {
+    // check if an anilist status
+    switch (input.status) {
+      case "FINISHED":
+      case "RELEASING":
+      case "NOT_YET_RELEASED":
+      case "CANCELLED":
+      case "HIATUS": {
+        safeObject.status = input.status;
+
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  }
+
   if ("averageScore" in input) {
     // check if a number
     safeObject.averageScore = typeof input.averageScore === "number"

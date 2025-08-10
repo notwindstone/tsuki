@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { HistoryEntryType } from "@/types/history/history-entry.type";
+  import type { StatusType } from "@/types/anilist/status.type";
   import { Link } from "@/lib/routing";
+  import { BaseURL } from "@/constants/app.js";
 
   let show = $state<boolean>(false);
   let {
@@ -8,6 +10,14 @@
   }: {
     "entry": HistoryEntryType;
   } = $props();
+
+  // assign a safe anime title
+  const title: string = entry?.title?.english
+    ?? entry?.title?.romaji
+    ?? entry?.title?.native
+    ?? "unknown";
+  const status: StatusType = entry?.status ?? "FINISHED";
+  const image: string =  entry?.coverImage?.extraLarged ?? `${BaseURL}/frieren-no-image.webp`;
 </script>
 
 <!-- show card only if idMal is defined -->
@@ -15,7 +25,7 @@
   <Link
     href="/anime"
     params={{ "idMal": entry.idMal }}
-    class="group aspect-poster relative flex flex-col justify-between overflow-clip rounded-md"
+    class="group aspect-poster relative flex flex-col justify-between overflow-hidden rounded-md"
   >
     <img
       loading="lazy"
@@ -24,14 +34,14 @@
         show ? "opacity-100" : "opacity-0",
       ]}
       alt={`${entry?.title?.english}'s anime cover image`}
-      src={entry?.coverImage?.extraLarge}
+      src={image}
       onload={() => show = true}
     />
     <div class="absolute h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
     <div class="z-10 w-full flex flex-wrap justify-between gap-2 p-2 text-xs">
       <!-- data-tooltip styles are defined in globals.css -->
       <div
-        data-tooltip="FINISHED"
+        data-tooltip={status}
         data-tooltip-hover="Anime status"
         class="rounded-md bg-neutral-100 px-2 py-1 text-black leading-none dark:bg-neutral-900 dark:text-white"
       >

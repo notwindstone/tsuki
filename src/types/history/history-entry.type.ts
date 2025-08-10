@@ -1,3 +1,5 @@
+import type { StatusType } from "@/types/anilist/status.type";
+
 export type HistoryEntryType = Partial<{
   // MyAnimeList ID
   "idMal": number;
@@ -10,6 +12,8 @@ export type HistoryEntryType = Partial<{
     // every other image size by Anilist is in shitty quality
     "extraLarge": string;
   }>;
+  // Anilist status
+  "status"        : StatusType;
   // Anilist score
   "averageScore"  : number;
   // total episodes
