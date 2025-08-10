@@ -12,7 +12,9 @@
   });
 
   setContext("default-values-store", {
-    "state": defaultValuesStore,
+    get "getState"() {
+      return defaultValuesStore;
+    },
     "update": (key: "search", value: string) => {
       defaultValuesStore.search = value;
     },
