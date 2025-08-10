@@ -17,7 +17,7 @@
       "queryKey": ["anime", "anilist", "search", debouncedSearch.value],
       "queryFn" : () => searchAnilist(
         typeof debouncedSearch.value === "string"
-          ? debouncedSearch.value
+          ? debouncedSearch.value.trim()
           : "",
       ),
     }),
