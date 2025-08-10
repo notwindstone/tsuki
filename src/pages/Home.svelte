@@ -1,11 +1,9 @@
 <script lang="ts">
-  import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import { Link } from "@/lib/routing";
   import { useDebounce } from "@/lib/hooks/use-debounce.svelte.js";
   import { createQuery } from "@tanstack/svelte-query";
-  import { createAnilistQuery } from "@/lib/graphql/create-anilist-query";
-  import { ChunkSize, GithubLink, HomePageLinks } from "@/constants/app";
-  import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
+  import { searchAnilist } from "@/lib/queries/searchAnilist";
+  import { GithubLink, HomePageLinks } from "@/constants/app";
   import Search from "@/components/base/Search.svelte";
   import env from "@/constants/env-variables.json";
   import History from "@/components/layout/History.svelte";
@@ -13,77 +11,15 @@
 
   const debouncedSearch = useDebounce("", 300);
 
-  // that's a react-like way to make queries lol ("state changed, lemme re-create this hook")
+  // that's a react-like way to make queries lol ("state have changed, lemme re-create this hook")
   const animes = $derived(
     createQuery({
       "queryKey": ["anime", "anilist", "search", debouncedSearch.value],
-      "queryFn" : async () => {
-        const response = await fetch("https://graphql.anilist.co", {
-          "method" : "POST",
-          "headers": {
-            "Content-Type": "application/json",
-          },
-          "body": JSON.stringify(
-            createAnilistQuery({
-              "queries": [
-                {
-                  "alias" : "search",
-                  "name"  : "Page.Media",
-                  "fields": [
-                    "id",
-                    "idMal",
-                    "title.romaji",
-                    "title.native",
-                    "title.english",
-                    "coverImage.extraLarge",
-                    "status",
-                    "averageScore",
-                    "episodes",
-                  ],
-                  "variables": {
-                    "media": {
-                      "type"  : "ANIME",
-                      // it's surely a string
-                      "search": debouncedSearch.value as string,
-                    },
-                    "page": {
-                      "page"   : 1,
-                      "perPage": ChunkSize,
-                    },
-                  },
-                },
-              ],
-            }),
-          ),
-        });
-        const data: unknown = await response.json();
-
-        /** maybe i should actually use runtime json validators */
-        if (
-          // check if data is an object and has the 'data' property
-          typeof data !== "object" ||
-          data === null ||
-          !("data" in data) ||
-          // check if data.data is an object and has the 'Search' property
-          typeof data.data !== "object" ||
-          data.data === null ||
-          !("Search" in data.data) ||
-          // check if data.data.Search is an object and has the 'media' property
-          typeof data.data.Search !== "object" ||
-          data.data.Search === null ||
-          !("media" in data.data.Search) ||
-          // check if data.data.Search.media is an array
-          !Array.isArray(data.data.Search.media)
-        ) {
-          return [];
-        }
-
-        const unknownList: Array<unknown> = data.data.Search.media;
-        // TODO: rename this type and function
-        const animeEntries: Array<AnimeEntryType> = unknownList.map((entry: unknown) => getAnimeEntryFromUnknown(entry));
-
-        return animeEntries;
-      },
+      "queryFn" : () => searchAnilist(
+        typeof debouncedSearch.value === "string"
+          ? debouncedSearch.value
+          : "",
+      ),
     }),
   );
 </script>
