@@ -45,7 +45,7 @@
       const dividedEntries = divideListToChunks({
         // first elements will be the most recent
         "list"     : shallowlyValidatedHistory.reverse(),
-        // pagination will show 30 anime cards on the page
+        // pagination will show 36 anime cards on the page
         "chunkSize": ChunkSize,
       });
 
