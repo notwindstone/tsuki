@@ -11,7 +11,12 @@
     "search": "",
   });
 
-  setContext("default-values-store", defaultValuesStore);
+  setContext("default-values-store", {
+    "search": defaultValuesStore.search,
+    "update": (key: "search", value: string) => {
+      defaultValuesStore.search = value;
+    },
+  });
 
   let {
     children,
