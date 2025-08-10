@@ -4,10 +4,12 @@
     setSearch,
     classNames,
     placeholder,
+    defaultValue,
   }: {
     "setSearch"   : (newValue: unknown) => void;
     "classNames"? : string;
     "placeholder"?: string;
+    "defaultValue": string;
   } = $props();
 
   const handleKeyboard = (event: KeyboardEvent) => {
@@ -55,6 +57,7 @@
   <input
     type="text"
     bind:this={reference}
+    defaultValue={defaultValue}
     oninput={event => setSearch(event.currentTarget.value)}
     class="h-full w-full bg-transparent pl-10 text-sm text-black outline-none dark:text-white focus:outline-none placeholder-neutral-500"
     placeholder={placeholder}
