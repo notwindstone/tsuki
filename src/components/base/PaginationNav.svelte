@@ -13,11 +13,45 @@
     "setPage"   : (specific: number) => void;
   } = $props();
 
+  const handleKeyboard = (event: KeyboardEvent): void => {
+    if (event.target === null) {
+      return;
+    }
+
+    // 'tagName' returns target element
+    if (!("tagName" in event.target)) {
+      return;
+    }
+
+    // handle keyboard navigation only if user didn't focus on some element
+    if (event.target.tagName !== "BODY") {
+      return;
+    }
+
+    const key = event.key.toLowerCase();
+
+    switch (key) {
+      case "arrowleft":
+      case "a": {
+        goPrevious();
+
+        break;
+      }
+      case "arrowright":
+      case "d": {
+        goNext();
+
+        break;
+      }
+    }
+  };
+
   const temporary = [
     1, "dots", 3, 4, 5, "dots", 10,
   ] as const;
 </script>
 
+<svelte:window onkeydown={handleKeyboard} />
 <div class="flex flex-wrap justify-center gap-2">
   <button
     disabled={page <= 1}
