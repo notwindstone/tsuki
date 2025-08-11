@@ -1,34 +1,27 @@
 <script lang="ts">
-  import { getContext } from "svelte";
   import { Link } from "@/lib/routing";
-  import { useDebounce } from "@/lib/hooks/use-debounce.svelte.js";
   import { createQuery } from "@tanstack/svelte-query";
   import { searchAnilist } from "@/lib/queries/searchAnilist";
   import { GithubLink, HomePageLinks } from "@/constants/app";
+  import { getCurrentSearchState } from "@/states/search/search.svelte";
+  import { debounce } from "@/lib/helpers/debounce";
   import Search from "@/components/base/Search.svelte";
   import env from "@/constants/env-variables.json";
   import History from "@/components/layout/History.svelte";
   import Card from "@/components/base/Card.svelte";
 
-  const defaultValuesStore = getContext("default-values-store");
-  // we intentionally lose reactivity here, because the value will be used only as the default one
-  const defaultSearch = defaultValuesStore.state.search;
-  const debouncedSearch = useDebounce(defaultSearch, 300);
+  const searchState = getCurrentSearchState().current;
 
-  $effect(() => {
-    // kinda fishy...
-    defaultValuesStore.update("search", debouncedSearch.value as string);
-  });
+  let debounced = $state(searchState.value);
+  const updateDebounced = debounce<string>((newValue: string) => debounced = newValue, 300);
+
+  $effect(() => updateDebounced(searchState.value));
 
   // that's a react-like way to make queries lol ("state have changed, lemme re-create this hook")
   const animes = $derived(
     createQuery({
-      "queryKey": ["anime", "anilist", "search", debouncedSearch.value],
-      "queryFn" : () => searchAnilist(
-        typeof debouncedSearch.value === "string"
-          ? debouncedSearch.value.trim()
-          : "",
-      ),
+      "queryKey": ["anime", "anilist", "search", debounced],
+      "queryFn" : () => searchAnilist(debounced),
     }),
   );
 </script>
@@ -66,10 +59,8 @@
     {/each}
   </div>
   <Search
-    setSearch={debouncedSearch.update}
     classNames="max-w-144"
     placeholder="Search anime by name or MAL ID..."
-    defaultValue={defaultSearch}
   />
   {#if $animes.isPending}
     <div class="pt-4 text-center">

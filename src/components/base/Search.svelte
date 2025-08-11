@@ -1,16 +1,17 @@
 <script lang="ts">
+  import { getCurrentSearchState } from "@/states/search/search.svelte";
+
   let reference: HTMLInputElement;
   let {
-    setSearch,
     classNames,
     placeholder,
-    defaultValue,
   }: {
-    "setSearch"   : (newValue: unknown) => void;
     "classNames"? : string;
     "placeholder"?: string;
-    "defaultValue": string;
   } = $props();
+
+  const searchState = getCurrentSearchState().current;
+  const setSearch = getCurrentSearchState().setSearch;
 
   const handleKeyboard = (event: KeyboardEvent) => {
     if (event.target === null) {
@@ -57,7 +58,7 @@
   <input
     type="text"
     bind:this={reference}
-    defaultValue={defaultValue}
+    value={searchState.value}
     oninput={event => setSearch(event.currentTarget.value)}
     class="h-full w-full bg-transparent pl-10 text-sm text-black outline-none dark:text-white focus:outline-none placeholder-neutral-500"
     placeholder={placeholder}
