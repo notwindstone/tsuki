@@ -7,12 +7,12 @@ const testData = [
     /** Input - Score - ranges from 0 to 100 */
     100,
 
-    /** Output - Hue - ranges from 0 to 150 */
-    150,
+    /** Output - Hue - ranges from 0 to 160 */
+    160,
   ],
-  [80, 90],
-  [60, 30],
-  [50, 0],
+  [80, 100],
+  [60, 40],
+  [50, 10],
   [40, 0],
   [0, 0],
 ] as const;

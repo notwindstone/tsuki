@@ -1,4 +1,4 @@
-const initialRange = 150;
+const initialRange = 160;
 const multiplier = 3;
 const baseValue = 100 * multiplier;
 
