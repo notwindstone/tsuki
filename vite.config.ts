@@ -56,6 +56,8 @@ export default defineConfig({
       "modernPolyfills": [
         "web.queue-microtask",
         "es/global-this",
+        // introduced in Chrome 73+ and Firefox 63+
+        "es.object.from-entries",
         // introduced in Chrome 85+ and Firefox 77+
         "esnext.string.replace-all",
       ],
