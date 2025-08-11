@@ -2,7 +2,14 @@ import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
 import { createAnilistQuery } from "@/lib/graphql/create-anilist-query";
 import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
 
-export async function fetchAnilistByIdMal(idMal: number): Promise<AnimeEntryType> {
+export async function fetchAnilistByIdMal(idMal: string): Promise<AnimeEntryType> {
+  const integerIdMal = Number(idMal);
+
+  // if it's not a number don't make a fetch
+  if (Number.isNaN(integerIdMal)) {
+    return {};
+  }
+
   const response = await fetch("https://graphql.anilist.co", {
     "method" : "POST",
     "headers": {
@@ -28,7 +35,7 @@ export async function fetchAnilistByIdMal(idMal: number): Promise<AnimeEntryType
             "variables": {
               "media": {
                 "type" : "ANIME",
-                "idMal": idMal,
+                "idMal": integerIdMal,
               },
               "page": {},
             },

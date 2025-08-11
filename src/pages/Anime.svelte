@@ -5,6 +5,7 @@
   import { fetchAnilistByIdMal } from "@/lib/queries/fetch-anilist-by-id-mal";
   import type { SearchType } from "@/states/search/search.type";
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
+  import Card from "@/components/base/Card.svelte";
 
   // get the 'tanstack query' client
   const queryClient = useQueryClient();
@@ -33,14 +34,20 @@
      */
     "enabled" : currentData === undefined,
     "queryKey": ["anime", "anilist", "idMal", idMal],
-    "queryFn" : () => fetchAnilistByIdMal(Number(idMal)),
+    "queryFn" : () => fetchAnilistByIdMal(idMal),
   });
 </script>
 
-<div class="flex flex-col gap-2">
-  {JSON.stringify(foundAnime ?? $fetchedAnime?.data)}
-  <Link href="/">
-    home page
-  </Link>
-  <div id="extensions-root-id" class="relative h-128 w-full rounded-md"></div>
+<div class="flex justify-center p-4">
+  <div class="max-w-320 w-full">
+    <div class="w-56 flex p-4">
+      {#if foundAnime || $fetchedAnime?.data}
+        <Card entry={foundAnime ?? $fetchedAnime?.data ?? {}} />
+      {/if}
+    </div>
+    <Link href="/">
+      home page
+    </Link>
+    <div id="extensions-root-id" class="relative h-128 w-full rounded-md"></div>
+  </div>
 </div>
