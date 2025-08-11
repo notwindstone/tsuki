@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { getQueryParams, Link } from "@/lib/routing";
+  import { getQueryParams } from "@/lib/routing";
   import { createQuery, useQueryClient } from "@tanstack/svelte-query";
   import { getCurrentSearchState } from "@/states/search/search.svelte";
   import { fetchAnilistByIdMal } from "@/lib/queries/fetch-anilist-by-id-mal";
   import type { SearchType } from "@/states/search/search.type";
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
-  import Card from "@/components/base/Card.svelte";
+  import type { StatusType } from "@/types/anilist/status.type";
+  import { NoImageURL } from "@/constants/app";
 
   // get the 'tanstack query' client
   const queryClient = useQueryClient();
@@ -36,18 +37,45 @@
     "queryKey": ["anime", "anilist", "idMal", idMal],
     "queryFn" : () => fetchAnilistByIdMal(idMal),
   });
+
+  const title = $derived<string>(
+    foundAnime?.title?.english ??
+    foundAnime?.title?.romaji ??
+    foundAnime?.title?.native ??
+    $fetchedAnime?.data?.title?.english ??
+    $fetchedAnime?.data?.title?.romaji ??
+    $fetchedAnime?.data?.title?.native ??
+    "unknown",
+  );
+  const coverImage = $derived<string>(
+    foundAnime?.coverImage?.extraLarge ??
+    $fetchedAnime?.data?.coverImage?.extraLarge ??
+    NoImageURL,
+  );
+  const status = $derived<StatusType>(
+    foundAnime?.status ??
+    $fetchedAnime?.data?.status ??
+    "NOT_YET_RELEASED",
+  );
+  const score = $derived<number>(
+    foundAnime?.averageScore ??
+    $fetchedAnime?.data?.averageScore ??
+    0,
+  );
+  const episodes = $derived<number>(
+    foundAnime?.episodes ??
+    $fetchedAnime?.data?.episodes ??
+    0,
+  );
 </script>
 
 <div class="flex justify-center p-4">
   <div class="max-w-320 w-full">
-    <div class="w-56 flex p-4">
-      {#if foundAnime || $fetchedAnime?.data}
-        <Card entry={foundAnime ?? $fetchedAnime?.data ?? {}} />
-      {/if}
-    </div>
-    <Link href="/">
-      home page
-    </Link>
-    <div id="extensions-root-id" class="relative h-128 w-full rounded-md"></div>
+    {title}
+    {coverImage}
+    {status}
+    {score}
+    {episodes}
   </div>
+  <!-- div id="extensions-root-id" class="relative h-128 w-full rounded-md"></div -->
 </div>

@@ -19,7 +19,7 @@
     ?? entry?.title?.romaji
     ?? entry?.title?.native
     ?? "unknown";
-  const status: StatusType = entry?.status ?? "FINISHED";
+  const status: StatusType = entry?.status ?? "NOT_YET_RELEASED";
 </script>
 
 <!-- show card only if idMal is defined -->
