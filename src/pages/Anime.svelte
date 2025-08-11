@@ -7,6 +7,7 @@
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import type { StatusType } from "@/types/anilist/status.type";
   import { NoImageURL } from "@/constants/app";
+  import Image from "@/components/base/Image.svelte";
 
   // get the 'tanstack query' client
   const queryClient = useQueryClient();
@@ -68,18 +69,21 @@
     "thumbnail"  : string;
     "description": string;
   }>>(() => {
-    console.log("logged");
     const episodesCount = foundAnime?.episodes ?? $fetchedAnime?.data?.episodes ?? 0;
     const streamingEpisodes = foundAnime?.streamingEpisodes ?? $fetchedAnime?.data?.streamingEpisodes ?? [];
 
+    /*
+     * 'streamingEpisodes' often contains nothing or not full list
+     * that's why we are filling an array from episodes count and override them with data from 'streamingEpisodes'
+     */
     return Array
       .from({ "length": episodesCount })
       .map((_, index) => {
         const correspondingStreamingEpisode = streamingEpisodes?.[index];
         const initialEpisodeData = {
           "url"        : "",
-          "title"      : `Episodes ${index + 1}`,
-          "thumbnail"  : "",
+          "title"      : `Episode ${index + 1}`,
+          "thumbnail"  : coverImage,
           "description": "",
         };
 
@@ -87,26 +91,33 @@
           return initialEpisodeData;
         }
 
+        // 'title' format: 'Episode {NUMBER} - {DESCRIPTION}'
+        const extractedDescription =
+          (correspondingStreamingEpisode?.title ?? "")
+            .replace(/Episode \d+ - /, "");
+
         return {
           "url"        : correspondingStreamingEpisode?.url ?? "",
           "title"      : initialEpisodeData.title,
-          "thumbnail"  : correspondingStreamingEpisode?.thumbnail ?? NoImageURL,
-          "description": correspondingStreamingEpisode?.title,
+          "thumbnail"  : correspondingStreamingEpisode?.thumbnail ?? coverImage,
+          "description": extractedDescription,
         };
       });
   });
+
+  let selectedEpisode = $state<number>(1);
 </script>
 
 <div class="flex justify-center p-4">
   <!-- this layout was inspired by https://www.miruro.to/ -->
   <div class="max-w-320 w-full flex flex-col gap-4">
-    <!-- player and episode selector will be on the same row on medium and larger screens -->
-    <!-- and will be on the two different rows on small screens -->
-    <div class="grid cols-1 rows-2 h-full w-full gap-4 md:cols-3 md:rows-1">
+    <!-- player and episode selector will be on the same row on large screens -->
+    <!-- and will be on the two different rows on smaller screens -->
+    <div class="grid cols-1 rows-2 h-full w-full gap-4 lg:cols-3 lg:rows-1">
       <!-- all player extensions will mount on this element -->
       <div
         id="extensions-player-id"
-        class="aspect-media relative col-span-1 rounded-md bg-neutral-100 md:col-span-2 dark:bg-neutral-900"
+        class="aspect-media relative col-span-1 rounded-md bg-neutral-100 lg:col-span-2 dark:bg-neutral-900"
       ></div>
       <div class="relative col-span-1">
         <!-- the only way to ensure that episode selector will not exceed player's height -->
@@ -116,16 +127,39 @@
             class="w-full rounded-md bg-neutral-200 px-2 py-1 text-sm dark:bg-neutral-800 focus:outline-none placeholder-neutral-500"
             placeholder="Search episodes..."
           />
-          <div class="mt-2 h-full overflow-y-auto">
-            {#each episodes as episode (episode.title)}
-              <div>
-                {JSON.stringify(episode)}
-              </div>
+          <div class="mt-2 h-full flex flex-col gap-2 overflow-y-auto">
+            {#each episodes as episode, index (episode.title)}
+              <button
+                onclick={() => selectedEpisode = index + 1}
+                class={[
+                  "w-full flex flex-nowrap gap-2 rounded-md p-2 transition-[background-color]",
+                  selectedEpisode === index + 1
+                    ? "bg-neutral-200 dark:bg-neutral-800"
+                    : "",
+                ]}
+              >
+                <Image
+                  classNames="!h-16 lg:!h-20 !w-auto rounded-md aspect-media"
+                  src={episode.thumbnail}
+                  alt={`${index + 1}'s episode cover image`}
+                />
+                <span
+                  title={episode.title + ": " + episode.description}
+                  class="flex flex-col justify-center text-start"
+                >
+                  <span class="text-sm">
+                    {episode.title}
+                  </span>
+                  <span class="line-clamp-3 text-xs opacity-70">
+                    {episode.description}
+                  </span>
+                </span>
+              </button>
             {/each}
           </div>
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap gap-4 sm:flex-nowrap"></div>
+    <div class="flex flex-wrap gap-4 lg:flex-nowrap"></div>
   </div>
 </div>

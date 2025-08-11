@@ -2,17 +2,14 @@
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import type { StatusType } from "@/types/anilist/status.type";
   import { Link } from "@/lib/routing";
-  import { NoImageURL } from "@/constants/app.js";
   import { getHueFromScore } from "@/lib/colors/get-hue-from-score";
+  import Image from "@/components/base/Image.svelte";
 
-  let show = $state<boolean>(false);
   let {
     entry,
   }: {
     "entry": AnimeEntryType;
   } = $props();
-  // we will change this image on image load error
-  let image = $state<string>(entry?.coverImage?.extraLarge ?? NoImageURL);
 
   // assign a safe anime title
   const title: string = entry?.title?.english
@@ -30,16 +27,10 @@
     params={{ "idMal": entry.idMal }}
     class="group aspect-poster relative flex flex-col justify-between overflow-hidden rounded-md"
   >
-    <img
-      loading="lazy"
-      class={[
-        "absolute h-full w-full object-cover transition-[opacity,transform] duration-300 group-hover:scale-105",
-        show ? "opacity-100" : "opacity-0",
-      ]}
+    <Image
+      classNames="absolute"
+      src={entry?.coverImage?.extraLarge}
       alt={`${title}'s anime cover image`}
-      src={image}
-      onload={() => show = true}
-      onerror={() => image = NoImageURL}
     />
     <!-- darkens image background -->
     <div class="absolute h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
