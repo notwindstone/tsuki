@@ -18,7 +18,7 @@
   // trigger debounced value update
   $effect(() => updateDebounced(searchState.value));
 
-  // that's a react-like way to make queries lol ("state have changed, lemme re-create this hook")
+  // that's a react-like way to make queries lol (aka "state have changed, lemme re-create this hook")
   const animes = $derived(
     createQuery({
       "queryKey": ["anime", "anilist", "search", debounced],
@@ -81,9 +81,10 @@
         <Card entry={anime} />
       {/each}
     </div>
-  {:else if $animes.data && $animes.data.length <= 0}
+  <!-- show that nothing was found only if search value is not empty -->
+  {:else if debounced !== "" && $animes.data && $animes.data.length <= 0}
     <div class="max-w-320 w-full pt-4 text-center">
-      No anime found.
+      No anime found
     </div>
   {/if}
   <History />

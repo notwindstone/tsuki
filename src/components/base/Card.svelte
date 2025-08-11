@@ -48,7 +48,7 @@
       <!-- data-tooltip styles are defined in globals.css -->
       <div
         data-tooltip={status}
-        data-tooltip-hover="Anime status"
+        data-tooltip-hover="Status"
         class="rounded-md bg-neutral-100 px-2 py-1 text-black leading-none dark:bg-neutral-900 dark:text-white"
       >
         <!-- content is displayed by data-tooltip -->
@@ -56,7 +56,7 @@
       {#if entry?.averageScore}
         <div
           data-tooltip={entry.averageScore / 10}
-          data-tooltip-hover="Others' score"
+          data-tooltip-hover="Score"
           class="rounded-md px-2 py-1 text-white leading-none"
           style={`background-color:hsl(${getHueFromScore(entry.averageScore)},100%,30%)`}
         >
