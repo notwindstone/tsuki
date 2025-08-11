@@ -62,11 +62,39 @@
     $fetchedAnime?.data?.averageScore ??
     0,
   );
-  const episodes = $derived<number>(
-    foundAnime?.episodes ??
-    $fetchedAnime?.data?.episodes ??
-    0,
-  );
+  const episodes = $derived.by<Array<{
+    "url"        : string;
+    "title"      : string;
+    "thumbnail"  : string;
+    "description": string;
+  }>>(() => {
+    console.log("logged");
+    const episodesCount = foundAnime?.episodes ?? $fetchedAnime?.data?.episodes ?? 0;
+    const streamingEpisodes = foundAnime?.streamingEpisodes ?? $fetchedAnime?.data?.streamingEpisodes ?? [];
+
+    return Array
+      .from({ "length": episodesCount })
+      .map((_, index) => {
+        const correspondingStreamingEpisode = streamingEpisodes?.[index];
+        const initialEpisodeData = {
+          "url"        : "",
+          "title"      : `Episodes ${index + 1}`,
+          "thumbnail"  : "",
+          "description": "",
+        };
+
+        if (correspondingStreamingEpisode?.title === undefined) {
+          return initialEpisodeData;
+        }
+
+        return {
+          "url"        : correspondingStreamingEpisode?.url ?? "",
+          "title"      : initialEpisodeData.title,
+          "thumbnail"  : correspondingStreamingEpisode?.thumbnail ?? NoImageURL,
+          "description": correspondingStreamingEpisode?.title,
+        };
+      });
+  });
 </script>
 
 <div class="flex justify-center p-4">
@@ -75,8 +103,9 @@
     <!-- player and episode selector will be on the same row on medium and larger screens -->
     <!-- and will be on the two different rows on small screens -->
     <div class="grid cols-1 rows-2 h-full w-full gap-4 md:cols-3 md:rows-1">
+      <!-- all player extensions will mount on this element -->
       <div
-        id="extensions-root-id"
+        id="extensions-player-id"
         class="aspect-media relative col-span-1 rounded-md bg-neutral-100 md:col-span-2 dark:bg-neutral-900"
       ></div>
       <div class="relative col-span-1">
@@ -88,48 +117,11 @@
             placeholder="Search episodes..."
           />
           <div class="mt-2 h-full overflow-y-auto">
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
-            <div>asd</div>
+            {#each episodes as episode (episode.title)}
+              <div>
+                {JSON.stringify(episode)}
+              </div>
+            {/each}
           </div>
         </div>
       </div>

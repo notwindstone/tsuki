@@ -15,11 +15,17 @@ export type AnimeEntryType = Partial<{
     "extraLarge": string;
   }>;
   // Anilist status
-  "status"      : StatusType;
+  "status"           : StatusType;
   // Anilist score
-  "averageScore": number;
+  "averageScore"     : number;
   // total episodes
-  "episodes"    : number;
+  "episodes"         : number;
+  // sometimes Anilist returns a list of streaming episodes with thumbnails, titles, etc.
+  "streamingEpisodes": Array<Partial<{
+    "url"      : string;
+    "title"    : string;
+    "thumbnail": string;
+  }>>;
 
   /** History only: which episode user have opened */
   "currentEpisode": number;

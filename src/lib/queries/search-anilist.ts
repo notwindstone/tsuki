@@ -32,6 +32,9 @@ export async function searchAnilist(search: string): Promise<
               "status",
               "averageScore",
               "episodes",
+              "streamingEpisodes.title",
+              "streamingEpisodes.url",
+              "streamingEpisodes.thumbnail",
             ],
             "variables": {
               "media": {

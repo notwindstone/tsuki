@@ -73,6 +73,13 @@ export function getAnimeEntryFromUnknown(input: unknown): AnimeEntryType {
       : undefined;
   }
 
+  if ("streamingEpisodes" in input) {
+    // check if an array
+    safeObject.streamingEpisodes = Array.isArray(input.streamingEpisodes)
+      ? input.streamingEpisodes
+      : [];
+  }
+
   if ("currentEpisode" in input) {
     // check if a number
     safeObject.currentEpisode = typeof input.currentEpisode === "number"

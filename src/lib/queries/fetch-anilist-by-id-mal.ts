@@ -31,6 +31,9 @@ export async function fetchAnilistByIdMal(idMal: string): Promise<AnimeEntryType
               "status",
               "averageScore",
               "episodes",
+              "streamingEpisodes.title",
+              "streamingEpisodes.url",
+              "streamingEpisodes.thumbnail",
             ],
             "variables": {
               "media": {
