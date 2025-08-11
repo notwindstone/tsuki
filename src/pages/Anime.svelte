@@ -7,7 +7,7 @@
   import { getCurrentSearchState } from "@/states/search/search.svelte";
   import { fetchAnilistByIdMal } from "@/lib/queries/fetch-anilist-by-id-mal";
   import { NoImageURL } from "@/constants/app";
-  import Image from "@/components/base/Image.svelte";
+  import EpisodeSelector from "@/components/misc/EpisodeSelector.svelte";
 
   // get the 'tanstack query' client
   const queryClient = useQueryClient();
@@ -105,8 +105,8 @@
       });
   });
 
-  let selectedEpisode = $state<number>(1);
   let toHideImages = $state<boolean>(true);
+  let selectedEpisode = $state<number>(1);
 </script>
 
 <div class="flex justify-center p-4">
@@ -142,44 +142,12 @@
               ]}></span>
             </button>
           </div>
-          <div class="mt-2 h-full flex flex-col overflow-y-auto">
-            {#each episodes as episode, index (episode.title)}
-              <button
-                onclick={() => selectedEpisode = index + 1}
-                class={[
-                  "w-full flex flex-nowrap gap-4 rounded-md p-2 transition-[background-color]",
-                  selectedEpisode === index + 1
-                    ? "bg-neutral-200 dark:bg-neutral-800"
-                    : "",
-                ]}
-              >
-                {#if toHideImages}
-                  <Image
-                    classNames="!h-16 lg:!h-20 !w-auto rounded-md aspect-media opacity-20"
-                    src={undefined}
-                    alt={`${index + 1}'s episode blurred cover image`}
-                  />
-                {:else}
-                  <Image
-                    classNames="!h-16 lg:!h-20 !w-auto rounded-md aspect-media"
-                    src={episode.thumbnail}
-                    alt={`${index + 1}'s episode cover image`}
-                  />
-                {/if}
-                <span
-                  title={episode.title + ": " + episode.description}
-                  class="flex flex-col justify-center text-start"
-                >
-                  <span class="text-sm">
-                    {episode.title}
-                  </span>
-                  <span class="line-clamp-3 text-xs opacity-70">
-                    {episode.description}
-                  </span>
-                </span>
-              </button>
-            {/each}
-          </div>
+          <EpisodeSelector
+            episodes={episodes}
+            setEpisode={newEpisode => selectedEpisode = newEpisode}
+            toHideImages={toHideImages}
+            selectedEpisode={selectedEpisode}
+          />
         </div>
       </div>
     </div>
