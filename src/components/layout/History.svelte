@@ -14,7 +14,7 @@
     "queryFn" : () => {
       const historyString = localStorage?.getItem?.(HistoryLocalStorageKey) ?? "[]";
 
-      let parsedHistory: Array<unknown>;
+      let parsedHistory: unknown;
 
       // historyString can be literally anything, because user can change localStorage
       try {
@@ -24,6 +24,11 @@
 
         parsedHistory = [];
       }
+
+      // just as i said, history can be anything data
+      const historyList: Array<unknown> = Array.isArray(parsedHistory)
+        ? parsedHistory
+        : [];
 
       /*
        * validation of 2000 entries (529 453 bytes) with every field being a random value
@@ -35,7 +40,7 @@
        * and 0.4 milliseconds without a CPU slowdown.
        */
       const shallowlyValidatedHistory: Array<AnimeEntryType>
-        = parsedHistory.map((unknownEntry: unknown) => getAnimeEntryFromUnknown(unknownEntry));
+        = historyList.map((unknownEntry: unknown) => getAnimeEntryFromUnknown(unknownEntry));
 
       /*
        * divide a list into chunks to make pagination faster
@@ -84,7 +89,7 @@
   <!-- we don't care about $history.isPending -->
   <!-- because localStorage blocks main thread -->
   {#if $history.data && $history.data.size > 0}
-    <div class="w-full flex flex-col items-center gap-2" transition:fade={{ "duration": 200 }}>
+    <div class="w-full flex flex-col items-center gap-4" transition:fade={{ "duration": 200 }}>
       <Pagination
         data={$history.data.entries}
         size={$history.data.size}
