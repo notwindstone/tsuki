@@ -15,6 +15,7 @@
   let debounced = $state(searchState.value);
   const updateDebounced = debounce<string>((newValue: string) => debounced = newValue, 300);
 
+  // trigger debounced value update
   $effect(() => updateDebounced(searchState.value));
 
   // that's a react-like way to make queries lol ("state have changed, lemme re-create this hook")
@@ -73,11 +74,16 @@
         {$animes?.error?.message}
       </span>
     </div>
-  {:else if $animes.data}
+  <!-- show only if 'data' exists and has some data -->
+  {:else if $animes.data && $animes.data.length > 0}
     <div class="grid cols-2 max-w-320 w-full gap-2 pt-4 md:cols-5 sm:cols-3">
       {#each $animes.data as anime (anime.id)}
         <Card entry={anime} />
       {/each}
+    </div>
+  {:else if $animes.data && $animes.data.length <= 0}
+    <div class="max-w-320 w-full pt-4 text-center">
+      No anime found.
     </div>
   {/if}
   <History />
