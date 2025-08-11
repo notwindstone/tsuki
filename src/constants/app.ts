@@ -5,6 +5,8 @@ export const ApplicationRootID = "tsuki_app";
 export const ApplicationNamespace = "__TSUKI__";
 
 export const HistoryLocalStorageKey = "@tsuki/history";
+// localStorage limit is 5 MB, 10_000 entries should not exceed this value and be around ~2,5 MB
+export const HistoryEntriesLimit = 10_000;
 
 /*
  * in the future we can read localStorage to allow user change this value.

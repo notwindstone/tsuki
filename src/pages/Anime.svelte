@@ -8,6 +8,7 @@
   import { fetchAnilistByIdMal } from "@/lib/queries/fetch-anilist-by-id-mal";
   import { NoImageURL } from "@/constants/app";
   import EpisodeSelector from "@/components/misc/EpisodeSelector.svelte";
+  import HandleWatchHistory from "@/components/misc/HandleWatchHistory.svelte";
 
   // get the 'tanstack query' client
   const queryClient = useQueryClient();
@@ -21,7 +22,7 @@
   // get current idMal from search params
   const idMal = getQueryParams()["idMal"];
 
-  let foundAnime: AnimeEntryType | undefined;
+  let foundAnime = $state<AnimeEntryType | undefined>(undefined);
 
   // currentData can be undefined
   if (currentData !== undefined) {
@@ -31,14 +32,19 @@
   const fetchedAnime = createQuery({
 
     /*
-     * make an anilist fetch only if cache is empty.
+     * make an anilist fetch only if cache is empty or currentData is an empty array.
      * for example, it can occur when user loads this anime page as a new page or reloads it
      */
-    "enabled" : currentData === undefined,
+    "enabled" : currentData === undefined || currentData.length === 0,
     "queryKey": ["anime", "anilist", "idMal", idMal],
     "queryFn" : () => fetchAnilistByIdMal(idMal),
   });
 
+  const id = $derived<number>(
+    foundAnime?.id ??
+    $fetchedAnime?.data?.id ??
+    0,
+  );
   const title = $derived<string>(
     foundAnime?.title?.english ??
     foundAnime?.title?.romaji ??
@@ -109,6 +115,19 @@
   let selectedEpisode = $state<number>(1);
 </script>
 
+<!-- add an anime to the watch history only if it has an 'idMal' field -->
+{#if (foundAnime?.idMal ?? $fetchedAnime.data?.idMal) !== undefined}
+  <HandleWatchHistory
+    id={id}
+    idMal={Number(foundAnime?.idMal ?? $fetchedAnime.data?.idMal)}
+    title={title}
+    coverImage={coverImage}
+    status={status}
+    score={score}
+    episodes={episodes.length}
+    currentEpisode={selectedEpisode}
+  />
+{/if}
 <div class="flex justify-center p-4">
   <!-- this layout was inspired by https://www.miruro.to/ -->
   <div class="max-w-320 w-full flex flex-col gap-4">
