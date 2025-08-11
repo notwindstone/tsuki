@@ -25,7 +25,6 @@
   } = $props();
 
   $effect(() => {
-    console.log("hello?");
     const storedHistory = localStorage?.getItem?.(HistoryLocalStorageKey) ?? "[]";
 
     let unknownHistory: unknown;

@@ -12,7 +12,6 @@ export const useIntersectionObserver = (options: {
     if (ref) {
       observer = new IntersectionObserver(
         ([entry]) => {
-          console.log("updated");
           observed = {
             "isIntersecting"   : entry.isIntersecting,
             "intersectionRatio": entry.intersectionRatio,
