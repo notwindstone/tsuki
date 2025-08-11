@@ -144,6 +144,7 @@
           </div>
           <EpisodeSelector
             episodes={episodes}
+            coverImage={coverImage}
             setEpisode={newEpisode => selectedEpisode = newEpisode}
             toHideImages={toHideImages}
             selectedEpisode={selectedEpisode}

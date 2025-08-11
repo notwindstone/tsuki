@@ -21,8 +21,8 @@
   // that's a react-like way to make queries lol (aka "state have changed, lemme re-create this hook")
   const animes = $derived(
     createQuery({
-      "queryKey": ["anime", "anilist", "search", debounced],
-      "queryFn" : () => searchAnilist(debounced),
+      "queryKey": ["anime", "anilist", "search", debounced.trim()],
+      "queryFn" : () => searchAnilist(debounced.trim()),
     }),
   );
 </script>

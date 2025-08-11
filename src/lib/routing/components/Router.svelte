@@ -56,6 +56,8 @@
       .then((module: Record<"default", Component>) => {
         CurrentComponent = module.default;
 
+        // scroll to the top of the page if route has changed
+        window.scrollTo(0, 0);
         setRouteStatus(false);
       });
   });

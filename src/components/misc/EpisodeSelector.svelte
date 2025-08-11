@@ -3,6 +3,7 @@
 
   let {
     episodes,
+    coverImage,
     setEpisode,
     toHideImages,
     selectedEpisode,
@@ -13,6 +14,7 @@
       "thumbnail"  : string;
       "description": string;
     }>;
+    "coverImage"     : string;
     "setEpisode"     : (newEpisode: number) => void;
     "toHideImages"   : boolean;
     "selectedEpisode": number;
@@ -34,7 +36,7 @@
       {#if toHideImages}
         <Image
           classNames="!h-16 lg:!h-20 !w-auto rounded-md aspect-media opacity-20"
-          src={undefined}
+          src={coverImage}
           alt={`${index + 1}'s episode blurred cover image`}
         />
       {:else}
