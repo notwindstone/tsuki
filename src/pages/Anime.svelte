@@ -121,7 +121,7 @@
     id={id}
     idMal={Number(foundAnime?.idMal ?? $fetchedAnime.data?.idMal)}
     title={title}
-    coverImage={coverImage}
+    coverImage={episodes[selectedEpisode - 1].thumbnail}
     status={status}
     score={score}
     episodes={episodes.length}
