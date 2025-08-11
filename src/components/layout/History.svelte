@@ -1,18 +1,16 @@
 <script lang="ts">
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import { createQuery, useQueryClient } from "@tanstack/svelte-query";
-  import { ChunkSize, HistoryLocalStorageKey } from "@/constants/app";
+  import { ChunkSize, HistoryLocalStorageKey, HistoryQueryKey } from "@/constants/app";
   import { fade } from "svelte/transition";
   import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
   import { divideListToChunks } from "@/lib/helpers/divide-list-to-chunks";
   import Pagination from "@/components/base/Pagination.svelte";
 
-  const historyQueryKey = ["anime", "history", "localStorage"];
-
   // get the 'tanstack query' client
   const queryClient = useQueryClient();
   const history = createQuery({
-    "queryKey": historyQueryKey,
+    "queryKey": HistoryQueryKey,
     "queryFn" : () => {
       const historyString = localStorage?.getItem?.(HistoryLocalStorageKey) ?? "[]";
 
@@ -58,14 +56,12 @@
         "entries": dividedEntries,
         // 'dividedEntries' is an object, not an array
         "size"   : Object.keys(dividedEntries).length,
-        // total entry count is needed later to re-render 'Pagination' element
-        "total"  : shallowlyValidatedHistory.length,
       };
     },
   });
 
   function refetchHistory() {
-    queryClient.refetchQueries({ "queryKey": historyQueryKey });
+    queryClient.refetchQueries({ "queryKey": HistoryQueryKey });
   }
 </script>
 
@@ -75,7 +71,7 @@
       History
     </p>
     <button
-      aria-label="refetch history"
+      aria-label="Refetch history"
       class="h-9 w-9 flex items-center justify-center rounded-md bg-neutral-100 transition-[background-color] dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800"
       onclick={refetchHistory}
     >
@@ -89,13 +85,10 @@
   <!-- because localStorage blocks main thread -->
   {#if $history.data && $history.data.size > 0}
     <div class="w-full flex flex-col items-center gap-2" transition:fade={{ "duration": 200 }}>
-      <!-- re-render 'Pagination' on query change -->
-      {#key $history.data.total}
-        <Pagination
-          data={$history.data.entries}
-          size={$history.data.size}
-        />
-      {/key}
+      <Pagination
+        data={$history.data.entries}
+        size={$history.data.size}
+      />
     </div>
   {:else if $history.data && $history.data.size <= 0}
     <div class="text-center" transition:fade={{ "duration": 200 }}>

@@ -80,8 +80,8 @@
   setPage={setPage}
 />
 <div class="grid cols-2 w-full gap-2 md:cols-5 sm:cols-3">
-  <!-- index is safer as a key here (entries can be duplicated) -->
-  {#each data[page - 1] as entry, index (`${page}-${index}`)}
+  <!-- 'entry?.id' can be undefined or duplicated -->
+  {#each data[page - 1] as entry, index (`${entry?.id}-${page}-${index}`)}
     <Card entry={entry} />
   {/each}
 </div>
