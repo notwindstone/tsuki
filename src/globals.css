@@ -19,10 +19,19 @@ html, body {
   /* support for old browsers */
   padding-bottom: 100%;
 }
+.aspect-media {
+  /* support for old browsers */
+  padding-bottom: 56.25%;
+}
 
 @supports (aspect-ratio: 9 / 16) {
   .aspect-poster {
     aspect-ratio: 9 / 16;
+    /* overwrite */
+    padding-bottom: unset;
+  }
+  .aspect-media {
+    aspect-ratio: 16 / 9;
     /* overwrite */
     padding-bottom: unset;
   }

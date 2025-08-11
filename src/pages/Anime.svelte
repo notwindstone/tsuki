@@ -70,12 +70,70 @@
 </script>
 
 <div class="flex justify-center p-4">
-  <div class="max-w-320 w-full">
-    {title}
-    {coverImage}
-    {status}
-    {score}
-    {episodes}
+  <!-- this layout was inspired by https://www.miruro.to/ -->
+  <div class="max-w-320 w-full flex flex-col gap-4">
+    <!-- player and episode selector will be on the same row on medium and larger screens -->
+    <!-- and will be on the two different rows on small screens -->
+    <div class="grid cols-1 rows-2 h-full w-full gap-4 md:cols-3 md:rows-1">
+      <div
+        id="extensions-root-id"
+        class="aspect-media relative col-span-1 rounded-md bg-neutral-100 md:col-span-2 dark:bg-neutral-900"
+      ></div>
+      <div class="relative col-span-1">
+        <!-- the only way to ensure that episode selector will not exceed player's height -->
+        <div class="absolute bottom-0 left-0 right-0 top-0 flex flex-col rounded-md bg-neutral-100 p-2 dark:bg-neutral-900">
+          <input
+            type="text"
+            class="w-full rounded-md bg-neutral-200 px-2 py-1 text-sm dark:bg-neutral-800 focus:outline-none placeholder-neutral-500"
+            placeholder="Search episodes..."
+          />
+          <div class="mt-2 h-full overflow-y-auto">
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+            <div>asd</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-4 sm:flex-nowrap"></div>
   </div>
-  <!-- div id="extensions-root-id" class="relative h-128 w-full rounded-md"></div -->
 </div>
