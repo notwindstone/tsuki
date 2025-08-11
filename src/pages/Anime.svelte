@@ -2,6 +2,7 @@
   import { getQueryParams, Link } from "@/lib/routing";
   import { createQuery, useQueryClient } from "@tanstack/svelte-query";
   import { getCurrentSearchState } from "@/states/search/search.svelte";
+  import { fetchAnilistByIdMal } from "@/lib/queries/fetch-anilist-by-id-mal";
   import type { SearchType } from "@/states/search/search.type";
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
 
@@ -25,13 +26,19 @@
   }
 
   const fetchedAnime = createQuery({
+
+    /*
+     * make an anilist fetch only if cache is empty.
+     * for example, it can occur when user loads this anime page as a new page or reloads it
+     */
+    "enabled" : currentData === undefined,
     "queryKey": ["anime", "anilist", "idMal", idMal],
-    "queryFn" : () => {},
+    "queryFn" : () => fetchAnilistByIdMal(Number(idMal)),
   });
 </script>
 
 <div class="flex flex-col gap-2">
-  {JSON.stringify(foundAnime)}
+  {JSON.stringify(foundAnime ?? $fetchedAnime?.data)}
   <Link href="/">
     home page
   </Link>

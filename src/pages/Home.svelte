@@ -28,12 +28,12 @@
 </script>
 
 <div class="flex flex-col items-center p-4">
-  <div class="relative pb-8 pt-4">
+  <div class="relative pb-12 pt-4">
     <span class="select-none text-6xl text-black font-600 dark:text-white">
       tsuki
     </span>
     <a
-      class="absolute bottom-4 left-[50%] translate-x-[-50%] rounded-md bg-neutral-100 px-2 py-1 text-sm text-black opacity-80 transition-[opacity] dark:bg-neutral-900 dark:text-white hover:opacity-100"
+      class="absolute bottom-8 left-[50%] translate-x-[-50%] rounded-md bg-neutral-100 px-2 py-1 text-sm text-black opacity-80 transition-[opacity] dark:bg-neutral-900 dark:text-white hover:opacity-100"
       href={`${GithubLink}/commit/${env.GIT_COMMIT_HASH}`}
       target="_blank"
     >

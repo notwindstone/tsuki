@@ -1,16 +1,8 @@
 import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
 import { createAnilistQuery } from "@/lib/graphql/create-anilist-query";
-import { ChunkSize } from "@/constants/app";
 import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
 
-export async function searchAnilist(search: string): Promise<
-  Array<AnimeEntryType>
-> {
-  // if search value is empty no need for fetching data
-  if (search === "") {
-    return [];
-  }
-
+export async function fetchAnilistByIdMal(idMal: number): Promise<AnimeEntryType> {
   const response = await fetch("https://graphql.anilist.co", {
     "method" : "POST",
     "headers": {
@@ -20,8 +12,8 @@ export async function searchAnilist(search: string): Promise<
       createAnilistQuery({
         "queries": [
           {
-            "alias" : "search",
-            "name"  : "Page.Media",
+            "alias" : "current",
+            "name"  : "Media",
             "fields": [
               "id",
               "idMal",
@@ -35,13 +27,10 @@ export async function searchAnilist(search: string): Promise<
             ],
             "variables": {
               "media": {
-                "type"  : "ANIME",
-                "search": search,
+                "type" : "ANIME",
+                "idMal": idMal,
               },
-              "page": {
-                "page"   : 1,
-                "perPage": ChunkSize,
-              },
+              "page": {},
             },
           },
         ],
@@ -59,18 +48,10 @@ export async function searchAnilist(search: string): Promise<
     // check if data.data is an object and has the 'Search' property
     typeof data.data !== "object" ||
     data.data === null ||
-    !("Search" in data.data) ||
-    // check if data.data.Search is an object and has the 'media' property
-    typeof data.data.Search !== "object" ||
-    data.data.Search === null ||
-    !("media" in data.data.Search) ||
-    // check if data.data.Search.media is an array
-    !Array.isArray(data.data.Search.media)
+    !("Current" in data.data)
   ) {
-    return [];
+    return {};
   }
 
-  const unknownList: Array<unknown> = data.data.Search.media;
-
-  return unknownList.map((entry: unknown) => getAnimeEntryFromUnknown(entry));
+  return getAnimeEntryFromUnknown(data.data.Current);
 }
