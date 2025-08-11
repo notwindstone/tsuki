@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getQueryParams, Link } from "@/lib/routing";
-  import { useQueryClient } from "@tanstack/svelte-query";
+  import { createQuery, useQueryClient } from "@tanstack/svelte-query";
   import { getCurrentSearchState } from "@/states/search/search.svelte";
   import type { SearchType } from "@/states/search/search.type";
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
@@ -23,6 +23,11 @@
   if (currentData !== undefined) {
     foundAnime = currentData.find((entry: AnimeEntryType) => entry?.idMal?.toString?.() === idMal);
   }
+
+  const fetchedAnime = createQuery({
+    "queryKey": ["anime", "anilist", "idMal", idMal],
+    "queryFn" : () => {},
+  });
 </script>
 
 <div class="flex flex-col gap-2">

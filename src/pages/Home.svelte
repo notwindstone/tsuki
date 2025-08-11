@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Link } from "@/lib/routing";
   import { createQuery } from "@tanstack/svelte-query";
-  import { searchAnilist } from "@/lib/queries/searchAnilist";
+  import { searchAnilist } from "@/lib/queries/search-anilist";
   import { GithubLink, HomePageLinks } from "@/constants/app";
   import { getCurrentSearchState } from "@/states/search/search.svelte";
   import { debounce } from "@/lib/helpers/debounce";
