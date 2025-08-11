@@ -73,6 +73,24 @@ export function getAnimeEntryFromUnknown(input: unknown): AnimeEntryType {
       : undefined;
   }
 
+  /*
+   * overwrite 'episodes' field (because 'nextAiringEpisode.episode'
+   * provides better data about all streamed episodes)
+   * for example, 'episodes' field for 'ONE PIECE' is null
+   */
+  if ("nextAiringEpisode" in input) {
+    // check if an object and has an 'episode' field
+    if (
+      typeof input.nextAiringEpisode === "object" &&
+      input.nextAiringEpisode !== null &&
+      "episode" in input.nextAiringEpisode
+    ) {
+      safeObject.episodes = typeof input.nextAiringEpisode.episode === "number"
+        ? input.nextAiringEpisode.episode
+        : safeObject.episodes;
+    }
+  }
+
   if ("streamingEpisodes" in input) {
     // check if an array
     safeObject.streamingEpisodes = Array.isArray(input.streamingEpisodes)

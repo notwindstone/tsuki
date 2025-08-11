@@ -35,6 +35,7 @@ export async function searchAnilist(search: string): Promise<
               "streamingEpisodes.title",
               "streamingEpisodes.url",
               "streamingEpisodes.thumbnail",
+              "nextAiringEpisode.episode",
             ],
             "variables": {
               "media": {

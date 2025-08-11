@@ -20,6 +20,7 @@
 </script>
 
 <div class="mt-2 h-full flex flex-col overflow-y-auto">
+  <!-- virtual list... maybe? -->
   {#each episodes as episode, index (episode.title)}
     <button
       onclick={() => setEpisode(index + 1)}
@@ -47,10 +48,10 @@
         title={episode.title + ": " + episode.description}
         class="flex flex-col justify-center text-start"
       >
-        <span class="text-sm">
+        <span class="text-sm leading-none pb-1">
           {episode.title}
         </span>
-        <span class="line-clamp-3 text-xs opacity-70">
+        <span class="line-clamp-3 text-sm leading-none opacity-70">
           {episode.description}
         </span>
       </span>
