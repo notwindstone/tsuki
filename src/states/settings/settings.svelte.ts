@@ -1,7 +1,8 @@
 import type { SettingsType } from "./settings.type";
 
 let currentSettingsState = $state<SettingsType>({
-  "transitions": !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  "transitions" : !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  "confirmation": false,
 });
 
 export function getCurrentSettingsState() {

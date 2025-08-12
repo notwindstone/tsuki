@@ -1,3 +1,4 @@
 export type SettingsType = {
-  "transitions": boolean;
+  "transitions" : boolean;
+  "confirmation": boolean;
 };

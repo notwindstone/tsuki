@@ -22,7 +22,7 @@
 </script>
 
 <div class="mt-2 h-full flex flex-col overflow-y-auto">
-  <!-- virtual list... maybe? -->
+  <!-- TODO: virtual list... maybe? -->
   {#each episodes as episode, index (episode.title)}
     <button
       onclick={() => setEpisode(index + 1)}
