@@ -29,7 +29,7 @@
     class="group relative flex flex-col gap-0 overflow-hidden border-2 border-transparent rounded-md bg-neutral-100 transition-[border-color] hover:border-black dark:bg-neutral-900 dark:hover:border-white"
   >
     <!-- image part styles -->
-    <div class="aspect-media relative w-full">
+    <div class="aspect-media relative w-full overflow-hidden rounded-md">
       <!-- deletion is available thanks to 'entry.date', otherwise there will be an error -->
       {#if entry?.date}
         <CardDeleteButton
