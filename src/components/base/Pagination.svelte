@@ -17,7 +17,7 @@
 
   // show less pagination elements on small screen (tailwind's 'sm' breakpoint)
   const delta = window.innerWidth >= 640
-    ? 3
+    ? 2
     : 1;
 
   const goNext = () => {

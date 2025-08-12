@@ -23,12 +23,9 @@
   const idMal = getQueryParams()["idMal"];
   const initialEpisode = Number(getQueryParams()["episode"]);
 
-  let foundAnime = $state<AnimeEntryType | undefined>(undefined);
-
-  // currentData can be undefined
-  if (currentData !== undefined) {
-    foundAnime = currentData.find((entry: AnimeEntryType) => entry?.idMal?.toString?.() === idMal);
-  }
+  let foundAnime = $state<AnimeEntryType | undefined>(
+    (currentData ?? []).find((entry: AnimeEntryType) => entry?.idMal?.toString?.() === idMal),
+  );
 
   const fetchedAnime = createQuery({
 
@@ -36,7 +33,10 @@
      * make an anilist fetch only if cache is empty or currentData is an empty array.
      * for example, it can occur when user loads this anime page as a new page or reloads it
      */
-    "enabled" : currentData === undefined || currentData.length === 0,
+    "enabled": currentData === undefined ||
+      currentData.length === 0 ||
+      // we don't care about reactivity in this case
+      foundAnime === undefined,
     "queryKey": ["anime", "anilist", "idMal", idMal],
     "queryFn" : () => fetchAnilistByIdMal(idMal),
   });
