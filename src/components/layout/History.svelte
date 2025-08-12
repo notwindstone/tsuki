@@ -82,7 +82,7 @@
     </p>
     <button
       aria-label="Refetch history"
-      class="h-9 w-9 flex items-center justify-center rounded-md bg-neutral-100 transition-[background-color] dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800"
+      class="h-9 w-9 flex items-center justify-center rounded-md bg-neutral-100 transition-[background-color] active:bg-white dark:bg-neutral-900 hover:bg-neutral-200 dark:active:bg-black dark:hover:bg-neutral-800"
       onclick={refetchHistory}
     >
       <span class="i-lucide-rotate-ccw block h-5 w-5"></span>
