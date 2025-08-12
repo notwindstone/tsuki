@@ -23,8 +23,8 @@ export const DefaultConfig: ConfigType = {
   "transitionDuration": 200,
   "chunkSize"         : 30,
   "confirmation"      : false,
-  // respect user's prefers-reduced-motion settings
-  "transitions"       : !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  // will be overwritten in 'initialize-config.ts'
+  "transitions"       : false,
 };
 
 export const HomePageLinks: Array<{

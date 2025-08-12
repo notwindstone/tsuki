@@ -13,7 +13,13 @@
   );
 
   $effect(() => {
-    document.body.toggleAttribute("data-transitions-disabled", !toEnableTransitions);
+    if (toEnableTransitions) {
+      document.body.removeAttribute("data-transitions-disabled");
+
+      return;
+    }
+
+    document.body.setAttribute("data-transitions-disabled", "");
   });
 
   const queryClient = new QueryClient({

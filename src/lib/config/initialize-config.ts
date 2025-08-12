@@ -1,4 +1,5 @@
 import { ConfigLocalStorageKey, DefaultConfig } from "@/constants/app";
+import type { ConfigType } from "@/types/config/config.type";
 
 export function initializeConfig() {
   const queriedConfig = localStorage?.getItem?.(ConfigLocalStorageKey);
@@ -7,5 +8,11 @@ export function initializeConfig() {
     return;
   }
 
-  localStorage?.setItem?.(ConfigLocalStorageKey, JSON.stringify(DefaultConfig));
+  const modifiedDefaultConfig: ConfigType = {
+    ...DefaultConfig,
+    // respect user's prefers-reduced-motion settings
+    "transitions": !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  };
+
+  localStorage?.setItem?.(ConfigLocalStorageKey, JSON.stringify(modifiedDefaultConfig));
 }
