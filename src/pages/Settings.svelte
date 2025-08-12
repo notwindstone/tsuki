@@ -2,7 +2,7 @@
   import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
   import Toggle from "@/components/base/Toggle.svelte";
 
-  const settingsState = getCurrentSettingsState().current;
+  const settingsState = $derived(getCurrentSettingsState().current);
   const setSettings = getCurrentSettingsState().setSettings;
 </script>
 
