@@ -142,7 +142,8 @@
         id="extensions-player-id"
         class="aspect-media relative col-span-1 rounded-md bg-neutral-100 lg:col-span-2 dark:bg-neutral-900"
       ></div>
-      <div class="relative col-span-1 row-span-2 sm:row-span-1">
+      <!-- min-h-48 here to fix some issues with old browsers -->
+      <div class="relative col-span-1 row-span-2 min-h-48 sm:row-span-1">
         <!-- the only way to ensure that episode selector will not exceed player's height -->
         <div class="absolute bottom-0 left-0 right-0 top-0 flex flex-col rounded-md bg-neutral-100 p-2 dark:bg-neutral-900">
           <div class="flex flex-nowrap gap-2">
