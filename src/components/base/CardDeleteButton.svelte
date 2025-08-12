@@ -1,11 +1,12 @@
 <script lang="ts">
   import { removeEntryFromHistory } from "@/lib/queries/remove-entry-from-history";
-  // import { HistoryQueryKey } from "@/constants/app";
 
   let {
     entryDate,
+    optimisticRemove,
   }: {
-    "entryDate": string | undefined;
+    "entryDate"       : string | undefined;
+    "optimisticRemove": () => void;
   } = $props();
 </script>
 
@@ -24,14 +25,7 @@
     }
 
     removeEntryFromHistory(entryDate);
-
-    /*
-     * refetch the watch history
-     * i wanted to optimistically hide the card instead of refetching the whole history
-     * but seems like even with ~4700 entries on mobile firefox it is re-calculated almost instantly...
-     *
-     * queryClient.refetchQueries({ "queryKey": HistoryQueryKey });
-     */
+    optimisticRemove();
   }}
   class="absolute right-2 top-2 z-10 h-8 w-8 flex items-center justify-center rounded-md bg-neutral-900 text-white opacity-30 transition-[opacity] dark:bg-neutral-100 dark:text-black hover:opacity-100"
 >

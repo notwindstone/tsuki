@@ -6,11 +6,16 @@
   import Image from "@/components/base/Image.svelte";
   import CardDeleteButton from "@/components/base/CardDeleteButton.svelte";
 
+  let show = $state<boolean>(true);
   let {
     entry,
   }: {
     "entry": AnimeEntryType;
   } = $props();
+
+  const optimisticRemove = () => {
+    show = false;
+  };
 
   // assign a safe anime title
   const title: string = entry?.title?.english
@@ -21,7 +26,7 @@
 </script>
 
 <!-- show card only if idMal is defined -->
-{#if entry?.idMal !== undefined}
+{#if entry?.idMal !== undefined && show}
   <!-- redirect to /anime?idMal=SOME_NUMBER&episode=SOME_NUMBER -->
   <Link
     href="/anime"
@@ -34,6 +39,7 @@
       {#if entry?.date}
         <CardDeleteButton
           entryDate={entry.date}
+          optimisticRemove={optimisticRemove}
         />
       {/if}
       {#if entry?.currentEpisode}
