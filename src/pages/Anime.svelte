@@ -112,6 +112,7 @@
       });
   });
 
+  let episodesSearch = $state<string>("");
   let toHideImages = $state<boolean>(true);
   let selectedEpisode = $state<number>(
     Number.isNaN(initialEpisode) ? 1 : initialEpisode,
@@ -149,6 +150,7 @@
           <div class="flex flex-nowrap gap-2">
             <input
               type="text"
+              bind:value={episodesSearch}
               class="w-full rounded-md bg-neutral-200 px-3 py-2 text-sm dark:bg-neutral-800 focus:outline-none placeholder-neutral-500"
               placeholder="Search episodes..."
             />
@@ -171,7 +173,11 @@
             </p>
           {/if}
           <EpisodeSelector
-            episodes={episodes}
+            episodes={episodes.filter(filtering => {
+              return filtering.title
+                .toLowerCase()
+                .includes(episodesSearch.toLowerCase());
+            })}
             coverImage={coverImage}
             setEpisode={newEpisode => selectedEpisode = newEpisode}
             toHideImages={toHideImages}
