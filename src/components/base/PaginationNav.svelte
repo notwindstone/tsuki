@@ -30,7 +30,7 @@
   <button
     disabled={page <= 1}
     aria-label="Go to the previous page"
-    class="h-8 w-8 flex items-center justify-center rounded-md bg-neutral-100 ring-black transition-[background-color,shadow] dark:bg-neutral-900 disabled:bg-transparent focus:ring-2 dark:ring-white"
+    class="h-8 w-8 flex items-center justify-center shrink-0 rounded-md bg-neutral-100 ring-black transition-[background-color,shadow] dark:bg-neutral-900 disabled:bg-transparent focus:ring-2 dark:ring-white"
     onclick={goPrevious}
   >
     <span class="i-lucide-chevron-left"></span>
@@ -60,7 +60,7 @@
   <button
     disabled={page >= size}
     aria-label="Go to the next page"
-    class="h-8 w-8 flex items-center justify-center rounded-md bg-neutral-100 ring-black transition-[background-color,shadow] dark:bg-neutral-900 disabled:bg-transparent focus:ring-2 dark:ring-white"
+    class="h-8 w-8 flex items-center justify-center shrink-0 rounded-md bg-neutral-100 ring-black transition-[background-color,shadow] dark:bg-neutral-900 disabled:bg-transparent focus:ring-2 dark:ring-white"
     onclick={goNext}
   >
     <span class="i-lucide-chevron-right"></span>
