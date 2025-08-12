@@ -35,7 +35,7 @@
   >
     <span class="i-lucide-chevron-left"></span>
   </button>
-  <div class="flex flex-wrap gap-2">
+  <div class="flex overflow-x-auto flex-nowrap gap-2">
     <!-- items can be duplicated, index is better here as the key -->
     {#each pagination as item, index (index)}
       {#if item === "dots"}
