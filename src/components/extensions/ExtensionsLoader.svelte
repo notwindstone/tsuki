@@ -2,7 +2,6 @@
   import { getCurrentExtensionsState } from "@/states/extensions/extensions.svelte";
   import { RouteSet } from "@/constants/routes";
   import { ApplicationNamespace } from "@/constants/app";
-  import { shitty } from "@/pages/shit.json";
   import type { ExtensionFunctionType } from "@/types/extensions/extension-function.type";
   import { createQuery } from "@tanstack/svelte-query";
 
@@ -28,8 +27,6 @@
 
   let code: string | undefined = $state(undefined);
   let func: ExtensionFunctionType | undefined = $state(undefined);
-
-  const gsdfgs = qwerty.qwerty;
 
   const pluginID = "vue-extension";
 
