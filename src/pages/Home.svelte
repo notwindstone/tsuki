@@ -33,7 +33,7 @@
       tsuki
     </span>
     <a
-      class="absolute bottom-8 left-[50%] translate-x-[-50%] rounded-md bg-neutral-100 px-2 py-1 text-sm text-black opacity-80 dark:bg-neutral-900 dark:text-white hover:opacity-100 motion-safe:transition-[opacity]"
+      class="absolute bottom-8 left-[50%] translate-x-[-50%] rounded-md bg-neutral-100 px-2 py-1 text-sm text-black opacity-80 transition-[opacity] dark:bg-neutral-900 dark:text-white hover:opacity-100"
       href={`${GithubLink}/commit/${env.GIT_COMMIT_HASH}`}
       target="_blank"
     >
@@ -43,7 +43,7 @@
   <div class="flex flex-nowrap pb-2">
     {#each HomePageLinks as link (link.href)}
       <Link
-        class="mx-1 flex flex-nowrap items-center rounded-md bg-neutral-100 px-2 py-1 focus:cursor-default dark:bg-neutral-900 hover:bg-neutral-200 focus:opacity-70 motion-safe:transition-[background-color,opacity] dark:hover:bg-neutral-800"
+        class="mx-1 flex flex-nowrap items-center rounded-md bg-neutral-100 px-2 py-1 transition-[background-color,opacity] focus:cursor-default dark:bg-neutral-900 hover:bg-neutral-200 focus:opacity-70 dark:hover:bg-neutral-800"
         href={link.href}
       >
         <div class={[

@@ -27,7 +27,7 @@
     <button
       onclick={() => setEpisode(index + 1)}
       class={[
-        "shrink-0 w-full flex flex-nowrap gap-4 rounded-md p-2 motion-safe:transition-[background-color]",
+        "shrink-0 w-full flex flex-nowrap gap-4 rounded-md p-2 transition-[background-color]",
         selectedEpisode === index + 1
           ? "bg-neutral-200 dark:bg-neutral-800"
           : "",
@@ -52,7 +52,7 @@
         title={episode.title + ": " + episode.description}
         class="flex flex-col justify-center text-start"
       >
-        <span class="text-sm leading-none pb-1">
+        <span class="pb-1 text-sm leading-none">
           {episode.title}
         </span>
         <span class="line-clamp-3 text-sm leading-none opacity-70">

@@ -157,7 +157,7 @@
             <button
               aria-label="Change episode selector format"
               onclick={() => toHideImages = !toHideImages}
-              class="h-9 w-9 flex shrink-0 items-center justify-center rounded-md bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-300 motion-safe:transition-[background-color] dark:hover:bg-neutral-700"
+              class="h-9 w-9 flex shrink-0 items-center justify-center rounded-md bg-neutral-200 transition-[background-color] dark:bg-neutral-800 hover:bg-neutral-300 dark:hover:bg-neutral-700"
             >
               <span class={[
                 "block h-5 w-5",

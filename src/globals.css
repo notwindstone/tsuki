@@ -7,6 +7,11 @@ html, body {
 }
 
 /* data attributes */
+[data-transitions-disabled] {
+  * {
+    transition: none;
+  }
+}
 [data-tooltip]:after {
   content: attr(data-tooltip);
 }

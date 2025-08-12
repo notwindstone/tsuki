@@ -12,7 +12,7 @@
   aria-label="Toggle an option"
   onclick={toggle}
   class={[
-    "h-8 w-14 rounded-full p-1 transition-[background-color]",
+    "h-8 w-14 shrink-0 rounded-full p-1 transition-[background-color]",
     toggled
       ? "bg-neutral-400 dark:bg-neutral-600"
       : "bg-neutral-200 dark:bg-neutral-800",

@@ -33,7 +33,7 @@
       alt={`${title}'s anime cover image`}
     />
     <!-- darken image background -->
-    <div class="absolute h-full w-full bg-white opacity-60 dark:bg-black group-hover:opacity-40 motion-safe:transition-[opacity]"></div>
+    <div class="absolute h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
     <!-- top badges -->
     <div class="z-10 w-full flex flex-wrap justify-between gap-2 p-2 text-xs">
       <!-- data-tooltip styles are defined in globals.css -->
