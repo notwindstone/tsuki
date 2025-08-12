@@ -5,9 +5,9 @@
   import { fade } from "svelte/transition";
   import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
   import { divideListToChunks } from "@/lib/helpers/divide-list-to-chunks";
-  import Pagination from "@/components/base/Pagination.svelte";
-  import Card from "@/components/base/Card.svelte";
   import { getCurrentHistoryState } from "@/states/history/history.svelte";
+  import Pagination from "@/components/base/Pagination.svelte";
+  import HistoryCard from "@/components/base/HistoryCard.svelte";
 
   const historyState = getCurrentHistoryState().current;
   const page = $derived(historyState.page);
@@ -99,7 +99,7 @@
         size={$history.data.size}
       >
         {#each $history.data.entries[page - 1] as entry (entry?.date)}
-          <Card entry={entry} />
+          <HistoryCard entry={entry} />
         {/each}
       </Pagination>
     </div>

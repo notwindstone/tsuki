@@ -46,7 +46,7 @@
         <button
           onclick={() => setPage(item)}
           class={[
-            "h-8 min-w-8 flex items-center justify-center rounded-md transition-[background-color]",
+            "font-medium h-8 min-w-8 flex items-center justify-center rounded-md px-2 transition-[background-color]",
             page === item
               ? "bg-rose-500"
               : "bg-neutral-100 dark:bg-neutral-900",

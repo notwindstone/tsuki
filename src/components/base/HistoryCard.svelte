@@ -4,6 +4,7 @@
   import { Link } from "@/lib/routing";
   import { getHueFromScore } from "@/lib/colors/get-hue-from-score";
   import Image from "@/components/base/Image.svelte";
+  import CardDeleteButton from "@/components/base/CardDeleteButton.svelte";
 
   let {
     entry,
@@ -27,6 +28,12 @@
     params={{ "idMal": entry.idMal }}
     class="group aspect-poster relative flex flex-col justify-between overflow-hidden rounded-md"
   >
+    <!-- if an entry has 'date' field, that means we are showing user's watch history and can delete this entry -->
+    {#if entry?.date}
+      <CardDeleteButton
+        entryDate={entry?.date}
+      />
+    {/if}
     <Image
       classNames="absolute"
       src={entry?.coverImage?.extraLarge}
