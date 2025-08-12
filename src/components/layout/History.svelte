@@ -6,6 +6,11 @@
   import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
   import { divideListToChunks } from "@/lib/helpers/divide-list-to-chunks";
   import Pagination from "@/components/base/Pagination.svelte";
+  import Card from "@/components/base/Card.svelte";
+  import { getCurrentHistoryState } from "@/states/history/history.svelte";
+
+  const historyState = getCurrentHistoryState().current;
+  const page = $derived(historyState.page);
 
   // get the 'tanstack query' client
   const queryClient = useQueryClient();
@@ -91,9 +96,12 @@
   {#if $history.data && $history.data.size > 0}
     <div class="w-full flex flex-col items-center gap-4" transition:fade={{ "duration": 200 }}>
       <Pagination
-        data={$history.data.entries}
         size={$history.data.size}
-      />
+      >
+        {#each $history.data.entries[page - 1] as entry (entry?.date)}
+          <Card entry={entry} />
+        {/each}
+      </Pagination>
     </div>
   {:else if $history.data && $history.data.size <= 0}
     <div class="text-center" transition:fade={{ "duration": 200 }}>

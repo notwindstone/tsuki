@@ -1,15 +1,18 @@
 <script lang="ts">
-  import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
-  import Card from "@/components/base/Card.svelte";
   import PaginationNav from "@/components/base/PaginationNav.svelte";
+  import type { Snippet } from "svelte";
+  import { getCurrentHistoryState } from "@/states/history/history.svelte";
 
-  let page = $state<number>(1);
+  const historyState = getCurrentHistoryState().current;
+  const setPage = getCurrentHistoryState().setPage;
+  const page = $derived(historyState.page);
+
   let {
-    data,
+    children,
     size,
   }: {
-    "data": Record<number, Array<AnimeEntryType>>;
-    "size": number;
+    "children": Snippet;
+    "size"    : number;
   } = $props();
 
   // show less pagination elements on small screen (tailwind's 'sm' breakpoint)
@@ -19,24 +22,21 @@
 
   const goNext = () => {
     if (page >= size) {
-      page = size;
+      setPage(size);
 
       return;
     }
 
-    page++;
+    setPage(page + 1);
   };
   const goPrevious = () => {
     if (page <= 1) {
-      page = 1;
+      setPage(1);
 
       return;
     }
 
-    page--;
-  };
-  const setPage = (specific: number) => {
-    page = specific;
+    setPage(page - 1);
   };
   const handleKeyboard = (event: KeyboardEvent) => {
     if (event.target === null) {
@@ -80,9 +80,7 @@
   setPage={setPage}
 />
 <div class="grid cols-2 w-full gap-2 md:cols-5 sm:cols-3">
-  {#each data[page - 1] as entry (entry?.date)}
-    <Card entry={entry} />
-  {/each}
+  {@render children()}
 </div>
 <PaginationNav
   page={page}
