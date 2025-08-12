@@ -33,15 +33,17 @@
           : "",
       ]}
     >
+      <!-- setting 'aspect-video' without a polyfill (padding-bottom) is ok here -->
+      <!-- 'padding-bottom' will only make things worse -->
       {#if toHideImages}
         <Image
-          classNames="!h-16 lg:!h-20 !w-auto rounded-md aspect-media opacity-20"
+          classNames="!h-16 lg:!h-20 !w-auto rounded-md aspect-video opacity-20"
           src={coverImage}
           alt={`${index + 1}'s episode blurred cover image`}
         />
       {:else}
         <Image
-          classNames="!h-16 lg:!h-20 !w-auto rounded-md aspect-media"
+          classNames="!h-16 lg:!h-20 !w-auto rounded-md aspect-video"
           src={episode.thumbnail}
           alt={`${index + 1}'s episode cover image`}
         />
