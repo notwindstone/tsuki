@@ -124,7 +124,7 @@
     id={id}
     idMal={Number(foundAnime?.idMal ?? $fetchedAnime.data?.idMal)}
     title={title}
-    coverImage={episodes[selectedEpisode - 1].thumbnail}
+    coverImage={episodes[selectedEpisode - 1]?.thumbnail ?? coverImage}
     status={status}
     score={score}
     episodes={episodes.length}
@@ -165,6 +165,11 @@
               ]}></span>
             </button>
           </div>
+          {#if $fetchedAnime.isFetching}
+            <p class="pt-4 text-center">
+              Loading...
+            </p>
+          {/if}
           <EpisodeSelector
             episodes={episodes}
             coverImage={coverImage}
