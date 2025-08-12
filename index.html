@@ -38,7 +38,7 @@
             ...unknownParsedData,
           };
         } catch (error) {
-          console.log("Configuration parsing error:", error);
+          console.error("Configuration parsing error:", error);
 
           parsedConfiguration = {};
         }

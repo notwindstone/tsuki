@@ -10,7 +10,7 @@ export function removeEntryFromHistory(date: string) {
   try {
     unknownHistory = JSON.parse(storedHistory);
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     unknownHistory = [];
   }
