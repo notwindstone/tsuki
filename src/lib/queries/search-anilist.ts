@@ -11,6 +11,15 @@ export async function searchAnilist(search: string): Promise<
     return [];
   }
 
+  const searchAsNumber = Number(search);
+  // set one of these fields based on 'Number.isNaN' check
+  const toApply: Partial<{
+    "idMal" : number;
+    "search": string;
+  }> = Number.isNaN(searchAsNumber)
+    ? { "search": search }
+    : { "idMal": searchAsNumber };
+
   const response = await fetch("https://graphql.anilist.co", {
     "method" : "POST",
     "headers": {
@@ -39,8 +48,8 @@ export async function searchAnilist(search: string): Promise<
             ],
             "variables": {
               "media": {
-                "type"  : "ANIME",
-                "search": search,
+                "type": "ANIME",
+                ...toApply,
               },
               "page": {
                 "page"   : 1,
