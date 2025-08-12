@@ -21,7 +21,7 @@
 
 <!-- show card only if idMal is defined -->
 {#if entry?.idMal !== undefined}
-  <!-- redirects to /anime?idMal=SOME_NUMBER -->
+  <!-- redirect to /anime?idMal=SOME_NUMBER -->
   <Link
     href="/anime"
     params={{ "idMal": entry.idMal }}
@@ -32,7 +32,7 @@
       src={entry?.coverImage?.extraLarge}
       alt={`${title}'s anime cover image`}
     />
-    <!-- darkens image background -->
+    <!-- darken image background -->
     <div class="absolute h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
     <!-- top badges -->
     <div class="z-10 w-full flex flex-wrap justify-between gap-2 p-2 text-xs">

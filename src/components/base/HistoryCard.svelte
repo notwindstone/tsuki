@@ -22,7 +22,7 @@
 
 <!-- show card only if idMal is defined -->
 {#if entry?.idMal !== undefined}
-  <!-- redirects to /anime?idMal=SOME_NUMBER&episode=SOME_NUMBER -->
+  <!-- redirect to /anime?idMal=SOME_NUMBER&episode=SOME_NUMBER -->
   <Link
     href="/anime"
     params={{ "idMal": entry.idMal, "episode": entry?.currentEpisode }}
@@ -63,12 +63,14 @@
           <!-- content is displayed by data-tooltip -->
         </div>
       {/if}
-      <!-- fill this element with the 16/9 aspect ratio -->
+      <!-- fill parent element with the 16/9 aspect ratio -->
       <Image
-        classNames="z-5 absolute h-full w-full opacity-50"
+        classNames="absolute z-5 h-full w-full"
         src={entry?.coverImage?.extraLarge}
         alt={`${title}'s anime cover image`}
       />
+      <!-- darken image background -->
+      <div class="absolute z-8 h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
     </div>
     <p class="line-clamp-3 w-full p-2 text-black dark:text-white">
       {title}
