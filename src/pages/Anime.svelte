@@ -19,8 +19,9 @@
     // we don't care about reactivity here
     ["anime", "anilist", "search", searchState.value],
   );
-  // get current idMal from search params
+  // get some data from search params
   const idMal = getQueryParams()["idMal"];
+  const initialEpisode = Number(getQueryParams()["episode"]);
 
   let foundAnime = $state<AnimeEntryType | undefined>(undefined);
 
@@ -112,7 +113,9 @@
   });
 
   let toHideImages = $state<boolean>(true);
-  let selectedEpisode = $state<number>(1);
+  let selectedEpisode = $state<number>(
+    Number.isNaN(initialEpisode) ? 1 : initialEpisode,
+  );
 </script>
 
 <!-- add an anime to the watch history only if it has an 'idMal' field -->

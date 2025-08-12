@@ -22,32 +22,34 @@
 
 <!-- show card only if idMal is defined -->
 {#if entry?.idMal !== undefined}
-  <!-- redirects to /anime?idMal=SOME_NUMBER -->
+  <!-- redirects to /anime?idMal=SOME_NUMBER&episode=SOME_NUMBER -->
   <Link
     href="/anime"
-    params={{ "idMal": entry.idMal }}
-    class="group aspect-poster relative flex flex-col justify-between overflow-hidden rounded-md"
+    params={{ "idMal": entry.idMal, "episode": entry?.currentEpisode }}
+    class="group relative flex flex-col gap-0 overflow-hidden border-2 border-transparent rounded-md bg-neutral-100 transition-[border-color] hover:border-black dark:bg-neutral-900 dark:hover:border-white"
   >
-    <!-- if an entry has 'date' field, that means we are showing user's watch history and can delete this entry -->
-    {#if entry?.date}
-      <CardDeleteButton
-        entryDate={entry?.date}
-      />
-    {/if}
-    <Image
-      classNames="absolute"
-      src={entry?.coverImage?.extraLarge}
-      alt={`${title}'s anime cover image`}
-    />
-    <!-- darkens image background -->
-    <div class="absolute h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
-    <!-- top badges -->
-    <div class="z-10 w-full flex flex-wrap justify-between gap-2 p-2 text-xs">
+    <!-- image part styles -->
+    <div class="aspect-media relative w-full">
+      <!-- deletion is available thanks to 'entry.date', otherwise there will be an error -->
+      {#if entry?.date}
+        <CardDeleteButton
+          entryDate={entry.date}
+        />
+      {/if}
+      {#if entry?.currentEpisode}
+        <div
+          data-tooltip={`${entry.currentEpisode} / ${entry?.episodes ?? "?"}`}
+          data-tooltip-hover="Episodes watched"
+          class="absolute bottom-2 left-2 z-10 w-fit rounded-md bg-neutral-900 px-2 py-1 text-xs text-white leading-none dark:bg-neutral-100 dark:text-black"
+        >
+          <!-- content is displayed by data-tooltip -->
+        </div>
+      {/if}
       <!-- data-tooltip styles are defined in globals.css -->
       <div
         data-tooltip={status}
         data-tooltip-hover="Status"
-        class="rounded-md bg-neutral-100 px-2 py-1 text-black leading-none dark:bg-neutral-900 dark:text-white"
+        class="absolute left-2 top-2 z-10 rounded-md bg-neutral-100 px-2 py-1 text-xs text-black leading-none dark:bg-neutral-900 dark:text-white"
       >
         <!-- content is displayed by data-tooltip -->
       </div>
@@ -55,27 +57,21 @@
         <div
           data-tooltip={entry.averageScore / 10}
           data-tooltip-hover="Score"
-          class="rounded-md px-2 py-1 text-white leading-none"
+          class="absolute bottom-2 right-2 z-10 rounded-md px-2 py-1 text-xs text-white leading-none"
           style={`background-color:hsl(${getHueFromScore(entry.averageScore)},100%,30%)`}
         >
           <!-- content is displayed by data-tooltip -->
         </div>
       {/if}
+      <!-- fill this element with the 16/9 aspect ratio -->
+      <Image
+        classNames="z-5 absolute h-full w-full opacity-50"
+        src={entry?.coverImage?.extraLarge}
+        alt={`${title}'s anime cover image`}
+      />
     </div>
-    <!-- bottom badges & title name -->
-    <div class="z-10 w-full flex flex-col gap-2 p-2">
-      {#if entry?.currentEpisode}
-        <div
-          data-tooltip={`${entry.currentEpisode} / ${entry?.episodes ?? "?"}`}
-          data-tooltip-hover="Episodes watched"
-          class="w-fit rounded-md bg-neutral-900 px-2 py-1 text-xs text-white leading-none dark:bg-neutral-100 dark:text-black"
-        >
-          <!-- content is displayed by data-tooltip -->
-        </div>
-      {/if}
-      <p class="line-clamp-3 text-black dark:text-white">
-        {title}
-      </p>
-    </div>
+    <p class="line-clamp-3 w-full p-2 text-black dark:text-white">
+      {title}
+    </p>
   </Link>
 {/if}

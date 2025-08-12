@@ -16,6 +16,7 @@
     event.preventDefault();
     event.stopPropagation();
 
+    // TODO: add a settings option to make user decide whether to show confirmation or no
     const toDelete = confirm("Do you really want to delete this history entry?");
 
     if (!toDelete || !entryDate) {
@@ -32,7 +33,7 @@
      * queryClient.refetchQueries({ "queryKey": HistoryQueryKey });
      */
   }}
-  class="absolute right-0 top-[50%] z-15 h-10 w-10 flex translate-y-[-50%] items-center justify-center rounded-l-md bg-neutral-900 text-white opacity-30 transition-[opacity] dark:bg-neutral-100 dark:text-black hover:opacity-100"
+  class="absolute right-2 top-2 z-10 h-8 w-8 flex items-center justify-center rounded-md bg-neutral-900 text-white opacity-30 transition-[opacity] dark:bg-neutral-100 dark:text-black hover:opacity-100"
 >
   <span class="i-lucide-x block h-6 w-6"></span>
 </button>

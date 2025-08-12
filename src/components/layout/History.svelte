@@ -98,7 +98,8 @@
       <Pagination
         size={$history.data.size}
       >
-        {#each $history.data.entries[page - 1] as entry (entry?.date)}
+        <!-- 'entry.date' can be undefined, if that's the case, use index as a key -->
+        {#each $history.data.entries[page - 1] as entry, index (entry?.date ?? `${page}-${index}`)}
           <HistoryCard entry={entry} />
         {/each}
       </Pagination>
