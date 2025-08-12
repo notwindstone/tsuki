@@ -4,12 +4,14 @@
   import { searchAnilist } from "@/lib/queries/search-anilist";
   import { GithubLink, HomePageLinks } from "@/constants/app";
   import { getCurrentSearchState } from "@/states/search/search.svelte";
+  import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
   import { debounce } from "@/lib/helpers/debounce";
   import Search from "@/components/base/Search.svelte";
   import env from "@/constants/env-variables.json";
   import History from "@/components/layout/History.svelte";
   import Card from "@/components/base/Card.svelte";
 
+  const settingsState = getCurrentSettingsState().current;
   const searchState = getCurrentSearchState().current;
 
   let debounced = $state(searchState.value);
@@ -22,7 +24,7 @@
   const animes = $derived(
     createQuery({
       "queryKey": ["anime", "anilist", "search", debounced.trim()],
-      "queryFn" : () => searchAnilist(debounced.trim()),
+      "queryFn" : () => searchAnilist(debounced.trim(), settingsState.chunkSize),
     }),
   );
 </script>

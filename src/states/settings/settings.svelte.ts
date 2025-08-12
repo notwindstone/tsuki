@@ -1,19 +1,26 @@
-import type { SettingsType } from "./settings.type";
 import { getConfig } from "@/lib/config/get-config";
+import type { ConfigType } from "@/types/config/config.type";
 
-const currentConfig = getConfig();
-
-let currentSettingsState = $state<SettingsType>({
-  "transitions" : currentConfig.transitions,
-  "confirmation": currentConfig.confirmation,
+const currentConfig: ConfigType = getConfig();
+let currentSettingsState = $state.raw<ConfigType>({
+  ...currentConfig,
 });
 
 export function getCurrentSettingsState() {
   function setSettings(
-    key  : keyof SettingsType,
-    value: SettingsType[typeof key],
+    key  : keyof ConfigType,
+    value: ConfigType[typeof key],
   ) {
-    currentSettingsState[key] = value;
+    // the only way to assign these key-value pairs to the settings state?
+    const entries: Array<[keyof ConfigType, ConfigType[typeof key]]> = [
+      [key, value],
+    ];
+    const newConfig: Partial<ConfigType> = Object.fromEntries(entries);
+
+    currentSettingsState = {
+      ...currentSettingsState,
+      ...newConfig,
+    };
   }
 
   return {

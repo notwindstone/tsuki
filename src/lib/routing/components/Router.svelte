@@ -7,13 +7,17 @@
   import type { RouterConfiguration } from "@/lib/routing/types/router-configuration.type";
   import type { Component } from "svelte";
   import type { LazyComponent } from "@/lib/routing";
-  import { ApplicationName, TransitionDuration } from "@/constants/app";
+  import { ApplicationName } from "@/constants/app";
   import { Routes } from "@/constants/routes";
   import Loading from "@/pages/Loading.svelte";
   import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
 
   const settingsState = getCurrentSettingsState().current;
-  const transitionDuration = $derived(settingsState.transitions ? TransitionDuration : 0);
+  const transitionDuration = $derived(
+    settingsState.transitions
+      ? settingsState.transitionDuration
+      : 0,
+  );
 
   const props: {
 

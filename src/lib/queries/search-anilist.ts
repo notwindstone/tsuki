@@ -1,9 +1,8 @@
 import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
 import { createAnilistQuery } from "@/lib/graphql/create-anilist-query";
-import { ChunkSize } from "@/constants/app";
 import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
 
-export async function searchAnilist(search: string): Promise<
+export async function searchAnilist(search: string, chunkSize: number): Promise<
   Array<AnimeEntryType>
 > {
   // if search value is empty no need for fetching data
@@ -53,7 +52,7 @@ export async function searchAnilist(search: string): Promise<
               },
               "page": {
                 "page"   : 1,
-                "perPage": ChunkSize,
+                "perPage": chunkSize,
               },
             },
           },

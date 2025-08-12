@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import { createQuery, useQueryClient } from "@tanstack/svelte-query";
-  import { ChunkSize, HistoryLocalStorageKey, HistoryQueryKey, TransitionDuration } from "@/constants/app";
+  import { HistoryLocalStorageKey, HistoryQueryKey } from "@/constants/app";
   import { fade } from "svelte/transition";
   import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
   import { divideListToChunks } from "@/lib/helpers/divide-list-to-chunks";
@@ -11,7 +11,11 @@
   import HistoryCard from "@/components/base/HistoryCard.svelte";
 
   const settingsState = getCurrentSettingsState().current;
-  const transitionDuration = $derived(settingsState.transitions ? TransitionDuration : 0);
+  const transitionDuration = $derived(
+    settingsState.transitions
+      ? settingsState.transitionDuration
+      : 0,
+  );
 
   const historyState = getCurrentHistoryState().current;
   const page = $derived(historyState.page);
@@ -62,7 +66,7 @@
         // first elements will be the most recent
         "list"     : shallowlyValidatedHistory.reverse(),
         // pagination will show 30 anime cards on the page
-        "chunkSize": ChunkSize,
+        "chunkSize": settingsState.chunkSize,
       });
 
       return {

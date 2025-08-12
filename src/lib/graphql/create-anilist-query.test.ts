@@ -1,6 +1,5 @@
 import { expect, test } from "vitest";
 import { createAnilistQuery } from "./create-anilist-query";
-import { ChunkSize } from "@/constants/app";
 
 const testData: Array<
   [
@@ -26,7 +25,7 @@ const testData: Array<
             },
             "page": {
               "page"   : 1,
-              "perPage": ChunkSize,
+              "perPage": 30,
             },
           },
         },
@@ -39,7 +38,7 @@ const testData: Array<
       "variables": JSON.stringify({
         // 'Main' because of the alias
         "pageMain"   : 1,
-        "perPageMain": ChunkSize,
+        "perPageMain": 30,
         "searchMain" : "sousou no frieren",
       }),
     },
