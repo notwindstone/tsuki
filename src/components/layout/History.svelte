@@ -1,13 +1,17 @@
 <script lang="ts">
   import type { AnimeEntryType } from "@/types/anime/anime-entry.type";
   import { createQuery, useQueryClient } from "@tanstack/svelte-query";
-  import { ChunkSize, HistoryLocalStorageKey, HistoryQueryKey } from "@/constants/app";
+  import { ChunkSize, HistoryLocalStorageKey, HistoryQueryKey, TransitionDuration } from "@/constants/app";
   import { fade } from "svelte/transition";
   import { getAnimeEntryFromUnknown } from "@/lib/helpers/get-anime-entry-from-unknown";
   import { divideListToChunks } from "@/lib/helpers/divide-list-to-chunks";
   import { getCurrentHistoryState } from "@/states/history/history.svelte";
+  import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
   import Pagination from "@/components/base/Pagination.svelte";
   import HistoryCard from "@/components/base/HistoryCard.svelte";
+
+  const settingsState = getCurrentSettingsState().current;
+  const transitionDuration = $derived(settingsState.transitions ? TransitionDuration : 0);
 
   const historyState = getCurrentHistoryState().current;
   const page = $derived(historyState.page);
@@ -82,7 +86,7 @@
     </p>
     <button
       aria-label="Refetch history"
-      class="h-9 w-9 flex items-center justify-center rounded-md bg-neutral-100 transition-[background-color] active:bg-white dark:bg-neutral-900 hover:bg-neutral-200 dark:active:bg-black dark:hover:bg-neutral-800"
+      class="h-9 w-9 flex items-center justify-center rounded-md bg-neutral-100 active:bg-white dark:bg-neutral-900 hover:bg-neutral-200 motion-safe:transition-[background-color] dark:active:bg-black dark:hover:bg-neutral-800"
       onclick={refetchHistory}
     >
       <span class="i-lucide-rotate-ccw block h-5 w-5"></span>
@@ -94,7 +98,7 @@
   <!-- we don't care about $history.isPending -->
   <!-- because localStorage blocks main thread -->
   {#if $history.data && $history.data.size > 0}
-    <div class="w-full flex flex-col items-center gap-4" transition:fade={{ "duration": 200 }}>
+    <div class="w-full flex flex-col items-center gap-4" transition:fade={{ "duration": transitionDuration }}>
       <Pagination
         size={$history.data.size}
       >
@@ -105,7 +109,7 @@
       </Pagination>
     </div>
   {:else if $history.data && $history.data.size <= 0}
-    <div class="text-center" transition:fade={{ "duration": 200 }}>
+    <div class="text-center" transition:fade={{ "duration": transitionDuration }}>
       No history yet. Try watching some anime first!
     </div>
   {/if}

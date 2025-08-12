@@ -31,7 +31,7 @@
   <Link
     href="/anime"
     params={{ "idMal": entry.idMal, "episode": entry?.currentEpisode }}
-    class="group relative flex flex-col gap-0 overflow-hidden border-2 border-transparent rounded-md bg-neutral-100 transition-[border-color] hover:border-black dark:bg-neutral-900 dark:hover:border-white"
+    class="group relative flex flex-col gap-0 overflow-hidden border-2 border-transparent rounded-md bg-neutral-100 hover:border-black dark:bg-neutral-900 motion-safe:transition-[border-color] dark:hover:border-white"
   >
     <!-- image part styles -->
     <div class="aspect-media relative w-full overflow-hidden rounded-md">
@@ -76,7 +76,7 @@
         alt={`${title}'s anime cover image`}
       />
       <!-- darken image background -->
-      <div class="absolute z-8 h-full w-full bg-white opacity-60 transition-[opacity] dark:bg-black group-hover:opacity-40"></div>
+      <div class="absolute z-8 h-full w-full bg-white opacity-60 dark:bg-black group-hover:opacity-40 motion-safe:transition-[opacity]"></div>
     </div>
     <p class="line-clamp-3 w-full p-2 text-black dark:text-white">
       {title}

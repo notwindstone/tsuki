@@ -7,9 +7,13 @@
   import type { RouterConfiguration } from "@/lib/routing/types/router-configuration.type";
   import type { Component } from "svelte";
   import type { LazyComponent } from "@/lib/routing";
-  import { ApplicationName } from "@/constants/app";
+  import { ApplicationName, TransitionDuration } from "@/constants/app";
   import { Routes } from "@/constants/routes";
   import Loading from "@/pages/Loading.svelte";
+  import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
+
+  const settingsState = getCurrentSettingsState().current;
+  const transitionDuration = $derived(settingsState.transitions ? TransitionDuration : 0);
 
   const props: {
 
@@ -84,7 +88,7 @@
        */
       "bg-white text-black dark:bg-black dark:text-white",
     ]}
-    transition:fade={{ "duration": 200 }}
+    transition:fade={{ "duration": transitionDuration }}
   >
     <CurrentComponent />
   </div>

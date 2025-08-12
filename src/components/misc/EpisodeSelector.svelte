@@ -27,7 +27,7 @@
     <button
       onclick={() => setEpisode(index + 1)}
       class={[
-        "shrink-0 w-full flex flex-nowrap gap-4 rounded-md p-2 transition-[background-color]",
+        "shrink-0 w-full flex flex-nowrap gap-4 rounded-md p-2 motion-safe:transition-[background-color]",
         selectedEpisode === index + 1
           ? "bg-neutral-200 dark:bg-neutral-800"
           : "",
