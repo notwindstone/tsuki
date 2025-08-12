@@ -12,7 +12,7 @@
   import Loading from "@/pages/Loading.svelte";
   import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
 
-  const settingsState = getCurrentSettingsState().current;
+  const settingsState = $derived(getCurrentSettingsState().current);
   const transitionDuration = $derived(
     settingsState.transitions
       ? settingsState.transitionDuration

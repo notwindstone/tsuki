@@ -7,7 +7,7 @@
 </script>
 
 <div class="flex justify-center p-4">
-  <div class="max-w-320 w-full flex flex-col gap-2">
+  <div class="max-w-320 w-full flex flex-col items-center gap-2">
     <div class="flex flex-nowrap items-center gap-4">
       <p class="">
         Ask for confirmation upon deletion?
