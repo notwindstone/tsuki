@@ -5,8 +5,10 @@
   import { initializeConfig } from "@/lib/config/initialize-config";
   import Layout from "@/Layout.svelte";
   import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
+  import { initializeExtensions } from "@/lib/extensions/initialize-extensions";
 
   initializeConfig();
+  initializeExtensions();
 
   const toEnableTransitions = $derived(
     getCurrentSettingsState().current.transitions,
