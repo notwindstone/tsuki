@@ -29,6 +29,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "lint": "eslint ./src",
     "test": "bun run test:vitest && bun run test:playwright",
     "test:vitest": "vitest run ./src",
     "test:playwright": "bunx playwright test",

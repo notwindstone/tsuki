@@ -7,6 +7,7 @@ const numberConfigKeys: Array<keyof ConfigType> = [
   "chunkSize",
 ];
 const booleanConfigKeys: Array<keyof ConfigType> = [
+  "hideEpisodeImages",
   "transitions",
   "confirmation",
 ];

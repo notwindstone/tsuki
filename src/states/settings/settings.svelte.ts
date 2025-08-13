@@ -1,5 +1,6 @@
 import { getConfig } from "@/lib/config/get-config";
 import type { ConfigType } from "@/types/config/config.type";
+import { writeConfig } from "@/lib/config/write-config";
 
 const currentConfig: ConfigType = getConfig();
 let currentSettingsState = $state.raw<ConfigType>({
@@ -17,10 +18,13 @@ export function getCurrentSettingsState() {
     ];
     const newConfig: Partial<ConfigType> = Object.fromEntries(entries);
 
-    currentSettingsState = {
+    const mergedSettings: ConfigType = {
       ...currentSettingsState,
       ...newConfig,
     };
+
+    currentSettingsState = mergedSettings;
+    writeConfig(mergedSettings);
   }
 
   return {

@@ -20,6 +20,7 @@ export const BaseURL = "/tsuki";
 export const NoImageURL = `${BaseURL}/frieren-no-image.webp`;
 
 export const DefaultConfig: ConfigType = {
+  "hideEpisodeImages" : true,
   "transitionDuration": 200,
   "chunkSize"         : 30,
   "confirmation"      : false,
