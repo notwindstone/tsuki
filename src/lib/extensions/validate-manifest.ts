@@ -1,5 +1,6 @@
 import type { ManifestType } from "@/types/extensions/manifest.type";
 import IsKeyInObject from "@/types/utils/is-key-in-object";
+import { CategoriesSet } from "@/constants/extensions";
 
 const requiredStringManifestKeys: Array<keyof ManifestType> = [
   "id",
@@ -51,11 +52,43 @@ export function validateManifest(parsedManifest: unknown): ManifestType | false 
       return false;
     }
 
-    if (!Array.isArray(parsedManifest[key])) {
+    const parsedValue = parsedManifest[key];
+
+    if (!Array.isArray(parsedValue)) {
       return false;
     }
 
-    safeManifest[key] = parsedManifest[key];
+    // 'categories' field requires specific string values
+    if (key !== "categories") {
+      // array entries can be anything tho
+      safeManifest[key] = (parsedValue as Array<unknown>)
+        .map(parsedArrayEntry => {
+          return typeof parsedArrayEntry === "string"
+            ? parsedArrayEntry
+            : JSON.stringify(parsedArrayEntry);
+        // 'safeManifest[key]' somehow became 'never' typed
+        }) as never;
+
+      continue;
+    }
+
+    const safeCategories: Array<ManifestType["categories"][number]> = [];
+
+    // typescript
+    for (const parsedArrayEntry of parsedValue as Array<unknown>) {
+      if (!CategoriesSet.has(
+        // otherwise we will not be able to make this check
+        parsedArrayEntry as ManifestType["categories"][number],
+      )) {
+        continue;
+      }
+
+      // we already did the check, so we are safe to do this
+      safeCategories.push(parsedArrayEntry as ManifestType["categories"][number]);
+    }
+
+    // typescript is thinking 'safeManifest[key]' is 'never' again
+    safeManifest[key] = safeCategories as never;
   }
 
   if (

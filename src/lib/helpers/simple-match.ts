@@ -1,4 +1,11 @@
-export function simpleMatch(stringFirst: string, stringSecond: string): boolean {
+export function simpleMatch(first: string, second: string): boolean {
+  const stringFirst = first.toLowerCase();
+  const stringSecond = second.toLowerCase();
+
+  if (stringFirst === stringSecond) {
+    return true;
+  }
+
   const lengthFirst = stringFirst.length;
   const lengthSecond = stringSecond.length;
   let occurrencesFirst = 0;
