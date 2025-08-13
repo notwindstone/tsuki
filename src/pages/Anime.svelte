@@ -5,6 +5,7 @@
   import { getQueryParams } from "@/lib/routing";
   import { createQuery, useQueryClient } from "@tanstack/svelte-query";
   import { getCurrentSearchState } from "@/states/search/search.svelte";
+  import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
   import { fetchAnilistByIdMal } from "@/lib/queries/fetch-anilist-by-id-mal";
   import { NoImageURL } from "@/constants/app";
   import EpisodeSelector from "@/components/misc/EpisodeSelector.svelte";
@@ -113,7 +114,10 @@
   });
 
   let episodesSearch = $state<string>("");
-  let toHideImages = $state<boolean>(true);
+  let toHideImages = $state<boolean>(
+    // we don't care about reactivity, because this value is going to be used as the initial
+    getCurrentSettingsState().current.hideEpisodeImages,
+  );
   let selectedEpisode = $state<number>(
     Number.isNaN(initialEpisode) ? 1 : initialEpisode,
   );

@@ -26,5 +26,14 @@
         toggled={settingsState.transitions}
       />
     </div>
+    <div class="flex flex-nowrap items-center gap-4">
+      <p class="">
+        Hide episode cover images?
+      </p>
+      <Toggle
+        toggle={() => setSettings("hideEpisodeImages", !settingsState.hideEpisodeImages)}
+        toggled={settingsState.hideEpisodeImages}
+      />
+    </div>
   </div>
 </div>
