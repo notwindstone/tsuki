@@ -42,7 +42,8 @@
           optimisticRemove={optimisticRemove}
         />
       {/if}
-      {#if entry?.currentEpisode}
+      <!-- data-tooltip styles are defined in globals.css -->
+      {#if entry?.currentEpisode && entry?.status !== "NOT_YET_RELEASED"}
         <div
           data-tooltip={`${entry.currentEpisode} / ${entry?.episodes ?? "?"}`}
           data-tooltip-hover="Episodes watched"
@@ -51,14 +52,15 @@
           <!-- content is displayed by data-tooltip -->
         </div>
       {/if}
-      <!-- data-tooltip styles are defined in globals.css -->
-      <div
-        data-tooltip={status}
-        data-tooltip-hover="Status"
-        class="absolute left-2 top-2 z-10 rounded-md bg-neutral-100 px-2 py-1 text-xs text-black leading-none dark:bg-neutral-900 dark:text-white"
-      >
-        <!-- content is displayed by data-tooltip -->
-      </div>
+      {#if entry?.status !== "NOT_YET_RELEASED"}
+        <div
+          data-tooltip={status}
+          data-tooltip-hover="Status"
+          class="absolute left-2 top-2 z-10 rounded-md bg-neutral-100 px-2 py-1 text-xs text-black leading-none dark:bg-neutral-900 dark:text-white"
+        >
+          <!-- content is displayed by data-tooltip -->
+        </div>
+      {/if}
       {#if entry?.averageScore}
         <div
           data-tooltip={entry.averageScore / 10}
