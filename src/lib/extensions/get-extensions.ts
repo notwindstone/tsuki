@@ -2,7 +2,7 @@ import type { ManifestType } from "@/types/extensions/manifest.type";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
 import { validateManifest } from "@/lib/extensions/validate-manifest";
 
-export function getExtensions(): Record<string, ManifestType> {
+export function getExtensions(options?: { "local": boolean }): Record<string, ManifestType> {
   const foundExtensions: Record<string, ManifestType> = {};
   const queriedExtensions: string | null = localStorage?.getItem?.(ExtensionsLocalStorageKey);
 
@@ -30,7 +30,7 @@ export function getExtensions(): Record<string, ManifestType> {
   const parsedExtensionEntries: Array<[string, unknown]> = Object.entries(parsedExtensions);
 
   for (const [extensionName, parsedManifest] of parsedExtensionEntries) {
-    const validatedManifest = validateManifest(parsedManifest);
+    const validatedManifest = validateManifest(parsedManifest, options?.local);
 
     if (validatedManifest === false) {
       continue;

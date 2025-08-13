@@ -83,6 +83,11 @@
   });
 
   $effect(() => {
-    console.log($extension.data, $extension.isError);
+    console.log(
+      "Extension loading:",
+      $extension.data,
+      "error:",
+      $extension.isError,
+    );
   });
 </script>
