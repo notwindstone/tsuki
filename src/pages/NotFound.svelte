@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Link } from "@/lib/routing/index.js";
+  import { Link } from "@/lib/routing/index.js";
 </script>
 
 <!-- if browser supports `svh` (firefox 101+, chrome 108+) -->

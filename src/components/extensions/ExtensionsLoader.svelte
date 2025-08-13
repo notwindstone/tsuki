@@ -4,6 +4,7 @@
   import { ApplicationNamespace } from "@/constants/app";
   import type { ExtensionFunctionType } from "@/types/extensions/extension-function.type";
   import { createQuery } from "@tanstack/svelte-query";
+  import { addExtensions } from "@/lib/extensions/adds-extension";
 
   const query = createQuery({
     "queryKey": ["todos"],
@@ -11,6 +12,19 @@
       const plugin = await fetch("https://raw.githubusercontent.com/notwindstone/anisun-extensions/refs/heads/main/styles-needy-girl-overdose/bundle.js");
 
       return await plugin.text();
+    },
+  });
+
+  addExtensions({
+    "vue": {
+      "id"        : "hewwo :3",
+      "name"      : "lul what~",
+      "logo"      : "hehe",
+      "url"       : "none",
+      "version"   : "semver",
+      "authors"   : [],
+      "categories": [],
+      "languages" : [],
     },
   });
 

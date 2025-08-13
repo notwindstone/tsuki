@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import LoadingTooLong from "@/components/misc/LoadingTooLong.svelte";
 </script>
 
