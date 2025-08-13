@@ -175,6 +175,10 @@
             <p class="pt-4 text-center">
               Loading...
             </p>
+          {:else if episodes.length === 0}
+            <p class="pt-4 text-center">
+              No episodes
+            </p>
           {/if}
           <EpisodeSelector
             episodes={episodes.filter(filtering => {
