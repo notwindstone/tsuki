@@ -20,4 +20,6 @@ export type ManifestType = {
   "description": string;
   // a list of routes that extension will use for its own pages
   "pages"      : Array<string>;
+  // only works for local storage entries
+  "enabled"    : boolean;
 }>;

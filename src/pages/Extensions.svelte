@@ -8,9 +8,9 @@
   );
 </script>
 
-<div>
-  {JSON.stringify(extensionsState)}
-  <div class="whitespace-pre">
+<div class="whitespace-pre">
+  {JSON.stringify(extensionsState, null, 2)}
+  <div>
     {JSON.stringify(getExtensions(), null, 2)}
   </div>
   <Link href="/">Home</Link>

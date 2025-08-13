@@ -15,7 +15,11 @@ const requiredArrayManifestKeys: Array<keyof ManifestType> = [
   "categories",
 ];
 
-export function validateManifest(parsedManifest: unknown): ManifestType | false {
+export function validateManifest(
+  parsedManifest: unknown,
+  // if 'local', then the 'enabled' field will be in the final object too
+  local?        : boolean,
+): ManifestType | false {
   if (
     typeof parsedManifest !== "object" ||
     parsedManifest === null
@@ -103,6 +107,14 @@ export function validateManifest(parsedManifest: unknown): ManifestType | false 
     Array.isArray(parsedManifest.pages)
   ) {
     safeManifest.pages = parsedManifest.pages;
+  }
+
+  if (
+    local &&
+    "enabled" in parsedManifest &&
+    typeof parsedManifest.enabled === "boolean"
+  ) {
+    safeManifest.enabled = parsedManifest.enabled;
   }
 
   return safeManifest;
