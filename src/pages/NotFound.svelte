@@ -21,8 +21,12 @@
   const isReservedByExtensionPage = $derived(
     ($extensions.data ?? [])
       .filter((filtering: [string, ManifestType]) => {
-        return (filtering[1].pages ?? [])
-          // initially pages are defined without the base url
+        if (!filtering[1]?.enabled) {
+          return false;
+        }
+
+        return (filtering[1]?.pages ?? [])
+          // initially pages in manifest are defined without the base url
           .map((page: string) => BaseURL + page)
           .includes(currentPath);
       }).length > 0,
