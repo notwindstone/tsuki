@@ -5,20 +5,17 @@
   import { ExtensionsQueryKey } from "@/constants/extensions";
   import ExtensionCard from "@/components/extensions/ExtensionCard.svelte";
 
-  // re-fetch query on state change
-  const extensions = $derived(
-    createQuery({
-      // will be re-fetched on plugin list update
-      "queryKey": ExtensionsQueryKey,
-      "queryFn" : () => {
-        const currentExtensions = getExtensions({
-          "local": true,
-        });
+  const extensions = createQuery({
+    // will be re-fetched on plugin list update
+    "queryKey": ExtensionsQueryKey,
+    "queryFn" : () => {
+      const currentExtensions = getExtensions({
+        "local": true,
+      });
 
-        return Object.entries(currentExtensions);
-      },
-    }),
-  );
+      return Object.entries(currentExtensions);
+    },
+  });
 </script>
 
 <div class="flex justify-center p-4">

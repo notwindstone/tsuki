@@ -11,6 +11,7 @@
   import EpisodeSelector from "@/components/misc/EpisodeSelector.svelte";
   import HandleWatchHistory from "@/components/misc/HandleWatchHistory.svelte";
   import Player from "@/components/base/Player.svelte";
+  import ExtensionSelector from "@/components/extensions/ExtensionSelector.svelte";
 
   // get the 'tanstack query' client
   const queryClient = useQueryClient();
@@ -195,6 +196,8 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap gap-4 lg:flex-nowrap"></div>
+    <div class="flex flex-wrap gap-4 lg:flex-nowrap">
+      <ExtensionSelector />
+    </div>
   </div>
 </div>
