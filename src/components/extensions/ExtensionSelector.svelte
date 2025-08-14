@@ -2,7 +2,11 @@
   import { createQuery  } from "@tanstack/svelte-query";
   import { ExtensionsQueryKey } from "@/constants/extensions";
   import { getExtensions } from "@/lib/extensions/get-extensions";
+  import { getCurrentExtensionsState } from "@/states/extensions/extensions.svelte";
 
+  const extensionsState = $derived(
+    getCurrentExtensionsState().currentExtensionsState,
+  );
   const extensions = createQuery({
     // will be re-fetched on plugin list update
     "queryKey": ExtensionsQueryKey,
@@ -21,7 +25,15 @@
 <div class="w-full flex flex-wrap items-center gap-4">
   {#if $extensions.data}
     {#each $extensions.data as extension (extension[0])}
-      {#if extension[1]?.enabled && (extension[1]?.categories?.includes?.("mal") || extension[1]?.categories?.includes?.("non-mal"))}
+      <!-- show selector only if extension was loaded, enabled and can be a player -->
+      {#if
+        extensionsState[extension[0]]?.status === "done" &&
+        extension[1]?.enabled &&
+        (
+          extension[1]?.categories?.includes?.("mal") ||
+          extension[1]?.categories?.includes?.("non-mal")
+        )
+      }
         <button
           disabled={selected === extension[0]}
           class={[
