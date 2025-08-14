@@ -54,8 +54,9 @@
   {/if}
   <button class="flex" onclick={() => {
     addExtensions({
-      "vue": { "id": "hewwo :3", "logo": "hehe", "name": "lul what~", "url": "https://raw.githubusercontent.com/ame-chan-lol/anisun-vue-example-extension/refs/heads/main/dist/bundle.js", "version": "semver", "authors": [], "languages": [], "categories": [] },
-      "nso": { "id": "ame chan", "logo": "hehe", "name": "lul what~", "url": "https://raw.githubusercontent.com/notwindstone/anisun-extensions/refs/heads/main/styles-needy-girl-overdose/bundle.js", "version": "semver", "authors": [], "languages": [], "categories": [] },
+      "vue"      : { "id": "hewwo :3", "logo": "hehe", "name": "lul what~", "url": "https://raw.githubusercontent.com/ame-chan-lol/anisun-vue-example-extension/refs/heads/main/dist/bundle.js", "version": "semver", "authors": [], "languages": [], "categories": [] },
+      "nso"      : { "id": "ame chan", "logo": "hehe", "name": "lul what~", "url": "https://raw.githubusercontent.com/notwindstone/anisun-extensions/refs/heads/main/styles-needy-girl-overdose/bundle.js", "version": "semver", "authors": [], "languages": [], "categories": [] },
+      "anilibria": { "id": "qwerqwer", "logo": "hehe", "name": "lul what~", "url": "https://raw.githubusercontent.com/ame-chan-lol/anisun-anilibria-extension/refs/heads/main/dist/bundle.js", "version": "semver", "authors": [], "languages": [], "categories": [] },
     });
     $extensions.refetch();
   }}>

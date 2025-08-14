@@ -11,7 +11,19 @@ export function toggleExtension(key: string) {
     extensions[key].enabled = false;
   }
 
-  extensions[key].enabled = !extensions[key].enabled;
+  const toDisable = !extensions[key].enabled;
+
+  extensions[key].enabled = toDisable;
 
   localStorage?.setItem?.(ExtensionsLocalStorageKey, JSON.stringify(extensions));
+
+  if (toDisable) {
+    // notify the extension that it was disabled
+    window.postMessage(`tsuki_disable_${key}`);
+
+    return;
+  }
+
+  // notify the extension that it was enabled
+  window.postMessage(`tsuki_enable_${key}`);
 }

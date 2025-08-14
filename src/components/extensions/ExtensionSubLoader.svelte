@@ -62,7 +62,6 @@
       const exports = {};
       const module = { exports };
 
-      console.log("hmmm");
       func(module, exports);
 
       setCurrentExtensionData(name, {
@@ -80,14 +79,20 @@
         "success": true,
       };
     },
+    // in case of error, retry 2 times more
+    "retry": 2,
   });
 
   $effect(() => {
     console.log(
-      "Extension loading:",
+      `%c ${name} `,
+      "background-color:black;color:white",
+      "extension status:",
       $extension.data,
-      "error:",
+      "is error:",
       $extension.isError,
+      "error message:",
+      $extension.error,
     );
   });
 </script>
