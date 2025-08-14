@@ -21,8 +21,9 @@
 <div class="w-full flex flex-wrap items-center gap-4">
   {#if $extensions.data}
     {#each $extensions.data as extension (extension[0])}
-      {#if extension[1].categories.includes("mal") || extension[1].categories.includes("non-mal")}
+      {#if extension[1]?.enabled && (extension[1]?.categories?.includes?.("mal") || extension[1]?.categories?.includes?.("non-mal"))}
         <button
+          disabled={selected === extension[0]}
           class={[
             "flex-1 rounded-md text-nowrap text-center p-2 transition-[background-color]",
             selected === extension[0]
@@ -30,9 +31,12 @@
               : "bg-neutral-100 bg-neutral-900",
           ]}
           onclick={() => {
+            if (selected === extension[0]) {
+              return;
+            }
+
             selected = extension[0];
             window.postMessage(`tsuki_player_${extension[0]}`, "*");
-            console.log(`tsuki_player_${extension[0]}`);
           }}
         >
           {extension[1].name}
