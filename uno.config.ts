@@ -1,4 +1,9 @@
-import { defineConfig, presetIcons, presetWebFonts, presetWind3 } from "unocss";
+import {
+  defineConfig,
+  presetIcons,
+  presetWebFonts,
+  presetWind3,
+} from "unocss";
 // eslint-disable-next-line
 // @ts-ignore - "esModuleInterop" and "allowSyntheticDefaultImports" don't affect it somehow
 import presetLegacyCompat from "@unocss/preset-legacy-compat";
