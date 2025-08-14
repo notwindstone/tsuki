@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createQuery } from "@tanstack/svelte-query";
   import type { ManifestType } from "@/types/extensions/manifest.type";
-  import {addExtensions} from '@/lib/extensions/add-extensions';
+  import { addExtensions } from "@/lib/extensions/add-extensions";
 
   const fetched = createQuery({
     // will be re-fetched on plugin list update
@@ -35,6 +35,19 @@
           "pages"      : ["/essentials"],
         },
       ];
+
+      addExtensions({
+        "kodik": {
+          "id"        : "kodik",
+          "logo"      : "https://raw.githubusercontent.com/ame-chan-lol/anisun-kodik-extension/refs/heads/main/kodik-logo.png",
+          "name"      : "Kodik Player",
+          "url"       : "https://raw.githubusercontent.com/ame-chan-lol/anisun-kodik-extension/refs/heads/main/dist/bundle.js",
+          "version"   : "1.0",
+          "authors"   : ["windstone"],
+          "languages" : ["ru"],
+          "categories": ["mal"],
+        },
+      });
 
       return manifests;
     },
