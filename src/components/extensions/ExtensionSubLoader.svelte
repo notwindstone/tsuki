@@ -79,8 +79,22 @@
         "success": true,
       };
     },
-    // in case of error, retry 2 times more
-    "retry": 2,
+    "retry": failureCount => {
+      if (failureCount >= 2) {
+        setCurrentExtensionData(name, {
+          "timeValue": -1,
+          "timeKey"  : "executing",
+          "status"   : "error",
+        });
+
+        return false;
+      }
+
+      // in case of the error, retry 2 times more
+      return true;
+    },
+    // in case of the error, retry every 1 second
+    "retryDelay": 1000,
   });
 
   $effect(() => {
