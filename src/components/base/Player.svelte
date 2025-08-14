@@ -21,5 +21,9 @@
 
 <div
   id="extensions-player-id"
-  class="aspect-media relative col-span-1 rounded-md bg-neutral-100 lg:col-span-2 dark:bg-neutral-900"
-></div>
+  class="aspect-media relative col-span-1 flex items-center justify-center rounded-md bg-neutral-100 lg:col-span-2 dark:bg-neutral-900"
+>
+  <span class="text-lg">
+    Select an extension
+  </span>
+</div>

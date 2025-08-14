@@ -21,20 +21,22 @@
 <div class="w-full flex flex-wrap items-center gap-4">
   {#if $extensions.data}
     {#each $extensions.data as extension (extension[0])}
-      <button
-        class={[
-          "flex-1 rounded-md text-nowrap text-center p-2 transition-[background-color]",
-          selected === extension[0]
-            ? "bg-rose-500"
-            : "bg-neutral-100 bg-neutral-900",
-        ]}
-        onclick={() => {
-          selected = extension[0];
-          window.postMessage(`tsuki_player_${extension[0]}`, "*");
-        }}
-      >
-        {extension[1].name}
-      </button>
+      {#if extension[1].categories.includes("mal") || extension[1].categories.includes("non-mal")}
+        <button
+          class={[
+            "flex-1 rounded-md text-nowrap text-center p-2 transition-[background-color]",
+            selected === extension[0]
+              ? "bg-rose-500"
+              : "bg-neutral-100 bg-neutral-900",
+          ]}
+          onclick={() => {
+            selected = extension[0];
+            window.postMessage(`tsuki_player_${extension[0]}`, "*");
+          }}
+        >
+          {extension[1].name}
+        </button>
+      {/if}
     {/each}
   {/if}
 </div>
