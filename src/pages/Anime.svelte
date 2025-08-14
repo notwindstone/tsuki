@@ -144,7 +144,10 @@
     <!-- and will be on the two different rows on smaller screens -->
     <div class="grid cols-1 rows-3 h-full w-full gap-4 lg:cols-3 lg:rows-1 sm:rows-2">
       <!-- all player extensions will mount on this element -->
-      <Player />
+      <Player
+        title={title.toLowerCase()}
+        episode={selectedEpisode}
+      />
       <!-- min-h-48 here to fix some issues with old browsers -->
       <div class="relative col-span-1 row-span-2 min-h-48 sm:row-span-1">
         <!-- the only way to ensure that episode selector will not exceed player's height -->

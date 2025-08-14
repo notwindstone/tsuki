@@ -19,11 +19,11 @@ export function toggleExtension(key: string) {
 
   if (toDisable) {
     // notify the extension that it was disabled
-    window.postMessage(`tsuki_disable_${key}`);
+    window.postMessage(`tsuki_disable_${key}`, "*");
 
     return;
   }
 
   // notify the extension that it was enabled
-  window.postMessage(`tsuki_enable_${key}`);
+  window.postMessage(`tsuki_enable_${key}`, "*");
 }
