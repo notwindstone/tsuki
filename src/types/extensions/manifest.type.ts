@@ -6,7 +6,7 @@ export type ManifestType = {
   "url"      : string;
   "version"  : string;
   "authors"  : Array<string>;
-  // use ISO 639-2 three-letter language codes
+  // use ISO 639-1 two-letter language codes
   "languages": Array<string>;
 
   /*

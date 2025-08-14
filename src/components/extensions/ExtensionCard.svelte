@@ -106,7 +106,7 @@
       <p class="text-sm">
         Status:
       </p>
-      <div class="flex gap-2 text-sm opacity-70">
+      <div class="flex gap-2 break-all text-sm opacity-70">
         {currentExtensionState.status} - {JSON.stringify(currentExtensionState.time)}
       </div>
     </div>

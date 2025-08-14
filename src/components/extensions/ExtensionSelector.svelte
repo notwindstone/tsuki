@@ -32,6 +32,7 @@
           onclick={() => {
             selected = extension[0];
             window.postMessage(`tsuki_player_${extension[0]}`, "*");
+            console.log(`tsuki_player_${extension[0]}`);
           }}
         >
           {extension[1].name}

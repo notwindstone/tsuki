@@ -4,6 +4,7 @@
   import { createQuery } from "@tanstack/svelte-query";
   import { ExtensionsQueryKey } from "@/constants/extensions";
   import ExtensionCard from "@/components/extensions/ExtensionCard.svelte";
+  import ExtensionsRepository from "@/components/extensions/ExtensionsRepository.svelte";
 
   const extensions = createQuery({
     // will be re-fetched on plugin list update
@@ -32,5 +33,6 @@
         />
       {/each}
     {/if}
+    <ExtensionsRepository />
   </div>
 </div>

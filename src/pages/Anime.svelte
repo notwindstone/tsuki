@@ -148,6 +148,7 @@
       <Player
         title={title.toLowerCase()}
         episode={selectedEpisode}
+        idMal={Number(idMal)}
       />
       <!-- min-h-48 here to fix some issues with old browsers -->
       <div class="relative col-span-1 row-span-2 min-h-48 sm:row-span-1">

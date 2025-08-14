@@ -4,9 +4,11 @@
   let {
     title,
     episode,
+    idMal,
   }: {
     "title"  : string;
     "episode": number;
+    "idMal"  : number;
   } = $props();
 
   $effect(() => {
@@ -14,6 +16,7 @@
       ...window[ApplicationNamespace].dynamic,
       "episode": episode,
       "title"  : title,
+      "idMal"  : idMal,
     };
     window.postMessage("tsuki_updated_window", "*");
   });
