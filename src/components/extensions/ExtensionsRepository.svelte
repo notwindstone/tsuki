@@ -15,7 +15,7 @@
     // will be re-fetched on plugin list update
     "queryKey": ["extensions", "list", "remote", "github"],
     "queryFn" : async () => {
-      const response = await fetch("https://raw.githubusercontent.com/notwindstone/anisun-extensions/refs/heads/main/manifests.json");
+      const response = await fetch("https://raw.githubusercontent.com/notwindstone/anisun-extensions/refs/heads/main/tsuki_temp.json");
       const unknownManifests: unknown = await response.json();
 
       if (!Array.isArray(unknownManifests)) {
@@ -34,46 +34,7 @@
         validatedManifests.push(validatedEntry);
       }
 
-      const manifests: Array<ManifestType> = [
-        {
-          "id"        : "kodik",
-          "logo"      : "https://raw.githubusercontent.com/ame-chan-lol/anisun-kodik-extension/refs/heads/main/kodik-logo.png",
-          "name"      : "Kodik Player",
-          "url"       : "https://raw.githubusercontent.com/ame-chan-lol/anisun-kodik-extension/refs/heads/main/dist/bundle.js",
-          "version"   : "1.0",
-          "authors"   : ["windstone"],
-          "languages" : ["ru"],
-          "categories": ["mal"],
-        },
-        {
-          "id"         : "essentials",
-          "logo"       : "https://raw.githubusercontent.com/EssentialsX/Assets/refs/heads/master/logo.svg",
-          "name"       : "Essentials",
-          "url"        : "",
-          "version"    : "1.0.0",
-          "authors"    : ["windstone"],
-          "languages"  : ["en"],
-          "categories" : ["cosmetic", "advanced"],
-          "description": "Adds various improvements to the app",
-          "pages"      : ["/essentials"],
-        },
-      ];
-
-      addExtensions({
-        "kodik": {
-          "id"        : "kodik",
-          "logo"      : "https://raw.githubusercontent.com/ame-chan-lol/anisun-kodik-extension/refs/heads/main/kodik-logo.png",
-          "name"      : "Kodik Player",
-          "url"       : "https://raw.githubusercontent.com/ame-chan-lol/anisun-kodik-extension/refs/heads/main/dist/bundle.js",
-          "version"   : "1.0",
-          "authors"   : ["windstone"],
-          "languages" : ["ru"],
-          "categories": ["mal"],
-        },
-      });
-
-      // return validatedManifests;
-      return manifests;
+      return validatedManifests;
     },
   });
 </script>
