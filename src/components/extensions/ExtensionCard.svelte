@@ -21,7 +21,8 @@
 
   /*
    * assure typescript that this is an array of 'Route["path"]' typed elements even if it is not.
-   * this is needed, because a 'Link' element accepts only 'Route["path"]' typed urls
+   * this is needed, because a 'Link' element accepts only 'Route["path"]' typed urls, but extensions can make
+   * custom routes that are not in 'Route["path"]' type
    */
   const pages = (extension[1].pages ?? []) as Array<Route["path"]>;
 </script>
