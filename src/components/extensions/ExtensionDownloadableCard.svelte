@@ -4,11 +4,13 @@
   import { addExtensions } from "@/lib/extensions/add-extensions";
 
   let {
+    installed,
     manifest,
     refetch,
   }: {
-    "manifest": ManifestType;
-    "refetch" : () => void;
+    "installed": boolean | undefined;
+    "manifest" : ManifestType;
+    "refetch"  : () => void;
   } = $props();
 
   const installExtension = () => {
@@ -50,9 +52,14 @@
   </div>
   <div class="flex justify-end">
     <button
+      disabled={installed}
       aria-label="Install this extension"
-      class="flex rounded-md bg-neutral-200 p-2 transition-[background-color] -right-2 -top-2 dark:bg-neutral-800 hover:bg-white dark:hover:bg-black"
+      class="flex rounded-md bg-neutral-200 p-2 transition-[background-color] -right-2 -top-2 dark:bg-neutral-800 disabled:bg-transparent hover:bg-white disabled:opacity-50 dark:hover:bg-black disabled:hover:bg-transparent"
       onclick={() => {
+        if (installed) {
+          return;
+        }
+
         installExtension();
         refetch();
       }}

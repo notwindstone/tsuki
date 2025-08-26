@@ -1,14 +1,15 @@
 <script lang="ts">
   import { createQuery } from "@tanstack/svelte-query";
   import type { ManifestType } from "@/types/extensions/manifest.type";
-  import { addExtensions } from "@/lib/extensions/add-extensions";
   import { validateManifest } from "@/lib/extensions/validate-manifest";
   import ExtensionDownloadableCard from "@/components/extensions/ExtensionDownloadableCard.svelte";
 
   let {
+    installedExtensions,
     refetch,
   }: {
-    "refetch": () => void;
+    "installedExtensions": Array<string> | undefined;
+    "refetch"            : () => void;
   } = $props();
 
   const fetched = createQuery({
@@ -52,6 +53,7 @@
     <!-- Of course it is better to use contexts instead of prop drilling, but... -->
     {#each $fetched.data as manifest (manifest.id)}
       <ExtensionDownloadableCard
+        installed={installedExtensions?.includes?.(manifest.id)}
         manifest={manifest}
         refetch={refetch}
       />

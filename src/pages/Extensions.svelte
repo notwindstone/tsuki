@@ -5,6 +5,7 @@
   import { ExtensionsQueryKey } from "@/constants/extensions";
   import ExtensionCard from "@/components/extensions/ExtensionCard.svelte";
   import ExtensionsRepository from "@/components/extensions/ExtensionsRepository.svelte";
+  import type { ManifestType } from "@/types/extensions/manifest.type";
 
   const extensions = createQuery({
     // will be re-fetched on plugin list update
@@ -17,6 +18,9 @@
       return Object.entries(currentExtensions);
     },
   });
+  const installedExtensions: Array<string> | undefined = $derived(
+    $extensions.data?.map?.((installed: [string, ManifestType]) => installed[0]),
+  );
 </script>
 
 <div class="flex justify-center p-4">
@@ -26,6 +30,9 @@
       <span>Back</span>
     </Link>
     {#if $extensions.data}
+      <p class="text-2xl">
+        Installed
+      </p>
       {#each $extensions.data as extension (extension[0])}
         <ExtensionCard
           extension={extension}
@@ -33,7 +40,11 @@
         />
       {/each}
     {/if}
+    <p class="text-2xl">
+      Available
+    </p>
     <ExtensionsRepository
+      installedExtensions={installedExtensions}
       refetch={() => $extensions.refetch()}
     />
   </div>
