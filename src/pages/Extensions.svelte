@@ -33,6 +33,8 @@
         />
       {/each}
     {/if}
-    <ExtensionsRepository />
+    <ExtensionsRepository
+      refetch={() => $extensions.refetch()}
+    />
   </div>
 </div>
