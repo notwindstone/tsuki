@@ -54,7 +54,7 @@
     <button
       disabled={installed}
       aria-label="Install this extension"
-      class="flex rounded-md bg-neutral-200 p-2 transition-[background-color] -right-2 -top-2 dark:bg-neutral-800 disabled:bg-transparent hover:bg-white disabled:opacity-50 dark:hover:bg-black disabled:hover:bg-transparent"
+      class="flex rounded-md bg-neutral-200 p-2 transition-[background-color] dark:bg-neutral-800 disabled:bg-transparent hover:bg-white disabled:opacity-50 dark:hover:bg-black disabled:hover:bg-transparent"
       onclick={() => {
         if (installed) {
           return;

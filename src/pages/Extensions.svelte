@@ -8,6 +8,7 @@
   import ExtensionsRepository from "@/components/extensions/ExtensionsRepository.svelte";
   import type { ManifestType } from "@/types/extensions/manifest.type";
   import { getCurrentSettingsState } from "@/states/settings/settings.svelte";
+  import ExtensionImporter from "@/components/extensions/ExtensionImporter.svelte";
 
   const settingsState = getCurrentSettingsState().current;
   const transitionDuration = $derived(
@@ -53,6 +54,12 @@
         </div>
       {/each}
     {/if}
+    <p class="text-2xl">
+      Import
+    </p>
+    <ExtensionImporter
+      refetch={() => $extensions.refetch()}
+    />
     <p class="text-2xl">
       Available
     </p>
