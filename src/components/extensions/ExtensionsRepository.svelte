@@ -49,7 +49,7 @@
     Error: {JSON.stringify($fetched.error)}
   </div>
 {:else if $fetched.data}
-  <div class="grid cols-2 gap-4 lg:cols-3">
+  <div class="grid cols-2 gap-4">
     <!-- Of course it is better to use contexts instead of prop drilling, but... -->
     {#each $fetched.data as manifest (manifest.id)}
       <ExtensionDownloadableCard
