@@ -65,6 +65,11 @@
     classNames="max-w-144"
     placeholder="Search anime by name or MAL ID..."
   />
+  <div class="max-w-144 w-full flex flex-wrap gap-2 pt-2">
+    <div class="select-none rounded-md bg-neutral-100 px-2 py-1 text-sm dark:bg-neutral-900">
+      MyAnimeList / Shikimori
+    </div>
+  </div>
   {#if $animes.isPending}
     <div class="pt-4 text-center">
       Loading...
