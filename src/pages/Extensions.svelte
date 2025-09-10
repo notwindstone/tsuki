@@ -35,7 +35,7 @@
 
 <div class="flex justify-center p-4">
   <div class="max-w-144 w-full flex flex-col gap-4">
-    <Link class="flex flex-nowrap items-center gap-2" href="/">
+    <Link class="flex flex-nowrap select-none items-center gap-2" href="/">
       <span class="i-lucide-arrow-left block"></span>
       <span>Back</span>
     </Link>

@@ -45,7 +45,7 @@
   <div class="flex flex-nowrap pb-2">
     {#each HomePageLinks as link (link.href)}
       <Link
-        class="mx-1 flex flex-nowrap items-center rounded-md bg-neutral-100 px-2 py-1 transition-[background-color,opacity] focus:cursor-default dark:bg-neutral-900 hover:bg-neutral-200 focus:opacity-70 dark:hover:bg-neutral-800"
+        class="mx-1 flex flex-nowrap select-none items-center rounded-md bg-neutral-100 px-2 py-1 transition-[background-color,opacity] focus:cursor-default dark:bg-neutral-900 hover:bg-neutral-200 focus:opacity-70 dark:hover:bg-neutral-800"
         href={link.href}
       >
         <div class={[
