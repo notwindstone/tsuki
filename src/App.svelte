@@ -17,7 +17,7 @@
 
   // to communicate with extensions
   initializeWindow({
-    // we don't care about reactivity
+    // we don't care about state reactivity
     "toEnableTransitions": getCurrentSettingsState().current.transitions,
   });
 
