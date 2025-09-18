@@ -38,7 +38,7 @@
         on: function (e) {
           console.log(e);
         },
-        baseUrl: "http://94.156.114.215:8080",
+        baseUrl: "https://webtor.freesmlauncher.org",
       });
     }
 
