@@ -34,17 +34,29 @@
         "timeValue": performance.now() - fetchingStarted,
       });
 
-      const readingStarted = performance.now();
-      const code = await response.text();
+      if (response.body === null) {
+        throw new Error("The response body is null");
+      }
 
-      setCurrentExtensionData(name, {
-        // next step
-        "status"   : "initializing",
-        // which step we passed
-        "timeKey"  : "reading",
-        // how much time did we lose to pass this step
-        "timeValue": performance.now() - readingStarted,
-      });
+      const readingStarted = performance.now();
+      const codeStream = response.body.pipeThrough(new TextDecoderStream);
+      const chunks: Array<string> = [];
+
+      for await (const chunk of codeStream) {
+        chunks.push(chunk);
+        console.log(`${performance.now() - readingStarted} | ${(chunks.reduce((acc, current) => acc + current.length, 0) / (1024 * 1024)).toFixed(2)} MB`);
+
+        setCurrentExtensionData(name, {
+          // next step
+          "status"   : "initializing",
+          // which step we passed
+          "timeKey"  : "reading",
+          // how much time did we lose to pass this step
+          "timeValue": performance.now() - readingStarted,
+        });
+      }
+
+      const code = chunks.join("");
 
       const initializingStarted = performance.now();
       const func = new Function("module", "exports", code) as ExtensionFunctionType;
