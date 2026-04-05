@@ -43,7 +43,13 @@ export default defineConfig({
          * default value: "chrome>=64"
          */
         "chrome>=66",
-        "safari>=12",
+
+        /*
+         * https://github.com/evanw/esbuild/issues/4436
+         * https://github.com/babel/babel/issues/17773
+         * default value: "safari>=12"
+         */
+        "safari>=14.1",
 
         /*
          * 'AbortController' requires Chrome 66+
