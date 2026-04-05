@@ -4,6 +4,9 @@ html, body {
    * that's why we manually add Geist here with fallbacks as safe fonts
    */
   font-family: Geist, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* avoid horizontal layout shifts on page navigation */
+  scrollbar-gutter: stable both-edges;
 }
 
 /* data attributes */
