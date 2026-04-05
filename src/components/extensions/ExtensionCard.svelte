@@ -107,8 +107,18 @@
       <p class="text-sm">
         Status:
       </p>
-      <div class="flex gap-2 break-all text-sm opacity-70">
-        {currentExtensionState.status} - {JSON.stringify(currentExtensionState.time)}
+      <div class="text-sm opacity-70">
+        {currentExtensionState.status}
+      </div>
+    </div>
+    <div>
+      <p class="text-sm">
+        Progress:
+      </p>
+      <div class="whitespace-pre-wrap break-all text-sm opacity-70">
+        {Object.entries(currentExtensionState.time)
+          .map(([key, timeSpent]) => `${key}: ${timeSpent || "unknown"} ms`)
+          .join("\n")}
       </div>
     </div>
   {/if}
