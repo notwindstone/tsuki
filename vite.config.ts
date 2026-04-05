@@ -7,10 +7,12 @@ import { BaseURL } from "./src/constants/app.ts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  "base" : BaseURL,
-  "build": {
-    // without these lines GitHub CI fails after 6 months of no commits
-    "target": ["chrome66", "firefox67", "edge79", "safari14.1", "ios12"],
+  "base"   : BaseURL,
+  "esbuild": {
+    "supported": {
+      // for some reason, esbuild fails without this option
+      "destructuring": true,
+    },
   },
   "server": {
     // expose to the network
@@ -53,7 +55,7 @@ export default defineConfig({
          * https://github.com/babel/babel/issues/17773
          * default value: "safari>=12"
          */
-        "safari>=14.1",
+        "safari>=12",
 
         /*
          * 'AbortController' requires Chrome 66+
