@@ -7,7 +7,11 @@ import { BaseURL } from "./src/constants/app.ts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  "base"  : BaseURL,
+  "base" : BaseURL,
+  "build": {
+    // without these lines GitHub CI fails after 6 months of no commits
+    "target": ["chrome66", "firefox67", "edge79", "safari14.1", "ios12"],
+  },
   "server": {
     // expose to the network
     "host": true,
